@@ -14,7 +14,7 @@ const Board = () => {
         }}
         >
             {arr.map((item, indexI) => {
-                return item.map((item1, indexJ)=> {return BoardGrid(indexI*20,indexJ*20)});
+                return item.map((item1, indexJ)=> {return BoardGrid(indexJ*20,indexI*20)});
             })}
         </div>
     )
