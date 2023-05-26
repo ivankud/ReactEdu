@@ -1,8 +1,14 @@
-import Header from './Header/Header.jsx';
-import Board from './Board/Board.jsx';
+import Header from './Header/Header';
+import Board from './Board/Board';
+import BoardGrid from './BoardGrid';
+import FrameObject from './FrameObject';
+import Console from './Console';
 
 
 export {
     Header,
-    Board
+    Board,
+    FrameObject,
+    BoardGrid,
+    Console,
 };

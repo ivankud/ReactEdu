@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './Header.css';
+import styles from './Header.module.css';
 
 const Header = ()=> {
     return (
-        <div className='header-top'>
+        <div className={styles['header-top']}>
             123123
         </div>
     )

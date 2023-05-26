@@ -2,14 +2,16 @@ import './App.css';
 
 import {
   // Header,
-  Board
+  Board,
+  Console,
 } from './../components';
 
-const App = () => {
+const App = () => {  
   return (
     <div>
-      {/* <Header/> */}
-      <Board/>
+      <Board>        
+      </Board>
+      <Console/>
     </div>
   );
 }

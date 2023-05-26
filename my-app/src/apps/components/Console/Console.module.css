@@ -1,0 +1,12 @@
+.main_console {
+    width: 100%;
+    height: 300px;
+    border-style:dashed;
+    text-align: center;
+}
+
+.main_console textarea {
+    width: 99%;
+    height: 98%;    
+    resize: none;
+}
