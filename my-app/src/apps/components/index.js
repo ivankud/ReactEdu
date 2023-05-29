@@ -3,6 +3,7 @@ import Board from './Board/Board';
 import BoardGrid from './BoardGrid';
 import FrameObject from './FrameObject';
 import Console from './Console';
+import meRouter from './meRouter';
 
 
 export {
@@ -11,4 +12,5 @@ export {
     FrameObject,
     BoardGrid,
     Console,
+    meRouter,
 };

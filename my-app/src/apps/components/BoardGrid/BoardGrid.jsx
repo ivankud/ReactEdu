@@ -2,6 +2,7 @@ import React from "react";
 // import styles from './BoardGrid.css'
 
 const BoardGrid = (positionX, positionY) =>{
+    // debugger;
     return(
         <div>
             <div style ={{
