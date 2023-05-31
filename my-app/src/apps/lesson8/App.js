@@ -7,28 +7,37 @@ import './App.css';
 // } from './../components';
 
 
-import {router} from './root';
-
-import {meRouter} from './../components';
-
-
 import {
-  RouterProvider,
-} from "react-router-dom";
+  RouterProvider, Route
+} from "react-router-dom"; 
+
+import {router, router_list} from './root';
+
+import { 
+  MenuBar,
+} from '../components'; //++ 
 
 
 
-const App = () => { 
+
+
+
+const App = () => {
   // let arrGrid = Array(50).fill(Array(50).fill(0)); 
   return (
-    <div>
-      ↓
-      <div><meRouter/></div>
-      
-      ↑
-      <RouterProvider router={router} />
-      {/* <Board grid = {arrGrid}/>
-      <Console/> */}
+    <div className='row'>      
+      <div 
+        // className='col2' 
+        style={{display: "inline-block",}}
+      >
+          <MenuBar router={router}/>
+      </div>
+      <div 
+        // className='col2' 
+        style={{display: "inline-block",}}
+      >
+        <RouterProvider router={router}/>
+        </div>
     </div>
   );
 }

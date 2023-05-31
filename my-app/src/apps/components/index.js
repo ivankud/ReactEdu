@@ -3,14 +3,17 @@ import Board from './Board/Board';
 import BoardGrid from './BoardGrid';
 import FrameObject from './FrameObject';
 import Console from './Console';
-import meRouter from './meRouter';
+import MeRouter from './MeRouter';
+
+import MenuBar from './MenuBar';
 
 
 export {
+    MenuBar,
     Header,
     Board,
     FrameObject,
     BoardGrid,
     Console,
-    meRouter,
+    MeRouter,
 };

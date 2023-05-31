@@ -6,11 +6,12 @@ const BoardGrid = (positionX, positionY) =>{
     return(
         <div>
             <div style ={{
-                position: 'absolute',
+                // position: 'absolute',
+                position: 'static',
                 left: (positionX??'0')||'px',
                 top:  (positionY??'0')||'px',
             }}>
-                .
+                *
             </div>
         </div>
     )

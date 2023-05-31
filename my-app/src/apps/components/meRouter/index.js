@@ -1,3 +1,3 @@
-import meRouter from './meRouter';
+import MeRouter from './MeRouter';
 
-export default meRouter;
+export default MeRouter;

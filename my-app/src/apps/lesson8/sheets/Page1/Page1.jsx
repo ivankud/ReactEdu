@@ -8,7 +8,7 @@ import {
   const Page1 = () => {
     let arrGrid = Array(50).fill(Array(50).fill(0)); 
     return (        
-        <div>
+        <div style={{position:'static'}}>
             <Board grid = {arrGrid}/>
             <Console/>
         </div>

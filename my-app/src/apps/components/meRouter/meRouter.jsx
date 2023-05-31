@@ -1,12 +1,16 @@
 import React from "react";
-// import {router_list} from "../../lesson8/root";
+import {router_list} from "../../lesson8/root";
 
-const meRouter = () => {
+const MeRouter = () => {
     return (
         <div>
-            123123123123123
+            {router_list.map(item=>
+                <div>
+                    <a href={`${item.path}`}>{`${item.caption}`}</a>
+                </div>
+            )}
         </div>
     )
 }
 
-export default meRouter;
+export default MeRouter;

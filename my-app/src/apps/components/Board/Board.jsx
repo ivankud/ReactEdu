@@ -9,18 +9,21 @@ const Board = (props) => {
     const width = 1000;
     const height = 1000;
     return (
-        <div>
+        <div style={{
+            position: 'relative',
+            border: "dashed",
+            top: "10px",
+            left: "10px",
+            width: width||"px",
+            height: height||"px",
+        }}>
             <div    
                 id='just_dot_grid'
                 className={styles['main_board']}
-                style={{
-                    width: width||"px",
-                    height: height||"px",
-                }}
-            >
-                {arr.map((item, indexI) => {
+            >123123
+                {/* {arr.map((item, indexI) => {
                     return item.map((item1, indexJ)=> {return BoardGrid(indexJ*20,indexI*20)});
-                })}
+                })} */}
                 <FrameObject/>
             </div>
         </div>
