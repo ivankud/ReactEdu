@@ -12,7 +12,8 @@ import {MeRouter} from './../'
 
 const MenuBar = (props) => {
     return (
-        <div className={styles.menu_body}
+        <div 
+            className={styles.menu_body}
         >
             <MeRouter/>  
         </div>

@@ -1,17 +1,23 @@
-import {
-    // Header,
-    Board,
-    Console,
-  } from '../../../components';
+// import {
+//     // Header,
+//     Board,
+//     Console,
+//   } from '../../../components';
 
+// import styles from './Page.module.css';
 
   const Page2 = () => {
-    let arrGrid = Array(50).fill(Array(50).fill(0)); 
     return (        
-        <div>
-          2 Страница
-            <Board grid = {arrGrid}/>
-            <Console/>
+        <div>Тестовая страница
+          <div>
+            <div style={{display: "inline-block",}}>111</div>
+            <div >
+              <div style={{display: "inline-block"}}>
+                222
+                222
+              </div>
+            </div>
+            </div>
         </div>
     )
   }

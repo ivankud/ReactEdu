@@ -1,4 +1,4 @@
-import './App.css';
+import styles from './App.module.css';
 
 // import {
 //   // Header,
@@ -8,10 +8,10 @@ import './App.css';
 
 
 import {
-  RouterProvider, Route
+  RouterProvider
 } from "react-router-dom"; 
 
-import {router, router_list} from './root';
+import {router} from './root';
 
 import { 
   MenuBar,
@@ -25,19 +25,15 @@ import {
 const App = () => {
   // let arrGrid = Array(50).fill(Array(50).fill(0)); 
   return (
-    <div className='row'>      
-      <div 
-        // className='col2' 
-        style={{display: "inline-block",}}
-      >
+    <div 
+      className={`${styles["grid-container"]}`}
+    >      
+      <div>
           <MenuBar router={router}/>
+      </div>      
+      <div>
+          <RouterProvider router={router}/>
       </div>
-      <div 
-        // className='col2' 
-        style={{display: "inline-block",}}
-      >
-        <RouterProvider router={router}/>
-        </div>
     </div>
   );
 }

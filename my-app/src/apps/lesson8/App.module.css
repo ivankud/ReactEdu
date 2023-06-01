@@ -42,3 +42,10 @@ div.Menu {
   width: 300px;
   height: 100vh;
 }
+
+.grid-container {
+  display: grid;
+  grid : 
+  'menu content content content content';
+  grid-gap: 5px;
+}
