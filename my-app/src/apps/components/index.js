@@ -4,8 +4,8 @@ import BoardGrid from './BoardGrid';
 import FrameObject from './FrameObject';
 import Console from './Console';
 import MeRouter from './MeRouter';
-
 import MenuBar from './MenuBar';
+import Content from './Content';
 
 
 export {
@@ -16,4 +16,5 @@ export {
     BoardGrid,
     Console,
     MeRouter,
+    Content,
 };

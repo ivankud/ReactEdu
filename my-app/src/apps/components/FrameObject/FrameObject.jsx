@@ -7,31 +7,25 @@ const FrameObject = () => {
             id='333'
             className ={styles['main_frame_div']}
             style={{
+                position: 'absolute',
                 width:"300px",
                 height:"300px",
+                borderColor:'pink',
             }}
             onMouseDown={(e)=>{console.log('DIV1')}}
         >
-            123123
-            123123
-            123123
-            123123
-            123123
-            123123
-            123123
-            123123
-            123123
             <div 
-            id='4444'
-            className ={styles['main_frame_div']}
-            style={{
-                width:"300px",
-                height:"300px",
-            }}
-            onMouseDown={(e)=>{console.log('DIV2')}}
-        >
-            123123
-        </div>
+                id='4444'
+                className ={styles['main_frame_div']}
+                style={{
+                    width:"200px",
+                    height:"200px",
+                    borderColor:'green',
+                }}
+                onMouseDown={(e)=>{console.log('DIV2')}}
+            >
+                123123
+            </div>
         </div>
     )
 }

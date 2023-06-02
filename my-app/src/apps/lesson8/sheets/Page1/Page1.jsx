@@ -4,6 +4,8 @@ import {
     Console,
   } from '../../../components';
 
+  import data_objects from './jsobject'
+
 
   const Page1 = () => {
     let arrGrid = Array(50).fill(Array(50).fill(0)); 
@@ -12,8 +14,8 @@ import {
           // style={{position:'static'}}
           // style={{display: "inline-block"}}
         >          
-          2 Страница
-            <Board grid = {arrGrid}/>
+          1 Страница
+            <Board grid = {arrGrid} data_objects={data_objects}/>
             <Console/>
         </div>
     )

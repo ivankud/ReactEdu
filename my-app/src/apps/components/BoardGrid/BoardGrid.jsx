@@ -2,17 +2,17 @@ import React from "react";
 // import styles from './BoardGrid.css'
 
 const BoardGrid = (positionX, positionY) =>{
-    console.log(positionX, positionY)
-    // debugger;
+    let x = (positionX??0);
+    let y = (positionY??0);
+    // debugger;    
     return(
         <div
             style ={{
-                dislay: "inline",
-                position: 'static',
-                left: (positionX??'0')||'px',
-                top:  (positionY??'0')||'px',
+                position: 'absolute',
+                top: `${x}px`,
+                left: `${y}px`,
             }}>
-                *
+                .
         </div>
     )
 }
