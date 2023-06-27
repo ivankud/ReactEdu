@@ -1,5 +1,5 @@
 import React from "react";
-import {router_list} from "../../lesson8/root";
+import {router_list} from "../../main_designer/root";
 
 const MeRouter = () => {
     return (

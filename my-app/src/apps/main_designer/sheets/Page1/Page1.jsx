@@ -16,7 +16,7 @@ import {
         >          
           1 Страница
             <Board grid = {arrGrid} data_objects={data_objects}/>
-            <Console/>
+            <Console data_objects={data_objects}/>
         </div>
     )
   }

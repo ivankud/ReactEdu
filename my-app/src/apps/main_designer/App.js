@@ -22,8 +22,7 @@ import {
 
 
 
-const App = () => {
-  // let arrGrid = Array(50).fill(Array(50).fill(0)); 
+const App = (props) => {
   return (
     <div 
       className={`${styles["grid-container"]}`}
