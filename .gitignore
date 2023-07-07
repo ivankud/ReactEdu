@@ -1,2 +1,7 @@
 /my-app/node_modules
 /ElectronEdu/simple-app/node_modules
+/ElectronEdu/bozon_elec_edu/.tmp
+/ElectronEdu/bozon_elec_edu/node_modules
+/ElectronEdu/bozon_elec_edu/builds
+/ElectronEdu/bozon_elec_edu/packages
+/ElectronEdu/bozon_elec_edu/bower_components
