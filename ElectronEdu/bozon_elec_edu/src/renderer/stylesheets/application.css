@@ -9,7 +9,17 @@ body {
   font-family: -apple-system, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+.titlebar {
+  position: absolute;
+  width: 100%;
+  padding-left: 10px;
+  height:20px;
+  background-color: aliceblue;
+  -webkit-app-region: drag;
+}
+
 .message {
+  background-color: aqua; 
   position: absolute;
   width: 500px;
   height: 250px;
