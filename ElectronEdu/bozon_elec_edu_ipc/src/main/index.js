@@ -1,4 +1,7 @@
-import {app, BrowserWindow} from 'electron'
+import {app, ipcMain, BrowserWindow} from 'electron'
+
+ipcMain.on('action', (_,data)=>{console.log(data.message)})
+
 
 const createWindow = ()=> {
   let window = new BrowserWindow({
@@ -19,6 +22,12 @@ const createWindow = ()=> {
   
   window.on('ready-to-show', ()=>{
     window.show()
+  })
+
+  ipcMain.on('loaddata', ()=>{
+    const number = Math.random()*100;
+    window.webContents.send('data',{number})
+  
   })
   
 }
