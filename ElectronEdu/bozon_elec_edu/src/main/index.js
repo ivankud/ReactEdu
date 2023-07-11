@@ -57,6 +57,10 @@ const createMenu =()=>{
   Menu.setApplicationMenu(menu);
 }
 
+
+
+
+
 const createWindow = ()=>{
   const {width, height} = screen.getPrimaryDisplay().workAreaSize;
   let window = new BrowserWindow({
@@ -84,11 +88,25 @@ const createWindow = ()=>{
   })
   
   const tray = new Tray(path.resolve(__dirname,icon))
+  const trayMenuTamplate = [
+    {
+      label:"OptionTray 1",
+      click : ()=>{
+        window.isVisible() ? window.hide(): window.show()
+      }
+    },
+    {type:"separator"},
+    {
+      label:"OptionTray 1 Quit",
+      role: 'quit'
+    }
+  ]
+  const trayMenu = new Menu.buildFromTemplate(trayMenuTamplate)
+  tray.setContextMenu(trayMenu)
   tray.setToolTip('Electron Application')
-  
-  tray.on('click', ()=>{
-    window.isVisible() ? window.hide(): window.show()
-  })
+  // tray.on('click', ()=>{
+  //   window.isVisible() ? window.hide(): window.show()
+  // })
 }
 
 
