@@ -26,6 +26,7 @@ const createWindow = ()=> {
 
   ipcMain.on('loaddata', ()=>{
     const number = Math.random()*100;
+    console.log('12312312')
     window.webContents.send('data',{number})
   
   })

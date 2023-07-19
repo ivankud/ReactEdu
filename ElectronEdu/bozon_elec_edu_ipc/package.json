@@ -8,6 +8,7 @@
   },
   "repository": {},
   "dependencies": {
+    "electron-open-link-in-browser": "^1.0.2",
     "file-loader": "^6.2.0"
   },
   "license": "ISC",
