@@ -12,3 +12,10 @@
 /ElectronEdu/bozon_elec_edu_ipc/builds
 /ElectronEdu/bozon_elec_edu_ipc/packages
 /ElectronEdu/bozon_elec_edu_ipc/bower_components
+
+
+/ElectronEdu/time_tracker/.tmp
+/ElectronEdu/time_tracker/node_modules
+/ElectronEdu/time_tracker/builds
+/ElectronEdu/time_tracker/packages
+/ElectronEdu/time_tracker/bower_components
