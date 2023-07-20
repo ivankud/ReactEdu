@@ -1,11 +1,12 @@
 import styles from './App.module.css';
 
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import {
 //   // Header,
 //   Board,
 //   Console,
 // } from './../components';
-
 
 import {
   RouterProvider
