@@ -7,6 +7,7 @@ import styles from './Content.module.css'
 const RenderContent=(render_object)=>{
     // return ``;
     // console.log(Object.hasOwn(render_object,'tag'))
+    // console.log('CHECK222',render_object)
     let elem;
     let style = getStyle(render_object)
     if(checkObject){
@@ -57,6 +58,7 @@ const checkObject=(obj)=>{
 
 const Content = (props) =>{
     let data_objects = props.data_objects;
+    console.log("data_objects",data_objects)
     return (
         <div>
             {RenderContent(data_objects)}

@@ -1,6 +1,7 @@
 .main_console {
     width: 50vh;
-    height: 10vb;
+    height: 100%;
+    vertical-align: top;
     border-style:dashed;
     text-align: center;
 }

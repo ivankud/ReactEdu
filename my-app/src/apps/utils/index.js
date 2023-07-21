@@ -1,6 +1,11 @@
-import { isValidJson } from "./JsonUtils";
+import 
+{   
+    isValidJson,
+    getElementById
+ } from "./JsonUtils";
 
 
 export {
-    isValidJson
+    isValidJson,
+    getElementById
 }
