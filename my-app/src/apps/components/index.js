@@ -6,6 +6,7 @@ import Console from './Console';
 import MeRouter from './MeRouter';
 import MenuBar from './MenuBar';
 import Content from './Content';
+import ObjectProperty from './ObjectProperty';
 
 
 export {
@@ -17,4 +18,5 @@ export {
     Console,
     MeRouter,
     Content,
+    ObjectProperty,
 };

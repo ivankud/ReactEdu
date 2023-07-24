@@ -2,7 +2,7 @@ import
 {   
     isValidJson,
     getElementById
- } from "./JsonUtils";
+} from "./JsonUtils";
 
 
 export {

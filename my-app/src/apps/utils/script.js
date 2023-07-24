@@ -90,9 +90,9 @@ function getLoopForTags(json, id){
     return targetJSON;
 }
 
-function getElementById(json, id){
+export function getElementById(json, id){
     return getLoopForTags(json, id);
 }
-let elem = getElementById(data_objects,'child4')
+// let elem = getElementById(data_objects,'child4')
 
-console.log('>>>',elem)
+// console.log('>>>',elem)

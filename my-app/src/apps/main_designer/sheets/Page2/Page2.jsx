@@ -1,25 +1,30 @@
 
-import { Button } from 'reactstrap';
-import React, { useState, useEffect } from 'react';
+import { Button ,Input} from 'reactstrap';
+import React, {
+   useState,
+   useEffect } from 'react';
+
+import {ObjectProperty} from './../../../components';
 
 // import styles from './Page.module.css';
 
   const Page2 = () => {
-    const [count, setCount] = useState(0);
+    const[object, setObject] = useState({"value":"green"})
 
-    useEffect(() => {
-      // Обновляем заголовок документа, используя API браузера
-      document.title = `Вы нажали ${count} раз`;
-    });
+    const setProperty =(nameProperty, value)=>{
+      let vObject = JSON.parse(JSON.stringify(object))
+      vObject[nameProperty] = value;
+      setObject(vObject) 
+    }
 
-    const foo = `<div>foo</div>`;
     return (        
         <div>
           <div>Тестовая страница</div>
-          <div>{count}</div>
-          <Button color="danger" onClick={()=>setCount(count+1)}>Danger!</Button>
-          {/* {`<div>asdfasdf</div>`} */}
-          <div dangerouslySetInnerHTML={{ __html: foo }}></div>
+          <ObjectProperty
+            property={object}
+            setProperty={setProperty}
+          />
+          {JSON.stringify(object)}
         </div>
     )
   }

@@ -1,0 +1,22 @@
+.ObjectProperty{
+    width : 50%;
+    background-color: rgb(255, 249, 241);
+    border-style: solid;
+    border-width: 2px;
+    border-color:burlywood;
+    border-radius: 5px;
+    display: flex;
+    vertical-align: middle;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ObjectProperty_head{
+    padding-left: 30px;
+}
+
+.ObjectProperty_value{
+    padding:2px;
+    width:70%;
+    padding-right: 10px;
+}
