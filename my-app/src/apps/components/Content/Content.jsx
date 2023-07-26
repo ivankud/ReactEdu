@@ -2,6 +2,8 @@ import {React} from 'react'
 
 import styles from './Content.module.css'
 
+import { Button } from 'bootstrap';
+
 
 
 const RenderContent=(render_object)=>{
@@ -11,20 +13,40 @@ const RenderContent=(render_object)=>{
     let elem;
     let style = getStyle(render_object)
     if(checkObject){
-        if(render_object.tag === 'div') elem = 
-            <div 
-                id = {render_object.id}
-                key = {render_object.id}
-                style={style}
-                onClick={(event)=>{
-                    console.log(event)
-                    console.log("id:", event.target.id)
-                    // getElementIdByClick(getElementIdByClick)
-                }}
-            >
-                {render_object.content??``}
-                {getChildren(render_object)}
-            </div>
+        switch(String(render_object.tag).toLowerCase()) {
+            case 'div': 
+                elem = <div 
+                            id = {render_object.id}
+                            key = {render_object.id}
+                            style={style}
+                            onClick={(event)=>{
+                                console.log(event)
+                                console.log("id:", event.target.id)
+                                // getElementIdByClick(getElementIdByClick)
+                            }}
+                        >
+                            {render_object.content??``}
+                            {getChildren(render_object)}
+                        </div>
+                break;
+            case 'button':
+                elem = <button 
+                        id = {render_object.id}
+                        key = {render_object.id}
+                        style={style}
+                        onClick={(event)=>{
+                            console.log(event)
+                            console.log("id:", event.target.id)
+                            // getElementIdByClick(getElementIdByClick)
+                        }}
+                    >
+                        {render_object.content??``}
+                        {getChildren(render_object)}
+                    </button>
+                break;
+            default:
+                break;
+        }
     }
     return elem;
 }

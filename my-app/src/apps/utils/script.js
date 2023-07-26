@@ -90,9 +90,14 @@ function getLoopForTags(json, id){
     return targetJSON;
 }
 
-export function getElementById(json, id){
-    return getLoopForTags(json, id);
-}
-// let elem = getElementById(data_objects,'child4')
+// export function getElementById(json, id){
+//     return getLoopForTags(json, id);
+// }
 
-// console.log('>>>',elem)
+
+// let elem = getElementById(data_objects,'child4')
+let a = {};
+a['tag'] = data_objects[Object.keys(data_objects)[0]]
+console.log('>>>',typeof a)
+
+

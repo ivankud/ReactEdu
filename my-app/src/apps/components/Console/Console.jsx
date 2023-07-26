@@ -9,16 +9,18 @@ import {isValidJson} from '../../utils'
 const Console = (props) =>{
     const [vjs, setVJS] = useState(props.data_objects);
     // console.log(isValidJson(JSON.stringify(vjs)))
-    console.log('props.set_data_objects',props.set_data_objects)
+    // console.log('props.set_data_objects',props.set_data_objects)
     const ChangeJSON =(VALUE)=>{
-        console.log('ChangeJSON>>START')
-        console.log('ChangeJSON>>VALUE',VALUE)
+        // console.log('ChangeJSON>>START')
+        // console.log('ChangeJSON>>VALUE',VALUE)
         if(isValidJson(VALUE)) {
             console.log('ChangeJSON>>ROLLBACK UP')
+            console.log(JSON.parse(VALUE))
+            // props.set_data_objects(JSON.parse(VALUE))
             props.set_data_objects(VALUE)
         }
         else {
-            console.log('ChangeJSON>>ROLLBACK SETTER')
+            // console.log('ChangeJSON>>ROLLBACK SETTER')
             setVJS(VALUE)
         }
     }
@@ -32,13 +34,15 @@ const Console = (props) =>{
         >            
             <textarea 
                 onChange={(e)=>{
-                    console.log(isValidJson(e.target.value))
-                    setVJS(e.target.value)
+                    if(isValidJson(e.target.value)) {
+                        ChangeJSON(e.target.value)
+                    }                    
+                    // setVJS(e.target.value)
                 }}
-                defaultValue={JSON.stringify(vjs, null, 4)}/>
+                defaultValue={JSON.stringify(props.data_objects, null, 4)}/>
             <button onClick={()=>{
                 // console.log(isValidJson(JSON.stringify(vjs)))
-                ChangeJSON(vjs)
+                ChangeJSON(props.data_objects)
             }}>
                 Save
             </button>
