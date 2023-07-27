@@ -48,7 +48,7 @@ let data_objects = {
                 },
                 {
                     "tag":"div",
-                    "id":"child4", 
+                    "id":"child5", 
                     "style":{
                         "background-color": "yellow",
                         "position":"absolute",
@@ -62,42 +62,35 @@ let data_objects = {
     ],
 }
 
-function getObject(){}
 
-function getChildren(){}
-
-function getLoopForTags(json, id){
-    // console.log('INPUT JSON>>',json)
-    // console.log('INPUT ID>>',id)
+function getPathById(json, id, currentTargetPATH){
+    let targetPATH='';
     let targetJSON;
     Object.keys(json).forEach(key=>{
         if(json[key]===id && key==='id') {
-            // console.log('FIND>>')
-            targetJSON = json;
+            targetPATH = currentTargetPATH;
         }
     })
     if(targetJSON === undefined) {
         if(json.hasOwnProperty('children')) {
             json["children"].forEach((child, index) => {
-                let tempTargetJSON = getLoopForTags(child, id)
-                if(tempTargetJSON) {
+                let vTemp = currentTargetPATH+(currentTargetPATH&&'>')+'children'+'>'+index;
+                // console.log(vTemp)
+                let tempTargetPATH = getPathById(child,id,vTemp)
+                if(tempTargetPATH) {
                     if(targetJSON) console.error(`Найдено несколько объектов с заданным id - ${id}`)
-                    targetJSON = tempTargetJSON;
+                    targetPATH = tempTargetPATH;
                 }
             });
         }
     }
-    return targetJSON;
+    return targetPATH;
 }
 
-// export function getElementById(json, id){
-//     return getLoopForTags(json, id);
-// }
+function getPathById1(json, id){
+    return getPathById(json, id,'');
+}
 
+// let path = getPathById1(data_objects,'child4')
 
-// let elem = getElementById(data_objects,'child4')
-let a = {};
-a['tag'] = data_objects[Object.keys(data_objects)[0]]
-console.log('>>>',typeof a)
-
-
+// console.log('result path>>>>> ',path)

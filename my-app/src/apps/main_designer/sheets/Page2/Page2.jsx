@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import {ObjectJson} from '../../../components';
 
 // import styles from './Page.module.css';
+import { updateObject } from '../../../utils';
 
   const Page2 = () => {
     // const[object, setObject] = useState({"value":"green"})
@@ -15,6 +16,31 @@ import {ObjectJson} from '../../../components';
     //   setObject(vObject) 
     // }
 
+    
+    var data = { 
+      "store": {
+        "book": [ 
+          { "category": "reference",
+            "author": "Nigel Rees",
+            "title": "Sayings of the Century",
+            "price": 8.95
+          },
+          { "category": "fiction",
+            "author": "Evelyn Waugh",
+            "title": "Sword of Honour",
+            "price": 12.99
+          }
+        ],
+        "bicycle": {
+          "color": "red",
+          "price": 19.95
+        }
+      }
+    }
+    var path = "store>book>0>price"
+
+    updateObject(data, path,"10.00")
+    
     return (        
         <div>
           <div>Тестовая страница</div>

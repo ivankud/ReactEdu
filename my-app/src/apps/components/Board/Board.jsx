@@ -5,6 +5,8 @@ import {Content,BoardGrid} from './../';
 
 const Board = (props) => {
     // let arr = Array(2).fill(Array(2).fill(0));
+    const changeTargetId= props.changeTargetId;
+    console.log('Board>>>',changeTargetId)
     let arr = props.grid;
     const width = 1000;
     const height = 1000;
@@ -19,12 +21,8 @@ const Board = (props) => {
                 className={styles.main_board}
                 style={{position: "relative",}}
             >
-                {arr.map((item, indexI) => {
-                    return item.map((item1, indexJ)=> {
-                        return BoardGrid(indexJ*20,indexI*20)
-                    });
-                })}
-                <Content data_objects={props.data_objects}/>
+                {arr.map((item, indexI) => item.map((item1, indexJ)=> BoardGrid(indexJ*20,indexI*20)))}
+                <Content data_objects={props.data_objects} changeTargetId={changeTargetId}/>
                 {/* <FrameObject/> */}
             </div>
         </div>

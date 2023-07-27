@@ -5,7 +5,7 @@ let data_objects = {
         "position":"absolute",
         "left":"0px",
         "top":"0px",
-        "background-color": "green",
+        "backgroundColor": "green",
         "width":"100px",
         "height":"100px",
     },
@@ -15,7 +15,7 @@ let data_objects = {
             "tag":"div",
             "id":"child1", 
             "style":{
-                "background-color": "red",
+                "backgroundColor": "red",
                 "position":"absolute",
                 "left":"30px",
                 "top":"30px",
@@ -23,10 +23,10 @@ let data_objects = {
             "content":'First elem',
         },
         {
-            "tag":"div",
+            "tag":"button",
             "id":"child2", 
             "style":{
-                "background-color": "yellow",
+                "backgroundColor": "yellow",
                 "position":"absolute",
                 "left":"30px",
                 "top":"100px",
@@ -36,9 +36,9 @@ let data_objects = {
     ],
 }
 
-const changeDataObject =(data)=> {
-    data_objects=data;
-}
+// const changeDataObject =(data)=> {
+    // data_objects=data;
+// }
 
 
 

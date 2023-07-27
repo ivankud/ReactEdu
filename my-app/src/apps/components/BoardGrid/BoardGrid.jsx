@@ -7,6 +7,7 @@ const BoardGrid = (positionX, positionY) =>{
     // debugger;    
     return(
         <div
+            key={positionX*100000000000+positionY*1000}
             style ={{
                 position: 'absolute',
                 top: `${x}px`,

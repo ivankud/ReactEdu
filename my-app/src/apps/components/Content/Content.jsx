@@ -1,60 +1,16 @@
 import {React} from 'react'
 
-import styles from './Content.module.css'
+// import styles from './Content.module.css'
 
-import { Button } from 'bootstrap';
+// import { Button } from 'bootstrap';
+
+// const RenderContent=(render_object,changeSelectedID)=>{
 
 
-
-const RenderContent=(render_object)=>{
-    // return ``;
-    // console.log(Object.hasOwn(render_object,'tag'))
-    // console.log('CHECK222',render_object)
-    let elem;
-    let style = getStyle(render_object)
-    if(checkObject){
-        switch(String(render_object.tag).toLowerCase()) {
-            case 'div': 
-                elem = <div 
-                            id = {render_object.id}
-                            key = {render_object.id}
-                            style={style}
-                            onClick={(event)=>{
-                                console.log(event)
-                                console.log("id:", event.target.id)
-                                // getElementIdByClick(getElementIdByClick)
-                            }}
-                        >
-                            {render_object.content??``}
-                            {getChildren(render_object)}
-                        </div>
-                break;
-            case 'button':
-                elem = <button 
-                        id = {render_object.id}
-                        key = {render_object.id}
-                        style={style}
-                        onClick={(event)=>{
-                            console.log(event)
-                            console.log("id:", event.target.id)
-                            // getElementIdByClick(getElementIdByClick)
-                        }}
-                    >
-                        {render_object.content??``}
-                        {getChildren(render_object)}
-                    </button>
-                break;
-            default:
-                break;
-        }
-    }
-    return elem;
-}
-
-const getChildren = (children)=>{
+const getChildren = (children,changeSelectedID)=>{
     // children.map(item=><Content data_objects={children}/>)
     if(Object.hasOwn(children,'children')){
-        return children.children.map(item=><Content data_objects={item}/>)
+        return children.children.map(item=><Content data_objects={item} changeTargetId={changeSelectedID}/>)
     }
     return ``;
 }
@@ -79,17 +35,69 @@ const checkObject=(obj)=>{
 }
 
 const Content = (props) =>{
-    let data_objects = props.data_objects;
-    console.log("data_objects",data_objects)
+    // let data_objects = props.data_objects;
+    console.log('Content props>>>>',props)
+    const RenderContent=(render_object,changeSelectedID)=>{
+        // return ``;
+        // console.log(Object.hasOwn(render_object,'tag'))
+        // console.log('CHECK222',render_object)
+        let elem;
+        let style = getStyle(render_object)
+        if(checkObject){
+            switch(String(render_object.tag).toLowerCase()) {
+                case 'div': 
+                    elem = <div 
+                                id = {render_object.id}
+                                // key = {render_object.id}
+                                key = {Math.floor(Math.random() * 2000)}
+                                style={style}
+                                onClick={(event)=>{
+                                    // console.log(event)
+                                    console.log("id:", event.target.id)
+                                    changeSelectedID(event.target.id)
+                                    // getElementIdByClick(getElementIdByClick)
+                                }}
+                            >
+                                {render_object.content??``}
+                                {getChildren(render_object,changeSelectedID)}
+                            </div>
+                    break;
+                case 'button':
+                    elem = <button 
+                            id = {render_object.id}
+                            // key = {render_object.id}
+                            key = {Math.floor(Math.random() * 2000)}
+                            style={style}
+                            onClick={(event)=>{
+                                // console.log(event)
+                                console.log("id:", event.target.id)
+                                changeSelectedID(event.target.id)
+                                // event.stopPropagation()
+                                // getElementIdByClick(getElementIdByClick)
+                            }}
+                        >
+                            {render_object.content??``}
+                            {getChildren(render_object,changeSelectedID)}
+                        </button>
+                    break;
+                default:
+                    break;
+            }
+        }
+        return elem;
+    }
+    let elem = RenderContent(props.data_objects,props.changeTargetId)
     return (
         <div>
-            {RenderContent(data_objects)}
+            {elem}
         </div>
     )
 }
 
-const getElementIdByClick=(event)=>{
-    console.log(event.target.id);
-}
+
+
+// const getElementIdByClick=(event)=>{
+    // console.log(event.target.id);
+// }
 
 export default Content;

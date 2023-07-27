@@ -16,10 +16,10 @@ const ObjectJson = (props)=> {
     const setProperty =(nameProperty, value)=>{
       // console.log('setProperty value>>',value)
       // console.log('setProperty typeof value>>',typeof value)
-      let vObject = JSON.parse(JSON.stringify(object))
+      let vObject = JSON.parse(JSON.stringify(props.data_objects))
       // console.log(JSON.parse(value))
       vObject[nameProperty] = JSON.parse(value);
-      console.log(vObject)
+      // console.log(vObject)
       setObject(vObject) 
       props.set_data_objects(JSON.stringify(vObject))
     }

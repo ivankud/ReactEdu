@@ -8,6 +8,7 @@ import MenuBar from './MenuBar';
 import Content from './Content';
 import ObjectProperty from './ObjectProperty';
 import ObjectJson from './ObjectJson'
+import ObjectTargetInfo from './ObjectTargetInfo';
 
 
 export {
@@ -20,5 +21,6 @@ export {
     MeRouter,
     Content,
     ObjectProperty,
-    ObjectJson
+    ObjectJson,
+    ObjectTargetInfo
 };

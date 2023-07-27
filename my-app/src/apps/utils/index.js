@@ -1,11 +1,15 @@
 import 
 {   
     isValidJson,
-    getElementById
+    getElementById,
+    updateObject,
+    getPathById
 } from "./JsonUtils";
 
 
 export {
     isValidJson,
-    getElementById
+    getElementById,
+    updateObject,
+    getPathById
 }
