@@ -35,12 +35,7 @@ const checkObject=(obj)=>{
 }
 
 const Content = (props) =>{
-    // let data_objects = props.data_objects;
-    console.log('Content props>>>>',props)
     const RenderContent=(render_object,changeSelectedID)=>{
-        // return ``;
-        // console.log(Object.hasOwn(render_object,'tag'))
-        // console.log('CHECK222',render_object)
         let elem;
         let style = getStyle(render_object)
         if(checkObject){
@@ -52,8 +47,6 @@ const Content = (props) =>{
                                 key = {Math.floor(Math.random() * 2000)}
                                 style={style}
                                 onClick={(event)=>{
-                                    // console.log(event)
-                                    console.log("id:", event.target.id)
                                     changeSelectedID(event.target.id)
                                     // getElementIdByClick(getElementIdByClick)
                                 }}

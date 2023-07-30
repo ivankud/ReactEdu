@@ -1,13 +1,14 @@
 let data_objects = {
     "tag":"div",
     "id":"main_object", 
+    "block":"true",
     "style":{
         "position":"absolute",
         "left":"0px",
         "top":"0px",
-        "backgroundColor": "green",
-        "width":"100px",
-        "height":"100px",
+        "backgroundColor": "",
+        "width":"100%",
+        "height":"100%",
     },
     "content":'asdfasdfasdf',
     "children":[

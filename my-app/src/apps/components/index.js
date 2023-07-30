@@ -9,6 +9,7 @@ import Content from './Content';
 import ObjectProperty from './ObjectProperty';
 import ObjectJson from './ObjectJson'
 import ObjectTargetInfo from './ObjectTargetInfo';
+import Button from './Button'
 
 
 export {
@@ -22,5 +23,6 @@ export {
     Content,
     ObjectProperty,
     ObjectJson,
-    ObjectTargetInfo
+    ObjectTargetInfo,
+    Button
 };

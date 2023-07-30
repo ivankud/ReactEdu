@@ -3,11 +3,13 @@
 import {getElementById} from './JsonUtils_getElementById'
 import {isValidJson} from './JsonUtils_isValidJson'
 import {updateObject} from './JsonUtils_updateByPath'
-import { getPathById } from './JsonUtils_getPathById'
+import {getPathById } from './JsonUtils_getPathById'
+import {objectReverse} from './JsonUtils_objectReverse'
 
-export {
+export { 
     getElementById,
     isValidJson,
     updateObject,
-    getPathById
+    getPathById,
+    objectReverse
 }

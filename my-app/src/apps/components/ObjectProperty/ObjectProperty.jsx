@@ -2,15 +2,12 @@ import React from 'react';
 
 import styles from './ObjectProperty.module.css';
 
-import { Input, Form } from 'reactstrap';
+// import { Input, Form } from 'reactstrap';
 
 const ObjectProperty = (props)=> {
-    // console.log(props.property)
+    // console.log('props.block',props.block)
     let inputPropertyName = Object.keys(props.property)[0]; 
     let inputValue = JSON.stringify(props.property[inputPropertyName], null,4);
-    // console.log('property>>',inputPropertyName)
-    // console.log('inputValue>>',props.property[inputPropertyName])
-    // console.log('typeof value>>',typeof inputValue)
     return (
         <div>
             <div className={styles['ObjectProperty']}>
@@ -19,8 +16,11 @@ const ObjectProperty = (props)=> {
                 </div>
                 <div className={styles['ObjectProperty_value']}>
                     <textarea           
-                        className={styles['ObjectProperty_textarea']}    
-                        defaultValue={inputValue} 
+                        className={styles['ObjectProperty_textarea']}   
+                        disabled={ 
+                            props.block===true
+                        } 
+                        value={inputValue} 
                         onChange={
                             (e)=>{
                                 let val = e.target.value;

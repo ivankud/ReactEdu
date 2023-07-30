@@ -6,7 +6,8 @@
  *              Так как объект является по своей сути ссылкой, достаточно всего лишь пройтись и поменять значения ничего не возвращая.
  */
 
-export function updateObject(data,OriginalPath, value) {
+export function updateObject(data, OriginalPath, value) {
+    // console.log('data',data,'path', OriginalPath, 'value',value)
     var pathArray = OriginalPath.split(">");
     var pointer = data; // points to the current nested object
     for (var i = 0, len = pathArray.length; i < len; i++) {
@@ -21,5 +22,6 @@ export function updateObject(data,OriginalPath, value) {
             console.log('error path:',OriginalPath)
         }
     }
-    // console.log(JSON.stringify(data,null,4))
+    // console.log('updateObject_result',JSON.stringify(data,null,4))
+    return data;
 }

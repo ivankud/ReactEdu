@@ -3,7 +3,8 @@ import
     isValidJson,
     getElementById,
     updateObject,
-    getPathById
+    getPathById,
+    objectReverse
 } from "./JsonUtils";
 
 
@@ -11,5 +12,6 @@ export {
     isValidJson,
     getElementById,
     updateObject,
-    getPathById
+    getPathById,
+    objectReverse
 }
