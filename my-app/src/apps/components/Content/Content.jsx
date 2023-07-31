@@ -7,23 +7,33 @@ import {React} from 'react'
 // const RenderContent=(render_object,changeSelectedID)=>{
 
 
-const getChildren = (children,changeSelectedID)=>{
-    // children.map(item=><Content data_objects={children}/>)
+const getChildren = (children,changeSelectedID, targetId,selectedElems)=>{
     if(Object.hasOwn(children,'children')){
-        return children.children.map(item=><Content data_objects={item} changeTargetId={changeSelectedID}/>)
+        return children.children.map(item=><Content data_objects={item} changeTargetId={changeSelectedID} targetId={targetId} selectedElems={selectedElems}/>)
     }
     return ``;
 }
 
-const getStyle = (styleproperties)=>{
+const getStyle = (object, selectedElem, selectedElems)=>{
+    console.log('selectedElems',selectedElems)
     let style={};
-    if(Object.hasOwn(styleproperties,'style')){
-        Object.keys(styleproperties.style).forEach(styleprop => {
-            style[styleprop] = styleproperties.style[styleprop];
-            style["opacity"]='0.8'
+    if(Object.hasOwn(object,'style')){
+        Object.keys(object.style).forEach(styleprop => {
+            style[styleprop] = object.style[styleprop];
+            style["opacity"]='0.9'
         });
     }
-    // console.log(style)
+    if(selectedElem || selectedElems?.includes(object.id) ) {
+        style['borderStyle']='solid' 
+        style['borderColor']='#ff7a7a' 
+        style['borderWidth']='1px' 
+    }
+    else {
+        style['borderStyle']='solid' 
+        style['borderColor']='#ffffff' 
+        style['borderWidth']='1px' 
+        
+    }
     return style;
 }
 
@@ -34,10 +44,12 @@ const checkObject=(obj)=>{
     return check;
 }
 
+
+
 const Content = (props) =>{
     const RenderContent=(render_object,changeSelectedID)=>{
         let elem;
-        let style = getStyle(render_object)
+        let style = getStyle(render_object, render_object.id===props.targetId, props.selectedElems)
         if(checkObject){
             switch(String(render_object.tag).toLowerCase()) {
                 case 'div': 
@@ -47,12 +59,12 @@ const Content = (props) =>{
                                 key = {Math.floor(Math.random() * 2000)}
                                 style={style}
                                 onClick={(event)=>{
-                                    changeSelectedID(event.target.id)
-                                    // getElementIdByClick(getElementIdByClick)
+                                    event.stopPropagation();
+                                    changeSelectedID(event.target.id,event.currentTarget)
                                 }}
                             >
                                 {render_object.content??``}
-                                {getChildren(render_object,changeSelectedID)}
+                                {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems)}
                             </div>
                     break;
                 case 'button':
@@ -62,15 +74,12 @@ const Content = (props) =>{
                             key = {Math.floor(Math.random() * 2000)}
                             style={style}
                             onClick={(event)=>{
-                                // console.log(event)
-                                console.log("id:", event.target.id)
-                                changeSelectedID(event.target.id)
-                                // event.stopPropagation()
-                                // getElementIdByClick(getElementIdByClick)
+                                event.stopPropagation();
+                                changeSelectedID(event.target.id,event.currentTarget)
                             }}
                         >
                             {render_object.content??``}
-                            {getChildren(render_object,changeSelectedID)}
+                            {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems)}
                         </button>
                     break;
                 default:

@@ -10,6 +10,7 @@ import ObjectProperty from './ObjectProperty';
 import ObjectJson from './ObjectJson'
 import ObjectTargetInfo from './ObjectTargetInfo';
 import Button from './Button'
+import CloseButton from './CloseButton'
 
 
 export {
@@ -24,5 +25,6 @@ export {
     ObjectProperty,
     ObjectJson,
     ObjectTargetInfo,
-    Button
+    Button,
+    CloseButton
 };

@@ -13,7 +13,7 @@ export function isValidJson(json) {
                 // console.log('isValidJson>>ERROR>>',error)
                 return false;
             }
-            break;
+            // break;
         case 'object' :
             // console.log('isValidJson>>CASE OBJECT')
             try {
@@ -26,7 +26,7 @@ export function isValidJson(json) {
                 // console.log('isValidJson>>RESULT>>',false)
                 return false;
             }
-            break;
+            // break;
         default :
             // console.log('isValidJson>>NOT PROCESSED 2')
             break;

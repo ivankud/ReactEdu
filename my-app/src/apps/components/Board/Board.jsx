@@ -9,7 +9,6 @@ const Board = (props) => {
     let arr = props.grid;
     const width = 1000;
     const height = 1000;
-    console.log('MainJson->',props.data_objects)
     return (
         <div style={{
             border: "dashed",
@@ -22,9 +21,10 @@ const Board = (props) => {
                 style={{position: "relative",}}
             >
                 {arr.map((item, indexI) => item.map((item1, indexJ)=> BoardGrid(indexJ*20,indexI*20)))}
-                <Content data_objects={props.data_objects} changeTargetId={changeTargetId} />
+                <Content data_objects={props.data_objects} changeTargetId={changeTargetId} targetId={props.targetId} selectedElems={props.selectedElems}/>
                 {/* <FrameObject/> */}
             </div>
+            {props.selectedElems}
         </div>
     )
 }

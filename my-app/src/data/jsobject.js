@@ -13,7 +13,7 @@ let data_objects = {
     "content":'asdfasdfasdf',
     "children":[
         {
-            "tag":"div",
+            "tag":"button",
             "id":"child1", 
             "style":{
                 "backgroundColor": "red",
@@ -21,10 +21,10 @@ let data_objects = {
                 "left":"30px",
                 "top":"30px",
             },
-            "content":'First elem',
+            "content":'First elem'
         },
         {
-            "tag":"button",
+            "tag":"div",
             "id":"child2", 
             "style":{
                 "backgroundColor": "yellow",
@@ -33,6 +33,31 @@ let data_objects = {
                 "top":"100px",
             },
             "content":'Second elem',
+            "children":[
+                {
+                    "tag":"button",
+                    "id":"child3", 
+                    "style":{
+                        "position":"absolute",
+                        "left":"100px",
+                        "top":"100px",
+                        "width": "100%"
+                    },
+                    "content":'Third elem',
+                },
+                {
+                    "tag":"div",
+                    "id":"child4", 
+                    "style":{
+                        "backgroundColor": "yellow",
+                        "position":"absolute",
+                        "left":"100px",
+                        "top":"200px",
+                        "width": "100%"
+                    },
+                    "content":'Fourth elem',
+                },
+            ]
         },
     ],
 }

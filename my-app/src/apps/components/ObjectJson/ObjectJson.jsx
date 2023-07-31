@@ -16,7 +16,6 @@ const ObjectJson = (props)=> {
     const setProperty =(nameProperty, value)=>{
       let vObject = JSON.parse(JSON.stringify(props.data_objects))
       vObject[nameProperty] = JSON.parse(value);
-      console.log('setProperty')
       props.set_data_objects(JSON.stringify(vObject))
       props.changeMessageConsole(`Изменено значение тега "${nameProperty}" на знчение >>${value.replace(/\\/gm,'')}`)
     }
@@ -30,13 +29,13 @@ const ObjectJson = (props)=> {
             onClick={
               ()=>setModeView('TREE')
             }
-            className={modeView==='TREE'?'btn-info disabled':'btn-info active'}
+            className={modeView==='TREE'?'btn-secondary disabled':'btn-info active'}
           >Свойства</Button>
           <Button 
             onClick={
               ()=>setModeView('CONSOLE')
             }
-            className={modeView==='CONSOLE'?'btn-info disabled':'btn-info active'}
+            className={modeView==='CONSOLE'?'btn-secondary disabled':'btn-info active'}
           >Json</Button>
         </div>
         { 
