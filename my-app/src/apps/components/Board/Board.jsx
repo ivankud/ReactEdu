@@ -7,8 +7,8 @@ const Board = (props) => {
     // let arr = Array(2).fill(Array(2).fill(0));
     const changeTargetId= props.changeTargetId;
     let arr = props.grid;
-    const width = 1000;
-    const height = 1000;
+    const width = 700;
+    const height = 700;
     return (
         <div style={{
             border: "dashed",
@@ -21,10 +21,18 @@ const Board = (props) => {
                 style={{position: "relative",}}
             >
                 {arr.map((item, indexI) => item.map((item1, indexJ)=> BoardGrid(indexJ*20,indexI*20)))}
-                <Content data_objects={props.data_objects} changeTargetId={changeTargetId} targetId={props.targetId} selectedElems={props.selectedElems}/>
+                <Content 
+                    data_objects={props.data_objects} 
+                    changeTargetId={changeTargetId} 
+                    targetId={props.targetId} 
+                    selectedElems={props.selectedElems} 
+                    selectionFrameSize={props.selectionFrameSize}
+                    mouseMode={props.mouseMode}
+                    addNewChildOnElement={props.addNewChildOnElement}
+                    setOverTargetID={props.setOverTargetID}
+                />
                 {/* <FrameObject/> */}
             </div>
-            {props.selectedElems}
         </div>
     )
 }

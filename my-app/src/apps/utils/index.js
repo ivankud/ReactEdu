@@ -8,7 +8,8 @@ import
 } from "./JsonUtils";
 
 import {
-    dragElement
+    dragElement,
+    dragNewElementElement
 } from './DragAndDrop'
 
 export {
@@ -17,5 +18,6 @@ export {
     updateObject,
     getPathById,
     objectReverse,
-    dragElement
+    dragElement,
+    dragNewElementElement
 }

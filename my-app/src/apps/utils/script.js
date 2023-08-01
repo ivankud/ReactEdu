@@ -102,7 +102,7 @@ function objectReverse(obj) {
     rev_obj.forEach(function(i) { 
       new_obj[i] = obj[i];
     })
-    console.log(new_obj)
+    // console.log(new_obj)
     return new_obj;
   }
 

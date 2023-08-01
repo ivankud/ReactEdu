@@ -1,4 +1,5 @@
 export function dragElement(elmnt,changeСoordinatesSelectedElem) {
+    // console.log('dragElement_elmnt',elmnt)
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(elmnt.id + "header")) {
       /* if present, the header is where you move the DIV from:*/
@@ -36,6 +37,6 @@ export function dragElement(elmnt,changeСoordinatesSelectedElem) {
       /* stop moving when mouse button is released:*/
       document.onmouseup = null;
       document.onmousemove = null;
-      changeСoordinatesSelectedElem({'top':elmnt.style.top, 'left': elmnt.style.left})
+      changeСoordinatesSelectedElem&&changeСoordinatesSelectedElem({'top':elmnt.style.top, 'left': elmnt.style.left})
     }
   }

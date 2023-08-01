@@ -11,6 +11,8 @@ import ObjectJson from './ObjectJson'
 import ObjectTargetInfo from './ObjectTargetInfo';
 import Button from './Button'
 import CloseButton from './CloseButton'
+import CompanentPanel from './CompanentPanel';
+import CompanentPanelElement from './CompanentPanelElement';
 
 
 export {
@@ -26,5 +28,7 @@ export {
     ObjectJson,
     ObjectTargetInfo,
     Button,
-    CloseButton
+    CloseButton,
+    CompanentPanel,
+    CompanentPanelElement
 };

@@ -1,0 +1,11 @@
+.MainComponentPanel{
+    background-color: blanchedalmond;
+    width: 400px;
+    height: 65vh;
+}
+.SlideComponentPanel{
+    background-color: rgb(90, 86, 79);
+    width: 380px;
+    height: 95%;
+    overflow: scroll;
+}

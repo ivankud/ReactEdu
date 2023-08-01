@@ -10,7 +10,7 @@ let data_objects = {
         "width":"100%",
         "height":"100%",
     },
-    "content":'asdfasdfasdf',
+    "content":'',
     "children":[
         {
             "tag":"button",
