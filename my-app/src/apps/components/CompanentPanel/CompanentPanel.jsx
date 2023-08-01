@@ -20,7 +20,7 @@ const CompanentPanel = (props) => {
             <div className={`${styles.SlideComponentPanel} d-flex justify-content-center d-flex flex-wrap`}>
                 <div className="d-flex flex-row">
                     <div className="p-2">
-                        <CompanentPanelElement id='Button_1' type='Button' label='Кнопка1' setMouseMode = {props?.setMouseMode} setNewItem={props.setNewItem} content={{"tag": "button","id": "ButtonTemplate","style": {"backgroundColor": "red","position": "absolute","left": "30px","top": "30px"},"content": 'Кнопка1'}}/>
+                        <CompanentPanelElement id='Button_1' type='Button' label='Кнопка' setMouseMode = {props?.setMouseMode} setNewItem={props.setNewItem} content={{"tag": "button","id": "ButtonTemplate","style": {"backgroundColor": "red","position": "absolute","left": "30px","top": "30px"},"content": 'Кнопка1'}}/>
                     </div>
                     {/* <div className="p-2">
                         <CompanentPanelElement id='Button_2' type='Button' content='Кнопка2'/>

@@ -50,10 +50,9 @@ import data_objects from '../../../../data/jsobject'
       * valueId - id выбранного объекта
       * targetNode - элемент DOM-дерева, нужен чтобы выщитать все вложенные объекты
       */
-      console.log('targetNode',targetNode)
       if(valueId) {
         let selectedElem = []
-        catchByObject(targetNode, "id", selectedElem)
+        if(targetNode) catchByObject(targetNode, "id", selectedElem)
         selectedElem=[...selectedElem.filter(id=>id!=='')]
         let path = getPathById(MainJson,valueId);
         let templateJSON = getElementById(MainJson,valueId)
@@ -73,21 +72,33 @@ import data_objects from '../../../../data/jsobject'
     }
 
     const addNewChildOnElement=(event)=>{
-      console.log('overTargetID>>',overTargetID)
       let vTargetNode = document.getElementById(overTargetID)
       changeTargetId(overTargetID,vTargetNode)
-      let vTemplateJSON = JSON.parse(JSON.stringify(templateJSON))
-      console.log('vTemplateJSON>>',JSON.stringify(vTemplateJSON,null,4))
+      let vTemplateJSON = getElementById(MainJson,overTargetID)
+      setTemplateJSON(vTemplateJSON)
       let rect = event.target.getBoundingClientRect();
       let x = event.clientX - rect.x;
       let y = event.clientY - rect.y;
-      console.log("x:", x, "y:",y)
-      newItem.style.left = x
-      newItem.style.top = y
-      vTemplateJSON.children.push(newItem)
-      // console.log(JSON.stringify(vTemplateJSON,null,4))
-      // console.log("event>>",event)
-      changeTemplateJSON(JSON.stringify(vTemplateJSON))
+      let vNewItem = JSON.parse(JSON.stringify(newItem))
+      vNewItem.style.left = x+'px'
+      vNewItem.style.top = y+'px'
+      /*вычисление id для нового объекта↓↓↓↓↓↓*/
+      let vNextItemId = (vNewItem.id).replace('Template','')
+      let aID =[]
+      catchByObject(MainJson,'id',aID)
+      let varr = aID.map(item=>item.toLowerCase())
+                    .filter(item=>!item.search(new RegExp(vNextItemId,'i')))
+                    .filter(item=>!isNaN(Number(item.split('_')[1])))
+                    .map(item=>Number(item.split('_')[1]))
+      let vLen = varr.length; /*Так надо*/
+      let nextID = vLen>0?(Math.max(...varr)+1):1
+      vNewItem.id = vNextItemId+"_"+String(nextID)
+      /*вычисление id для нового объекта↑↑↑↑↑↑*/
+      vTemplateJSON.children.push(vNewItem)
+      setTemplateJSON(vTemplateJSON)
+      changeMessageConsole(`В объект ${overTargetID} добавлен новый компонент ${vNewItem.id}`)
+      console.log('vNewItem>>>',vNewItem)
+      changeTargetId(vNewItem.id)
     }
 
     const catchByObject=(object, tag, value)=>{
@@ -148,9 +159,6 @@ import data_objects from '../../../../data/jsobject'
     },[MainJson,selectedElems])
     return (        
         <div>
-          {/* <div className="p-2">
-                <CompanentPanelElement id='Button_1' type='Button' content='Кнопка1'/>
-          </div> */}
           <div style={{display: "inline-block", padding:'0px', backgroundColor:'#FFFFE0', height:'65vh', verticalAlign: "top", width:'300px'}}>
             <ObjectTargetInfo targetPath={targetPath} targetId={targetId} changeTargetId={changeTargetId}/>
             <ObjectJson data_objects={templateJSON} set_data_objects={changeTemplateJSON}  changeMessageConsole={changeMessageConsole}/>
