@@ -1,10 +1,10 @@
 .MainComponentPanel{
-    background-color: blanchedalmond;
+    background-color: #f2f0ed;
     width: 400px;
     height: 65vh;
 }
 .SlideComponentPanel{
-    background-color: rgb(90, 86, 79);
+    background-color: #d1cfcd;
     width: 380px;
     height: 95%;
     overflow: scroll;

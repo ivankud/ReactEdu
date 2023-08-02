@@ -41,7 +41,7 @@ const CompanentPanelElement = (props) => {
                             </div>
                             <div className="mt-3">{props.label}</div>
                         </div>
-                break;
+                // break;
             case 'table':
                 return  <div  className={`d-flex justify-content-center align-items-center flex-column ${styles['componentElement']}`} >                
                             <div>
@@ -81,7 +81,7 @@ const CompanentPanelElement = (props) => {
                             }
                             <div className="">{props.label}</div>
                         </div>                        
-                break;
+                // break;
             case 'input':
                 return  <div  className={`d-flex justify-content-center align-items-center flex-column ${styles['componentElement']}`} >
                             <div id={props.id} className={`${styles['elementButton']}` }>
@@ -95,7 +95,7 @@ const CompanentPanelElement = (props) => {
                             }
                             <div className="">{props.label}</div>
                         </div>                        
-                break;
+                // break;
             case 'label':
                 return  <div  className={`d-flex justify-content-center align-items-center flex-column ${styles['componentElement']}`} >
                             <div id={props.id} className={`${styles['elementButton']}` }>
@@ -106,10 +106,23 @@ const CompanentPanelElement = (props) => {
                                 <div className={`${styles["label"]} ${styles["phantom"]}`}>{props.label}</div>
                             }
                         </div>                        
-                break;
+                // break;
+                
+            case 'div':
+                return  <div  className={`d-flex justify-content-center align-items-center flex-column ${styles['componentElement']}`} >
+                            <div id={props.id} className={`${styles['elementButton']}` }>
+                                <div className={styles.input}  style={elemStyle}/>
+                            </div>
+                            {
+                                mode==='MOVE'&&                                    
+                                <div style={originalStyle}  className={`${styles["phantom"]}`}/>
+                            }
+                            <div className="">{props.label}</div>
+                        </div>                        
+                // break;
             default:
                 return 'ERROR'
-                break;
+                // break;
     }
     }
     useEffect(()=>{

@@ -1,12 +1,12 @@
 import React
-, {useState, useEffect}
+// , {useState, useEffect}
  from 'react';
 
 // import {Object} from './../../../components';
 
 import {
   // ObjectJson,
-  // Button
+  Button,
   ObjectTree
 } from '../../../components';
 
@@ -43,7 +43,8 @@ import styles from './Page2.module.css';
             123123
           </div>
           <p>asdfasdfasdf</p>
-          
+          <Button style={{textAlign:'center', lineHeight:"10px"}}>123123</Button>
+          <div style={{"width":"30px","height":"30px","border-color":"pink","borderStyle":"solid"}}>4444</div>
         </div>
     )
   }

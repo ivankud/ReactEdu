@@ -31,10 +31,10 @@ const getStyle = (object, selectedElem, selectedElems)=>{
             style["opacity"]='0.9'
         });
     }
-    if(selectedElem || selectedElems?.includes(object.id) ) {
-        style['borderStyle']='solid' 
-        style['borderColor']='#ff7a7a' 
-        style['borderWidth']='1px' 
+    if( selectedElem || selectedElems?.includes(object.id) ) {
+        style['borderStyle']=style['borderStyle']??'solid' 
+        style['borderColor']=style['borderColor']??'#ff7a7a' 
+        style['borderWidth']=style['borderWidth']??'1px' 
     }
     else {
         style['borderStyle']='solid' 
@@ -82,7 +82,7 @@ const Content = (props) =>{
                                     if(props.mouseMode ==='MOVENEWITEM') props.addNewChildOnElement(event)
                                 }}
                             >
-                                {render_object.content??``}
+                                {/* {render_object.content??``} */}
                                 {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID)}
                             </div>
                     break;

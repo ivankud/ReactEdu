@@ -1,11 +1,13 @@
-import React, {useEffect} from "react";
+import React
+// , {useEffect}
+ from "react";
 import styles from './CompanentPanel.module.css'
 
 import {CompanentPanelElement} from "../";
 
 import {
-    dragNewElementElement,
-    dragElement
+    // dragNewElementElement,
+    // dragElement
 } from './../../utils'
 
 const CompanentPanel = (props) => {
@@ -20,6 +22,7 @@ const CompanentPanel = (props) => {
                         {"tag": "table","id": "TableTemplate","style": {"position": "absolute","left": "30px","top": "30px"},"content": 'Таблица'},
                         {"tag": "input","id": "InputTemplate","style": {"position": "absolute","left": "30px","top": "30px"},"content": 'Поле ввода'},
                         {"tag": "label","id": "LabelTemplate","style": {"position": "absolute","left": "30px","top": "30px"},"content": 'Надпись'},
+                        {"tag": "div","id": "DivTemplate","style": {"width":"30px","height":"30px","border-color":"pink","borderStyle":"solid","borderWidth":"5px","position": "absolute","left": "30px","top": "30px"},"content":'Контейнер'},
                     ]
     return (
         <div className={styles.MainComponentPanel + ' d-flex justify-content-center align-items-center'}>
@@ -42,9 +45,9 @@ const CompanentPanel = (props) => {
                     <div className="p-2">
                         <CompanentPanelElement id={elements[4].id} type={elements[4].tag} label={elements[4].content} setMouseMode = {props?.setMouseMode} setNewItem={props.setNewItem} content={elements[4]}/>
                     </div>
-                    {/* <div className="p-2">
-                        <CompanentPanelElement id='Button_6' type='Button' content='Кнопка6'/>
-                    </div> */}
+                    <div className="p-2">
+                        <CompanentPanelElement id={elements[5].id} type={elements[5].tag} label={elements[5].content} setMouseMode = {props?.setMouseMode} setNewItem={props.setNewItem} content={elements[5]}/>
+                    </div>
                 </div>                
                 <div className="d-flex flex-row">
                     {/* <div className="p-2">

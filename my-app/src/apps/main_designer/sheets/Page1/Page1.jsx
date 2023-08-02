@@ -95,6 +95,7 @@ import data_objects from '../../../../data/jsobject'
       let nextID = vLen>0?(Math.max(...varr)+1):1
       vNewItem.id = vNextItemId+"_"+String(nextID)
       /*вычисление id для нового объекта↑↑↑↑↑↑*/
+      if(!Object.hasOwn(vTemplateJSON,"children")) vTemplateJSON.children = []
       vTemplateJSON.children.push(vNewItem)
       setTemplateJSON(vTemplateJSON)
       changeMessageConsole(`В объект ${overTargetID} добавлен новый компонент ${vNewItem.id}`)
@@ -145,6 +146,7 @@ import data_objects from '../../../../data/jsobject'
         })        
       } 
     }
+    
     useEffect(()=>{
       /*вешает событие drag на компонент*/
       if(targetId !== 'main_object') {
@@ -159,7 +161,7 @@ import data_objects from '../../../../data/jsobject'
     },[MainJson,selectedElems])
     return (        
         <div>
-          <div style={{display: "inline-block", padding:'0px', backgroundColor:'#FFFFE0', height:'65vh', verticalAlign: "top", width:'20vw'}}>
+          <div style={{display: "inline-block", padding:'0px', backgroundColor:'#d1cfcd', height:'65vh', verticalAlign: "top", width:'20vw'}}>
             <ObjectTree data_objects={MainJson} changeTargetId={changeTargetId}/>
             <div style={{overflow: "scroll", height:'400px'}}>
               <ObjectTargetInfo targetPath={targetPath} targetId={targetId} changeTargetId={changeTargetId}/>
@@ -192,7 +194,7 @@ import data_objects from '../../../../data/jsobject'
               onClick={()=>{setModeConsole('MAIN')}} >
               Общий объект
             </Button>
-            <Button 
+            <Button  
               className={modeConsole==='CONSOLE'?'btn-secondary disabled':'btn-info active'}
               onClick={()=>{setModeConsole('CONSOLE')}} >
               Консоль

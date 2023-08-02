@@ -1,7 +1,7 @@
 
   export function dragNewElementElement(elmntId , changeStyle, setMode) {
       let elmnt = document.getElementById(elmntId)
-      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      var /*pos1 = 0, pos2 = 0,*/ pos3 = 0, pos4 = 0;
       if (elmnt) {
         /* if present, the header is where you move the DIV from:*/
         elmnt.onmousedown = dragMouseDown;
@@ -12,7 +12,7 @@
       }
     
       function dragMouseDown(e) {
-        e = e || window.event;
+        e = e || window.event; 
         e.preventDefault();
         // get the mouse cursor position at startup:
         pos3 = e.clientX;
@@ -26,8 +26,8 @@
         e = e || window.event;
         e.preventDefault();
         // calculate the new cursor position:
-        pos1 = pos3 - e.pageX;
-        pos2 = pos4 - e.pageY;
+        // pos1 = pos3 - e.pageX;
+        // pos2 = pos4 - e.pageY;
         pos3 = e.pageX;
         pos4 = e.pageY;
         // set the element's new position:

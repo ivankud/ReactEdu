@@ -1,9 +1,9 @@
 .ObjectProperty{
     width : 100%;
-    background-color: rgb(255, 249, 241);
+    background-color: #f2f0ed;
     border-style: solid;
     border-width: 2px;
-    border-color:burlywood;
+    border-color:#d1cfcd;
     border-radius: 5px;
     display: flex;
     vertical-align: middle;
@@ -24,4 +24,6 @@
 
 .ObjectProperty_textarea{
     width:100%;
+    min-height: 10px;
+    height: 25px;
 }

@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from 'react';
 
-import styles from './ObjectTreeNode.module.css';
+// import styles from './ObjectTreeNode.module.css';
 import { Button } from 'reactstrap';
 
 const ObjectTreeNode = (props)=> {
@@ -19,15 +19,15 @@ const ObjectTreeNode = (props)=> {
                   let vShowChildren = !showChildren;
                   setShowChildren(vShowChildren)
                 }}>
-              {Object.hasOwn(props.data_objects,"children")?(showChildren?'-':'+'):' '}
+              {Object.hasOwn(props.data_objects,"children")?(showChildren?'╚':'+'):' '}
           </button>
           <Button 
-            style={{flex:1, backgroundColor:'#b3b3cc'}}
+            style={{flex:1, backgroundColor:'#f2f0ed', color: 'black', textAlign:'center', lineHeight:"10px"}}
             onClick={()=>{
               props.changeTargetId(props.data_objects?.id,document.getElementById(props.data_objects?.id))
             }}
             >
-            {props.data_objects?.tag}:{props.data_objects?.id}
+            Тип: {props.data_objects?.id} {props.data_objects?.id&&`->`} id: {props.data_objects?.tag} {props.data_objects.content?`->${props.data_objects.content}`:''}
           </Button>
         </div>
         {Object.hasOwn(props.data_objects,"children")&&showChildren&& 
