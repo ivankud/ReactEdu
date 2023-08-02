@@ -7,8 +7,8 @@ const Board = (props) => {
     // let arr = Array(2).fill(Array(2).fill(0));
     const changeTargetId= props.changeTargetId;
     let arr = props.grid;
-    const width = 700;
-    const height = 700;
+    const width = 1920;
+    const height = 1080;
     return (
         <div style={{
             border: "dashed",

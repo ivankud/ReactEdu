@@ -13,6 +13,8 @@ import Button from './Button'
 import CloseButton from './CloseButton'
 import CompanentPanel from './CompanentPanel';
 import CompanentPanelElement from './CompanentPanelElement';
+import ObjectTree from './ObjectTree';
+import ObjectTreeNode from './ObjectTreeNode';
 
 
 export {
@@ -30,5 +32,7 @@ export {
     Button,
     CloseButton,
     CompanentPanel,
-    CompanentPanelElement
+    CompanentPanelElement,
+    ObjectTree,
+    ObjectTreeNode
 };

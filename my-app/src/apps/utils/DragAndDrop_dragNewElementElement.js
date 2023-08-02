@@ -40,7 +40,7 @@
       }
     
       function closeDragElement() {
-        console.log("closeDragElement");
+        // console.log("closeDragElement");
         /* stop moving when mouse button is released:*/
         // setStyle(originalStyle)
         document.onmouseup = null;

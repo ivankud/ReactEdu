@@ -15,5 +15,32 @@
   }
 
   table, th, td , tr{
+    height: 10px;
+    width:50px;
     border: 1px solid black;
+    line-height: 14px;
   }
+
+  .tableElement {
+    background-color: rgb(255,255,255,0);
+    border:"none";
+    background: "none"
+  }
+
+  .elementButtonInvisibleStyle {
+    /* border:"none"; */          /*Стили не подтягиваются*/
+    /* background: "none"; */     /*Стили не подтягиваются*/
+    border-color: rgba(240, 248, 255, 0);
+    background-color: rgba(0, 255, 255, 0);
+
+  }
+
+  .header-top {
+    /* outline: "dotted"; */
+    /* background-color: blanchedalmond; */
+    /* text-align: center; */
+    /* width: 100%; */
+    /* height: 250px; */
+    border:"none";
+    background: "none"
+}

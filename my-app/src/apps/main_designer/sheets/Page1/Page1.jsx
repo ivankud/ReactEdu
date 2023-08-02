@@ -5,7 +5,7 @@ import {
     ObjectJson,
     ObjectTargetInfo,
     CompanentPanel,
-    CompanentPanelElement
+    ObjectTree,
 } from '../../../components';
 
 import moment from 'moment/moment';
@@ -23,9 +23,9 @@ import data_objects from '../../../../data/jsobject'
 
   const Page1 = () => {
     // const MainJson = data_objects
-    const [mouseMode, setMouseMode] = useState('HANDLE'); /*HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
-    const [overTargetID,setOverTargetID] = useState(null);
-    const [newItem, setNewItem] = useState(null)
+    const [mouseMode, setMouseMode] = useState('HANDLE');   /*HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
+    const [overTargetID,setOverTargetID] = useState(null);  /*компонент над котором перетаскивается новый объект*/
+    const [newItem, setNewItem] = useState(null)            /*новый перетаскиваемый объект*/
     const [selectionFrameSize, setSelectionFrameSize] = useState({width:0, height: 0})
     const [messageConsole, setMessageConsole] = useState({})
     const [modeConsole, setModeConsole] = useState('TARGET')
@@ -36,7 +36,7 @@ import data_objects from '../../../../data/jsobject'
     // catchByObject(targetNode, "id", selectedElem)
       // selectedElem=[...selectedElem.filter(id=>id!=='')]
     const [selectedElems, setSelectedElems] = useState([])
-    let arrGrid = Array(35).fill(Array(35).fill(0)); 
+    let arrGrid = Array(100).fill(Array(100).fill(0)); 
 
     function changeMessageConsole(eventmessage){
       /*Добавляет сообщения в консоль*/
@@ -80,6 +80,7 @@ import data_objects from '../../../../data/jsobject'
       let x = event.clientX - rect.x;
       let y = event.clientY - rect.y;
       let vNewItem = JSON.parse(JSON.stringify(newItem))
+      console.log()
       vNewItem.style.left = x+'px'
       vNewItem.style.top = y+'px'
       /*вычисление id для нового объекта↓↓↓↓↓↓*/
@@ -97,7 +98,6 @@ import data_objects from '../../../../data/jsobject'
       vTemplateJSON.children.push(vNewItem)
       setTemplateJSON(vTemplateJSON)
       changeMessageConsole(`В объект ${overTargetID} добавлен новый компонент ${vNewItem.id}`)
-      console.log('vNewItem>>>',vNewItem)
       changeTargetId(vNewItem.id)
     }
 
@@ -159,11 +159,14 @@ import data_objects from '../../../../data/jsobject'
     },[MainJson,selectedElems])
     return (        
         <div>
-          <div style={{display: "inline-block", padding:'0px', backgroundColor:'#FFFFE0', height:'65vh', verticalAlign: "top", width:'300px'}}>
-            <ObjectTargetInfo targetPath={targetPath} targetId={targetId} changeTargetId={changeTargetId}/>
-            <ObjectJson data_objects={templateJSON} set_data_objects={changeTemplateJSON}  changeMessageConsole={changeMessageConsole}/>
+          <div style={{display: "inline-block", padding:'0px', backgroundColor:'#FFFFE0', height:'65vh', verticalAlign: "top", width:'20vw'}}>
+            <ObjectTree data_objects={MainJson} changeTargetId={changeTargetId}/>
+            <div style={{overflow: "scroll", height:'400px'}}>
+              <ObjectTargetInfo targetPath={targetPath} targetId={targetId} changeTargetId={changeTargetId}/>
+              <ObjectJson data_objects={templateJSON} set_data_objects={changeTemplateJSON}  changeMessageConsole={changeMessageConsole}/>
+            </div>
           </div>
-          <div style={{display: "inline-block",height:'65vh'}}>
+          <div style={{display: "inline-block",height:'65vh', overflow: "scroll", width:'50vw'}}>
             <Board 
               grid = {arrGrid}
               data_objects={MainJson}
@@ -177,11 +180,7 @@ import data_objects from '../../../../data/jsobject'
           </div>
           <div style={{display: "inline-block", padding:'0px', backgroundColor:'#FFFFE0', height:'65vh', verticalAlign: "top", width:'300px'}}>
             <CompanentPanel setMouseMode={setMouseMode} setNewItem={setNewItem}/>
-          </div>
-          <div>
-          {JSON.stringify(mouseMode)}
-          </div>
-          
+          </div>          
           <div style = {{height:"300px"}}>
             <Button 
               className={modeConsole==='TARGET'?'btn-secondary disabled':'btn-info active'}

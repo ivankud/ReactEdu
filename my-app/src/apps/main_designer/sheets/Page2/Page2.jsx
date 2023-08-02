@@ -7,7 +7,12 @@ import React
 import {
   // ObjectJson,
   // Button
+  ObjectTree
 } from '../../../components';
+
+
+
+import data_objects from '../../../../data/jsobject';
 
 import styles from './Page2.module.css';
 // import { updateObject } from '../../../utils';
@@ -15,9 +20,11 @@ import styles from './Page2.module.css';
   const Page2 = () => {
     return (        
         <div>
-          <table className={styles.table}>
-            <tr className={styles.tr}>
-              <th colspan="2">Таблица</th>
+          <ObjectTree data_objects={data_objects}/>
+          
+          <table className={styles.table} style={{position:"absolute", left:"200px", top:"200px"}} onClick={()=>{console.log("clickTable")}}>
+            <tr>
+              <th colspan="2"></th>
             </tr>            
             <tr>
               <td><h12> </h12></td>
@@ -28,6 +35,15 @@ import styles from './Page2.module.css';
               <td><h12> </h12></td>
             </tr>
           </table>
+          <button style={{border:"none", background: "none"}}>1111111</button>
+          
+          <button  className={styles['elementButtonInvisibleStyle']}>2222222</button>
+          <button  className='border'>2222222</button>
+          <div className={styles['header-top']}>
+            123123
+          </div>
+          <p>asdfasdfasdf</p>
+          
         </div>
     )
   }

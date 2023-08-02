@@ -101,6 +101,74 @@ const Content = (props) =>{
                                 {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID)}
                             </button>
                     break;
+                case 'table':
+                    if(Object.hasOwn(render_object,'model')){
+                        elem = <table   
+                                    id= {render_object.id} 
+                                    style={style}
+                                    onClick={(event)=>{
+                                        event.stopPropagation();
+                                        changeSelectedID(event.currentTarget.id,event.currentTarget)
+                                    }}
+                                >
+                                    <tr>
+                                        {render_object['model'].map((itemModel, index)=><th>{itemModel.name}</th>)}
+                                    </tr>            
+                                    <tr>
+                                        {render_object['model'].map((itemModel, index)=><th>row1.{itemModel.field}</th>)}
+                                    </tr>          
+                                    <tr>                                        
+                                        {render_object['model'].map((itemModel, index)=><th>row2.{itemModel.field}</th>)}
+                                    </tr>        
+                                    <tr>
+                                    <td></td>
+                                    <td></td>
+                                    </tr>
+                                </table>
+                    }
+                    else 
+                        elem = <table   
+                                    id= {render_object.id} 
+                                    style={style}
+                                    onClick={(event)=>{
+                                        event.stopPropagation();
+                                        changeSelectedID(event.currentTarget.id,event.currentTarget)
+                                    }}
+                                >
+                                    <tr>
+                                        <th colspan="2"></th>
+                                    </tr>            
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>        
+                                    <tr>
+                                    <td></td>
+                                    <td></td>
+                                    </tr>
+                                </table>
+                    break;
+                    
+                case 'input':
+                    elem =  <input
+                                id= {render_object.id}
+                                style={style}
+                                defaultValue={render_object.content??''}
+                                onClick={(event)=>{
+                                    event.stopPropagation();
+                                    changeSelectedID(event.currentTarget.id,event.currentTarget)
+                                }}/>
+                    break;
+                case 'label':
+                    elem =  <p id= {render_object.id}
+                                style={style}
+                                onClick={(event)=>{
+                                    event.stopPropagation();
+                                    changeSelectedID(event.currentTarget.id,event.currentTarget)
+                                }}>
+                                {render_object.content??''}
+                            </p>
+                    break;
                 default:
                     break;
             }

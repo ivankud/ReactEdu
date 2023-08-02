@@ -11,7 +11,29 @@ let data_objects = {
         "height":"100%",
     },
     "content":'',
-    "children":[
+    "children":[{
+            "tag": "table",
+            "id": "Table_1",
+            "style": {
+                "position": "absolute",
+                "left": "467.56640625px",
+                "top": "242.25px"
+            },
+            "content": "Таблица",
+            "model":[
+                {
+                    "name":"field1",
+                    "field":"id"
+                },
+                {
+                    "name":"field2",
+                    "field":"scaption"
+                },
+                {
+                    "name":"field3",
+                    "field":"smnemocode"
+                }]
+        },
         {
             "tag":"button",
             "id":"child1", 
@@ -21,7 +43,32 @@ let data_objects = {
                 "left":"30px",
                 "top":"30px",
             },
-            "content":'First elem'
+            "content":'First elem',
+            "children":[
+                {
+                    "tag":"button",
+                    "id":"child5", 
+                    "style":{
+                        "position":"absolute",
+                        "left":"100px",
+                        "top":"100px",
+                        "width": "100%"
+                    },
+                    "content":'Five elem',
+                },
+                {
+                    "tag":"div",
+                    "id":"child6", 
+                    "style":{
+                        "backgroundColor": "yellow",
+                        "position":"absolute",
+                        "left":"100px",
+                        "top":"200px",
+                        "width": "100%"
+                    },
+                    "content":'Six elem',
+                },
+            ]
         },
         {
             "tag":"div",
