@@ -50,7 +50,7 @@ import data_objects from '../../../../data/jsobject'
       * valueId - id выбранного объекта
       * targetNode - элемент DOM-дерева, нужен чтобы выщитать все вложенные объекты
       */
-      if(valueId) {
+      if(valueId && valueId !=='SelObjectFrame') {
         let selectedElem = []
         if(targetNode) catchByObject(targetNode, "id", selectedElem)
         selectedElem=[...selectedElem.filter(id=>id!=='')]
@@ -66,6 +66,7 @@ import data_objects from '../../../../data/jsobject'
     }
     const changeTemplateJSON =(value)=>{
       /*Устанавливает и меняет выбранный объект*/
+      console.log("changeTemplateJSON",value)
       setTemplateJSON(JSON.parse(value))
       setMainJSON(updateObject(MainJson,targetPath,JSON.parse(value)))
       changeMessageConsole(`Изменен выбранный объект ${JSON.parse(value)['id']}-path>>${targetPath}`)
@@ -141,7 +142,7 @@ import data_objects from '../../../../data/jsobject'
           maxX = Math.max(...aX)
           minY = Math.min(...aY)
           maxY = Math.max(...aY)
-          dragElement(document.getElementById(targetId),changeСoordinatesSelectedElem)
+            dragElement(document.getElementById(targetId),changeСoordinatesSelectedElem)
           setSelectionFrameSize({width:maxX-minX, height: maxY-minY})
         })        
       } 
@@ -162,7 +163,7 @@ import data_objects from '../../../../data/jsobject'
     return (        
         <div>
           <div style={{display: "inline-block", padding:'0px', backgroundColor:'#d1cfcd', height:'65vh', verticalAlign: "top", width:'20vw'}}>
-            <ObjectTree data_objects={MainJson} changeTargetId={changeTargetId}/>
+            <ObjectTree data_objects={MainJson} changeTargetId={changeTargetId} targetId={targetId}/>
             <div style={{overflow: "scroll", height:'400px'}}>
               <ObjectTargetInfo targetPath={targetPath} targetId={targetId} changeTargetId={changeTargetId}/>
               <ObjectJson data_objects={templateJSON} set_data_objects={changeTemplateJSON}  changeMessageConsole={changeMessageConsole}/>
@@ -173,6 +174,7 @@ import data_objects from '../../../../data/jsobject'
               grid = {arrGrid}
               data_objects={MainJson}
               changeTargetId={changeTargetId}
+              changeTemplateJSON={changeTemplateJSON}
               targetId={targetId}
               selectedElems={selectedElems}
               selectionFrameSize={selectionFrameSize}

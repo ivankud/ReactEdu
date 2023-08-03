@@ -6,8 +6,9 @@ import {React} from 'react'
 
 // const RenderContent=(render_object,changeSelectedID)=>{
 
+import ResizableBox from '../ResizableBox';
 
-const getChildren = (children,changeSelectedID, targetId,selectedElems,selectionFrameSize,mouseMode,addNewChildOnElement,setOverTargetID)=>{
+const getChildren = (children,changeSelectedID, targetId,selectedElems,selectionFrameSize,mouseMode,addNewChildOnElement,setOverTargetID,changeTemplateJSON)=>{
     if(Object.hasOwn(children,'children')){
         return children.children.map(item=><Content 
                                                 data_objects={item}
@@ -18,6 +19,7 @@ const getChildren = (children,changeSelectedID, targetId,selectedElems,selection
                                                 mouseMode={mouseMode}
                                                 addNewChildOnElement={addNewChildOnElement}
                                                 setOverTargetID={setOverTargetID}
+                                                changeTemplateJSON={changeTemplateJSON}
                                             />)
     }
     return ``;
@@ -83,7 +85,7 @@ const Content = (props) =>{
                                 }}
                             >
                                 {/* {render_object.content??``} */}
-                                {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID)}
+                                {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID,props.changeTemplateJSON)}
                             </div>
                     break;
                 case 'button':
@@ -98,7 +100,7 @@ const Content = (props) =>{
                                 }}
                             >
                                 {render_object.content??``}
-                                {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID)}
+                                {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID,props.changeTemplateJSON)}
                             </button>
                     break;
                 case 'table':
@@ -190,7 +192,8 @@ const Content = (props) =>{
         }
     return (
         <div>
-            {   props.data_objects.id===props.targetId && 
+            {   props.data_objects.id===props.targetId && props.data_objects.id !== 'main_object' &&
+                // <ResizableBox data_objects={props.data_objects} style={style} changeTemplateJSON={props.changeTemplateJSON}/>
                 <div style={style}/>
             }
             {elem}

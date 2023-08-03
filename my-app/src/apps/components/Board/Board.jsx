@@ -30,6 +30,7 @@ const Board = (props) => {
                     mouseMode={props.mouseMode}
                     addNewChildOnElement={props.addNewChildOnElement}
                     setOverTargetID={props.setOverTargetID}
+                    changeTemplateJSON={props.changeTemplateJSON}
                 />
                 {/* <FrameObject/> */}
             </div>

@@ -7,7 +7,7 @@ import {ObjectTreeNode} from '../'
 const ObjectTree = (props)=> {
     return (
       <div style={{widht: "400px", height: "400px", backgroundColor: '#d1cfcd', overflow: "scroll",}}>
-        <ObjectTreeNode data_objects={props.data_objects} counter={0} show={true} changeTargetId={props.changeTargetId}/>
+        <ObjectTreeNode data_objects={props.data_objects} counter={0} show={true} changeTargetId={props.changeTargetId} targetId={props.targetId}/>
       </div>
     )
 }

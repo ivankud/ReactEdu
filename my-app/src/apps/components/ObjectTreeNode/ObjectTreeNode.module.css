@@ -1,0 +1,9 @@
+.selectedItem{
+    background-color: #bfcddc;
+    color:white;
+}
+
+.notSelectedItem{
+    background-color:#7d8690;
+    color:black;
+}

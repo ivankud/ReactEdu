@@ -11,11 +11,6 @@ import {
 } from './../../utils'
 
 const CompanentPanel = (props) => {
-    // useEffect(
-    //     ()=>{
-    //         // dragElement(document.getElementById('Button_1'))
-    //     }
-    // )
     let elements = [
                         {"tag": "button","id": "ButtonTemplate","style": {"position": "absolute","left": "30px","top": "30px","backgroundColor":"green"},"content": 'Кнопка1'},
                         {"tag": "button","id": "ButtonType2Template","style": {"position": "absolute","left": "30px","top": "30px","backgroundColor":"red"},"content": 'Кнопка2'},

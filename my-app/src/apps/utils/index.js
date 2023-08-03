@@ -9,7 +9,8 @@ import
 
 import {
     dragElement,
-    dragNewElementElement
+    dragNewElementElement,
+    justDragElement
 } from './DragAndDrop'
 
 export {
@@ -19,5 +20,6 @@ export {
     getPathById,
     objectReverse,
     dragElement,
-    dragNewElementElement
+    dragNewElementElement,
+    justDragElement
 }

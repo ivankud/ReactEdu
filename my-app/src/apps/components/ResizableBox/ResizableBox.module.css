@@ -1,0 +1,28 @@
+.buttonArrow{
+    font-size: 8px;
+}
+
+.uprow{
+    
+}
+
+.midrow{
+}
+
+.downrow{
+    
+}
+
+
+.resize-both,
+.resize-hor,
+.resize-ver {
+    border: 5px green double;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+    margin: 16px;
+
+    /* Set overflow to auto */
+    overflow: auto;
+}

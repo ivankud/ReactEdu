@@ -15,6 +15,7 @@ import CompanentPanel from './CompanentPanel';
 import CompanentPanelElement from './CompanentPanelElement';
 import ObjectTree from './ObjectTree';
 import ObjectTreeNode from './ObjectTreeNode';
+import ResizableBox from './ResizableBox'
 
 
 export {
@@ -34,5 +35,6 @@ export {
     CompanentPanel,
     CompanentPanelElement,
     ObjectTree,
-    ObjectTreeNode
+    ObjectTreeNode,
+    ResizableBox
 };
