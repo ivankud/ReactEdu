@@ -66,14 +66,12 @@ import data_objects from '../../../../data/jsobject'
     }
     const changeTemplateJSON =(value)=>{
       /*Устанавливает и меняет выбранный объект*/
-      console.log("changeTemplateJSON",value)
       setTemplateJSON(JSON.parse(value))
       setMainJSON(updateObject(MainJson,targetPath,JSON.parse(value)))
       changeMessageConsole(`Изменен выбранный объект ${JSON.parse(value)['id']}-path>>${targetPath}`)
     }
 
     const addNewChildOnElement=(event)=>{
-      console.log("addNewChildOnElement>>>>1")
       let vTargetNode = document.getElementById(overTargetID)
       changeTargetId(overTargetID,vTargetNode)
       let vTemplateJSON = getElementById(MainJson,overTargetID)
@@ -160,7 +158,7 @@ import data_objects from '../../../../data/jsobject'
       /*вычисляет размеры рамки объекта*/
       /*P.S. надо пропихнуть такое же событие на изменение положение элемента, но пока пусть будет так*/ 
       changeSelectionFrame()
-    },[MainJson,selectedElems])
+    },[MainJson,selectedElems,templateJSON])
     return (        
       /* mouseMode: HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
         <div>

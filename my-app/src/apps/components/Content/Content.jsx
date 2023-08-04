@@ -57,6 +57,9 @@ const checkObject=(obj)=>{
 
 
 const Content = (props) =>{
+
+
+
     const RenderContent=(render_object,changeSelectedID,selectionFrameSize)=>{
         let elem;
         let style = getStyle(render_object, render_object.id===props.targetId, props.selectedElems)
@@ -198,9 +201,12 @@ const Content = (props) =>{
         }
     return (
         <div>
-            {   props.data_objects.id===props.targetId && props.data_objects.id !== 'main_object' && (
+            {   
+                
+                    props.data_objects.id===props.targetId && props.data_objects.id !== 'main_object' && (
                     props.mouseMode==='RESIZE'?<ResizableBox data_objects={props.data_objects} style={style} changeTemplateJSON={props.changeTemplateJSON}/>:
-                    props.mouseMode==='HANDLE'?<div style={style}/>:
+                    // props.mouseMode==='HANDLE'?<div style={style}/>:
+                    props.mouseMode==='HANDLE'?<div style={props.data_objects.style}/>:
                     ``
                 )
             }

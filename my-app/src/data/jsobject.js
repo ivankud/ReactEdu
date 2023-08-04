@@ -10,8 +10,10 @@ let data_objects = {
         "width":"100%",
         "height":"100%",
     },
+    "context":[],
     "content":'',
-    "children":[{
+    "children":[
+        {
             "tag": "table",
             "id": "Table_1",
             "style": {
@@ -35,10 +37,9 @@ let data_objects = {
                 }]
         },
         {
-            "tag":"button",
+            "tag":"div",
             "id":"child1", 
             "style":{
-                "backgroundColor": "red",
                 "position":"absolute",
                 "left":"30px",
                 "top":"30px",
@@ -52,7 +53,8 @@ let data_objects = {
                         "position":"absolute",
                         "left":"100px",
                         "top":"100px",
-                        "width": "100%"
+                        "width": "100px",
+                        "height": "30px"
                     },
                     "content":'Five elem',
                 },
@@ -60,11 +62,11 @@ let data_objects = {
                     "tag":"div",
                     "id":"child6", 
                     "style":{
-                        "backgroundColor": "yellow",
                         "position":"absolute",
                         "left":"100px",
                         "top":"200px",
-                        "width": "100%"
+                        "width": "100px",
+                        "height": "30px"
                     },
                     "content":'Six elem',
                 },
@@ -74,10 +76,14 @@ let data_objects = {
             "tag":"div",
             "id":"child2", 
             "style":{
-                "backgroundColor": "yellow",
+                "border-color": "pink",
+                "borderStyle": "solid",
+                "borderWidth": "5px",
                 "position":"absolute",
                 "left":"30px",
                 "top":"100px",
+                "width": "300px",
+                "height": "300px"
             },
             "content":'Second elem',
             "children":[
@@ -88,7 +94,8 @@ let data_objects = {
                         "position":"absolute",
                         "left":"100px",
                         "top":"100px",
-                        "width": "100%"
+                        "width": "100px",
+                        "height": "30px"
                     },
                     "content":'Third elem',
                 },
@@ -100,7 +107,8 @@ let data_objects = {
                         "position":"absolute",
                         "left":"100px",
                         "top":"200px",
-                        "width": "100%"
+                        "width": "100px",
+                        "height": "30px"
                     },
                     "content":'Fourth elem',
                 },
