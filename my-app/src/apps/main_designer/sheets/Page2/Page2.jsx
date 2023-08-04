@@ -31,7 +31,7 @@ import styles from './Page2.module.css';
     return (        
         <div>
           <div style={{position:"relative"}}>
-            <ResizableBox/>
+            {/* <ResizableBox/> */}
           </div>          
           <ObjectTree data_objects={data_objects}/>          
           <table className={styles.table} style={{position:"absolute", left:"200px", top:"200px"}} onClick={()=>{console.log("clickTable")}}>

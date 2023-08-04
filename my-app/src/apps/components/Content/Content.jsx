@@ -80,11 +80,17 @@ const Content = (props) =>{
                                 }}
                                 onMouseUp={(event)=>{
                                     // event.stopPropagation();
-                                    console.log('onMouseUp')
+                                    // console.log('onMouseUp')
                                     if(props.mouseMode ==='MOVENEWITEM') props.addNewChildOnElement(event)
                                 }}
                             >
-                                {/* {render_object.content??``} */}
+                                {/* {render_object.id!=='main_object' ? <button style={{width:"100%",height:"100%", display:"flex"}}
+                                                                        onClick={(event)=>{
+                                                                            event.stopPropagation();
+                                                                            changeSelectedID(event.target.id,event.currentTarget)
+                                                                        }}
+                                                                    ></button>:render_object.content??``} */}
+                                {render_object.content??``}
                                 {getChildren(render_object,changeSelectedID,props.targetId,props.selectedElems,selectionFrameSize,props.mouseMode,props.addNewChildOnElement,props.setOverTargetID,props.changeTemplateJSON)}
                             </div>
                     break;
@@ -192,9 +198,11 @@ const Content = (props) =>{
         }
     return (
         <div>
-            {   props.data_objects.id===props.targetId && props.data_objects.id !== 'main_object' &&
-                // <ResizableBox data_objects={props.data_objects} style={style} changeTemplateJSON={props.changeTemplateJSON}/>
-                <div style={style}/>
+            {   props.data_objects.id===props.targetId && props.data_objects.id !== 'main_object' && (
+                    props.mouseMode==='RESIZE'?<ResizableBox data_objects={props.data_objects} style={style} changeTemplateJSON={props.changeTemplateJSON}/>:
+                    props.mouseMode==='HANDLE'?<div style={style}/>:
+                    ``
+                )
             }
             {elem}
         </div>

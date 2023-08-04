@@ -23,7 +23,7 @@ import data_objects from '../../../../data/jsobject'
 
   const Page1 = () => {
     // const MainJson = data_objects
-    const [mouseMode, setMouseMode] = useState('HANDLE');   /*HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
+    const [mouseMode, setMouseMode] = useState('HANDLE');   /* mouseMode: HANDLE RESIZE MOVENEWITEM DELETEITEM COPYITEM*/
     const [overTargetID,setOverTargetID] = useState(null);  /*компонент над котором перетаскивается новый объект*/
     const [newItem, setNewItem] = useState(null)            /*новый перетаскиваемый объект*/
     const [selectionFrameSize, setSelectionFrameSize] = useState({width:0, height: 0})
@@ -73,6 +73,7 @@ import data_objects from '../../../../data/jsobject'
     }
 
     const addNewChildOnElement=(event)=>{
+      console.log("addNewChildOnElement>>>>1")
       let vTargetNode = document.getElementById(overTargetID)
       changeTargetId(overTargetID,vTargetNode)
       let vTemplateJSON = getElementById(MainJson,overTargetID)
@@ -161,7 +162,24 @@ import data_objects from '../../../../data/jsobject'
       changeSelectionFrame()
     },[MainJson,selectedElems])
     return (        
+      /* mouseMode: HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
         <div>
+          <div style={{width:"100vw", backgroundColor:'#d1cfcd', height:'70px'}} className='d-flex align-items-center'>
+            <div style={{padding: "5px", widht: '100%'}}>
+              <Button className={mouseMode==='HANDLE'?`bg-info`:''} onClick={()=>{setMouseMode('HANDLE')}}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-textarea-resize" viewBox="0 0 16 16">
+                  <path d="M0 4.5A2.5 2.5 0 0 1 2.5 2h11A2.5 2.5 0 0 1 16 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 11.5v-7zM2.5 3A1.5 1.5 0 0 0 1 4.5v7A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 13.5 3h-11zm10.854 4.646a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708l3-3a.5.5 0 0 1 .708 0zm0 2.5a.5.5 0 0 1 0 .708l-.5.5a.5.5 0 0 1-.708-.708l.5-.5a.5.5 0 0 1 .708 0z"/>
+                </svg>
+              </Button>
+               
+              <Button className={mouseMode==='RESIZE'?`bg-info`:''} onClick={()=>{setMouseMode('RESIZE')}}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-fill" viewBox="0 0 16 16">
+                  <path d="M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v5.34l-1.2.24a1.5 1.5 0 0 0-1.196 1.636l.345 3.106a2.5 2.5 0 0 0 .405 1.11l1.433 2.15A1.5 1.5 0 0 0 6.035 16h6.385a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002z"/>
+                </svg>
+              </Button>
+            </div>            
+          </div>
+          <div style={{backgroundColor:'#f1f1f1',width:"100vw", height:'10px'}}/>
           <div style={{display: "inline-block", padding:'0px', backgroundColor:'#d1cfcd', height:'65vh', verticalAlign: "top", width:'20vw'}}>
             <ObjectTree data_objects={MainJson} changeTargetId={changeTargetId} targetId={targetId}/>
             <div style={{overflow: "scroll", height:'400px'}}>
@@ -206,6 +224,7 @@ import data_objects from '../../../../data/jsobject'
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
               </svg>Очистить консоль
             </Button>}
+            {mouseMode}
             {modeConsole==='TARGET'&&<Console data_objects={templateJSON}/>}
             {modeConsole==='MAIN'&&<Console data_objects={MainJson}/>}
             {modeConsole==='CONSOLE'&&<Console data_objects={JSON.parse(JSON.stringify(objectReverse(messageConsole),null,4))}/>}
