@@ -19,7 +19,7 @@ import {
 } from '../../../utils'
 import React, { useState, useEffect} from 'react';
 // import data_objects from './jsobject'
-import data_objects from '../../../../data/jsobject'
+import data_objects from '../../../../data/jsobject3'
 
   const Page1 = () => {
     // const MainJson = data_objects
@@ -30,7 +30,7 @@ import data_objects from '../../../../data/jsobject'
     const [messageConsole, setMessageConsole] = useState({})
     const [modeConsole, setModeConsole] = useState('TARGET')
     const [MainJson, setMainJSON] = useState(data_objects);
-    const [targetId, setTargetId] = useState('child2');
+    const [targetId, setTargetId] = useState('main_object');
     const [targetPath, setTargetPath] = useState(getPathById(MainJson,targetId));
     const [templateJSON, setTemplateJSON] = useState(getElementById(MainJson,targetId));
     // catchByObject(targetNode, "id", selectedElem)
@@ -115,11 +115,12 @@ import data_objects from '../../../../data/jsobject'
     }
 
     function changeСoordinatesSelectedElem(coord){
+      let vCoord = JSON.parse(JSON.stringify(coord))
       let path = getPathById(MainJson,targetId);
       let vTemplateJSON = getElementById(MainJson,targetId)
-      let style = Object.hasOwn(vTemplateJSON,'style')?vTemplateJSON['style']:{};
-      style["top"] = coord.top;
-      style["left"] = coord.left;
+      let style = Object.hasOwn(vTemplateJSON,'style')?JSON.parse(JSON.stringify(vTemplateJSON['style'])):{};
+      style["top"] = vCoord.top;
+      style["left"] = vCoord.left;
       vTemplateJSON["style"] = style
       setTemplateJSON(vTemplateJSON)
       changeMessageConsole(`Изменен выбранный объект ${vTemplateJSON['id']}-path>>${path}`)
@@ -141,7 +142,7 @@ import data_objects from '../../../../data/jsobject'
           maxX = Math.max(...aX)
           minY = Math.min(...aY)
           maxY = Math.max(...aY)
-            dragElement(document.getElementById(targetId),changeСoordinatesSelectedElem)
+          dragElement(document.getElementById(targetId),changeСoordinatesSelectedElem)
           setSelectionFrameSize({width:maxX-minX, height: maxY-minY})
         })        
       } 
@@ -222,7 +223,6 @@ import data_objects from '../../../../data/jsobject'
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
               </svg>Очистить консоль
             </Button>}
-            {mouseMode}
             {modeConsole==='TARGET'&&<Console data_objects={templateJSON}/>}
             {modeConsole==='MAIN'&&<Console data_objects={MainJson}/>}
             {modeConsole==='CONSOLE'&&<Console data_objects={JSON.parse(JSON.stringify(objectReverse(messageConsole),null,4))}/>}

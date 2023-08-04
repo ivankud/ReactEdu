@@ -1,125 +1,124 @@
 let data_objects = {
-    "tag":"div",
-    "id":"main_object", 
-    "block":"true",
-    "style":{
-        "position":"absolute",
-        "left":"0px",
-        "top":"0px",
+    "tag": "div",
+    "id": "main_object",
+    "block": "true",
+    "style": {
+        "position": "absolute",
+        "left": "0px",
+        "top": "0px",
         "backgroundColor": "",
-        "width":"100%",
-        "height":"100%",
+        "width": "100%",
+        "height": "100%"
     },
-    "context":[],
-    "content":'',
-    "children":[
+    "content": "",
+    "children": [
         {
             "tag": "table",
             "id": "Table_1",
             "style": {
                 "position": "absolute",
-                "left": "467.56640625px",
-                "top": "242.25px"
+                "left": "583px",
+                "top": "228px"
             },
             "content": "Таблица",
-            "model":[
+            "model": [
                 {
-                    "name":"field1",
-                    "field":"id"
+                    "name": "field1",
+                    "field": "id"
                 },
                 {
-                    "name":"field2",
-                    "field":"scaption"
+                    "name": "field2",
+                    "field": "scaption"
                 },
                 {
-                    "name":"field3",
-                    "field":"smnemocode"
-                }]
-        },
-        {
-            "tag":"div",
-            "id":"child1", 
-            "style":{
-                "position":"absolute",
-                "left":"30px",
-                "top":"30px",
-            },
-            "content":'First elem',
-            "children":[
-                {
-                    "tag":"button",
-                    "id":"child5", 
-                    "style":{
-                        "position":"absolute",
-                        "left":"100px",
-                        "top":"100px",
-                        "width": "100px",
-                        "height": "30px"
-                    },
-                    "content":'Five elem',
-                },
-                {
-                    "tag":"div",
-                    "id":"child6", 
-                    "style":{
-                        "position":"absolute",
-                        "left":"100px",
-                        "top":"200px",
-                        "width": "100px",
-                        "height": "30px"
-                    },
-                    "content":'Six elem',
-                },
+                    "name": "field3",
+                    "field": "smnemocode"
+                }
             ]
         },
         {
-            "tag":"div",
-            "id":"child2", 
-            "style":{
+            "tag": "div",
+            "id": "Div_1",
+            "style": {
+                "width": "370px",
+                "height": "277px",
                 "border-color": "pink",
                 "borderStyle": "solid",
                 "borderWidth": "5px",
-                "position":"absolute",
-                "left":"30px",
-                "top":"100px",
-                "width": "300px",
-                "height": "300px"
+                "position": "absolute",
+                "left": "586px",
+                "top": "411px"
             },
-            "content":'Second elem',
-            "children":[
+            "content": "Контейнер",
+            "children": [
                 {
-                    "tag":"button",
-                    "id":"child3", 
-                    "style":{
-                        "position":"absolute",
-                        "left":"100px",
-                        "top":"100px",
-                        "width": "100px",
+                    "tag": "button",
+                    "id": "Button_2",
+                    "style": {
+                        "position": "absolute",
+                        "left": "77.1875px",
+                        "top": "74.66665649414062px",
+                        "backgroundColor": "green",
+                        "width": "75px",
                         "height": "30px"
                     },
-                    "content":'Third elem',
+                    "content": "Кнопка1"
                 },
                 {
-                    "tag":"div",
-                    "id":"child4", 
-                    "style":{
-                        "backgroundColor": "yellow",
-                        "position":"absolute",
-                        "left":"100px",
-                        "top":"200px",
-                        "width": "100px",
+                    "tag": "button",
+                    "id": "Button_3",
+                    "style": {
+                        "position": "absolute",
+                        "left": "77.1875px",
+                        "top": "74.66665649414062px",
+                        "backgroundColor": "green",
+                        "width": "75px",
                         "height": "30px"
                     },
-                    "content":'Fourth elem',
-                },
+                    "content": "Кнопка1"
+                }
             ]
         },
-    ],
+        {
+            "tag": "button",
+            "id": "Button_1",
+            "style": {
+                "position": "absolute",
+                "left": "1017.5208129882812px",
+                "top": "329px",
+                "backgroundColor": "green",
+                "width": "75px",
+                "height": "30px"
+            },
+            "content": "Кнопка1"
+        },
+        {
+            "tag": "button",
+            "id": "ButtonType2_1",
+            "style": {
+                "position": "absolute",
+                "left": "1037.5208129882812px",
+                "top": "521px",
+                "backgroundColor": "red",
+                "width": "75px",
+                "height": "30px"
+            },
+            "content": "Кнопка2"
+        },
+        {
+            "tag": "table",
+            "id": "Table_2",
+            "style": {
+                "position": "absolute",
+                "left": "1027.5208129882812px",
+                "top": "190px",
+                "width": "75px",
+                "height": "40px"
+            },
+            "content": "Таблица"
+        }
+    ]
 }
-
-// const changeDataObject =(data)=> {
-    // data_objects=data;
-// }
 
 
 
