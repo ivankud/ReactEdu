@@ -64,16 +64,18 @@ let data_objects = {
                 "height": "30px",
                 "borderColor":"#ffffff"
             },
-            "onchange":`(e.target.value)=>{
-                let selRow = this.state.selRow;
-                setState()}`,
+            "onChange":`(event)=>{
+                let selRow=this.state.selRow;
+                selRow['age'] = event.target.value;
+                this.setState({selRow:selRow});
+            }`,
             "value": "selRow['age']",
             "content": "Возраст"
         },
         {
             "tag": "button",
             "id": "childAgePlus",
-            "action": "selRow=selRow+1",
+            "onClick":"()=>{console.log('123123123123')}",
             "style": {
                 "position": "absolute",
                 "background":"red",

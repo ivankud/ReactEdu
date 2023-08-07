@@ -19,22 +19,47 @@ class Page3_example extends React.Component {
     render() {
         return (
             <div  style={{position:'relative'}}>
-	<div>
-		<div id="main_object" style={{position:'absolute',opacity:'0.9',left:'0px',top:'0px',width:'100%',height:'100%',borderStyle:'solid',borderColor:'#ffffff',borderWidth:'1px'}}>
-			<div>
-				<input id="InputName" style={{position:'absolute',opacity:'0.9',left:'26px',top:'67px',width:'75px',height:'30px',borderColor:'#ffffff',borderStyle:'solid',borderWidth:'1px'}} placeholder="Твое Имя" value={this.state.selRow['name']}/>
-			</div>
-			<div>
-				<input id="InputDescription" style={{position:'absolute',opacity:'0.9',left:'152px',top:'65px',width:'181px',height:'32px',borderColor:'#ffffff',borderStyle:'solid',borderWidth:'1px'}} placeholder="Описание" value={this.state.selRow['sdescription']}/>
-			</div>
-			<div>
-				<input id="InputAge" style={{position:'absolute',opacity:'0.9',left:'387px',top:'68px',width:'75px',height:'30px',borderColor:'#ffffff',borderStyle:'solid',borderWidth:'1px'}} placeholder="Возраст" value={this.state.selRow['age']}/>
-			</div>
-			<div>
-				<button id="childAgePlus" style={{position:'absolute',opacity:'0.9',background:'red',left:'523px',top:'68px',width:'100px',height:'30px',borderStyle:'solid',borderColor:'#ffffff',borderWidth:'1px'}}>
-AgePlus</button>
-			</div>
-		</div>
+	<div 
+    id="main_object"
+    style={{"position":"absolute","left":"0px","top":"0px","backgroundColor":"","width":"100%","height":"100%"}}
+>
+		<input
+    id="InputName"
+    style={{"position":"absolute","left":"26px","top":"67px","width":"75px","height":"30px","borderColor":"#ffffff"}}
+    placeholder={'Твое Имя'}
+    defaultValue={'Твое Имя'}
+    value={this.state.selRow['name']}
+/>
+		<input
+    id="InputDescription"
+    style={{"position":"absolute","left":"152px","top":"65px","width":"181px","height":"32px","borderColor":"#ffffff"}}
+    placeholder={'Описание'}
+    defaultValue={'Описание'}
+    value={this.state.selRow['sdescription']}
+/>
+		<input
+    id="InputAge"
+    style={{"position":"absolute","left":"387px","top":"68px","width":"75px","height":"30px","borderColor":"#ffffff"}}
+    placeholder={'Возраст'}
+    defaultValue={'Возраст'}
+    onChange={(event)=>
+{
+                let selRow=this.state.selRow;
+                selRow['age'] = event.target.value;
+                this.setState({selRow:selRow});
+            }}
+    value={this.state.selRow['age']}
+/>
+		<button 
+    id="childAgePlus"
+    key = "childAgePlus"
+    style={{"position":"absolute","background":"red","left":"523px","top":"68px","width":"100px","height":"30px"}}
+    onClick={()=>
+{console.log('123123123123')}}
+>
+AgePlus
+
+</button>
 	</div>
 </div>
     );}
