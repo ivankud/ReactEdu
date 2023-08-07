@@ -13,13 +13,24 @@ import {
     justDragElement
 } from './DragAndDrop'
 
+import {
+    prettyRenderText,
+    convertJsonToRenderText,
+    convertJsonToRenderClass,
+} from './Generator'
+
 export {
     isValidJson,
     getElementById,
     updateObject,
     getPathById,
     objectReverse,
+
     dragElement,
     dragNewElementElement,
-    justDragElement
+    justDragElement,
+
+    prettyRenderText,
+    convertJsonToRenderText,
+    convertJsonToRenderClass,
 }

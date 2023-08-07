@@ -6,6 +6,7 @@ import Console from './Console';
 import MeRouter from './MeRouter';
 import MenuBar from './MenuBar';
 import Content from './Content';
+import ContentGenerator from './ContentGenerator';
 import ObjectProperty from './ObjectProperty';
 import ObjectJson from './ObjectJson'
 import ObjectTargetInfo from './ObjectTargetInfo';
@@ -16,6 +17,7 @@ import CompanentPanelElement from './CompanentPanelElement';
 import ObjectTree from './ObjectTree';
 import ObjectTreeNode from './ObjectTreeNode';
 import ResizableBox from './ResizableBox'
+
 
 
 export {
@@ -36,5 +38,6 @@ export {
     CompanentPanelElement,
     ObjectTree,
     ObjectTreeNode,
-    ResizableBox
+    ResizableBox,
+    ContentGenerator
 };

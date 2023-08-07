@@ -1,6 +1,7 @@
 let data_objects = {
     "tag": "div",
     "id": "main_object",
+    "namePage":"pageXXXX",
     "block": "true",
     "style": {
         "position": "absolute",
@@ -17,6 +18,9 @@ let data_objects = {
                 "sdescription": "Человек прямоходящий",
                 "age": 42
             }
+        },
+        {
+            "vNumber": 33,
         }
     ],
     "content": "",
@@ -29,10 +33,11 @@ let data_objects = {
                 "left": "26px",
                 "top": "67px",
                 "width": "75px",
-                "height": "30px"
+                "height": "30px",
+                "borderColor":"#ffffff"
             },
             "value": "selRow['name']",
-            "content": "Имя"
+            "content": "Твое Имя"
         },
         {
             "tag": "input",
@@ -42,7 +47,8 @@ let data_objects = {
                 "left": "152px",
                 "top": "65px",
                 "width": "181px",
-                "height": "32px"
+                "height": "32px",
+                "borderColor":"#ffffff"
             },
             "value": "selRow['sdescription']",
             "content": "Описание"
@@ -55,8 +61,12 @@ let data_objects = {
                 "left": "387px",
                 "top": "68px",
                 "width": "75px",
-                "height": "30px"
+                "height": "30px",
+                "borderColor":"#ffffff"
             },
+            "onchange":`(e.target.value)=>{
+                let selRow = this.state.selRow;
+                setState()}`,
             "value": "selRow['age']",
             "content": "Возраст"
         },
@@ -66,6 +76,7 @@ let data_objects = {
             "action": "selRow=selRow+1",
             "style": {
                 "position": "absolute",
+                "background":"red",
                 "left": "523px",
                 "top": "68px",
                 "width": "100px",

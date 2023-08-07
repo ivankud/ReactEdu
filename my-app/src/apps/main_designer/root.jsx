@@ -4,7 +4,7 @@ import {
   } from "react-router-dom";
 
 
-import {Page1,Page2} from "./sheets";
+import {Page1,Page2,Page3_example} from "./sheets";
 
 const router_list = [
   {
@@ -21,6 +21,11 @@ const router_list = [
     path: "/page2",
     element: <Page2/>,
     caption: 'Страница 2',
+  },
+  {
+    path: "/page3",
+    element: <Page3_example/>,
+    caption: 'Сгенерированная страница',
   },
 ];
 

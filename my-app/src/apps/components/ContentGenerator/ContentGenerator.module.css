@@ -1,0 +1,7 @@
+.main_object {
+    width: 98%;
+    height: 98%;
+    border-style: dotted;
+    border-color: aqua;
+    padding: 5px;
+}
