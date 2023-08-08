@@ -3,7 +3,7 @@ import React from 'react';
 
 
 
-class Page3_example extends React.Component {
+class Page_example extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,4 +65,4 @@ AgePlus
     );}
 }
 
-export default Page3_example;
+export default Page_example;

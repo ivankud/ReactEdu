@@ -4,28 +4,38 @@ import {
   } from "react-router-dom";
 
 
-import {Page1,Page2,Page3_example} from "./sheets";
+import {
+  Page_Designer,
+  Page_test_env,
+  Page_example,
+  Page_generator
+} from "./sheets";
 
 const router_list = [
   {
     path: "/",
-    element: <Page2/>,
+    element: <Page_test_env/>,
     caption: 'Страница DEF',
   },  
   {
-    path: "/page1",
-    element: <Page1/>,
-    caption: 'Страница 1',
+    path: "/page_designer",
+    element: <Page_Designer/>,
+    caption: 'Конструктор',
   },  
   {
-    path: "/page2",
-    element: <Page2/>,
-    caption: 'Страница 2',
+    path: "/page_generator",
+    element: <Page_generator/>,
+    caption: 'Генератор',
   },
   {
     path: "/page3",
-    element: <Page3_example/>,
+    element: <Page_example/>,
     caption: 'Сгенерированная страница',
+  },
+  {
+    path: "/page_test",
+    element: <Page_test_env/>,
+    caption: 'Тестовая страница',
   },
 ];
 

@@ -17,6 +17,9 @@ import CompanentPanelElement from './CompanentPanelElement';
 import ObjectTree from './ObjectTree';
 import ObjectTreeNode from './ObjectTreeNode';
 import ResizableBox from './ResizableBox'
+import TableModelDialog from './TableModelDialog';
+import SwaggerAPITreeNode from './SwaggerAPITreeNode';
+import SwaggerAPITree from './SwaggerAPITree/SwaggerAPITree';
 
 
 
@@ -39,5 +42,8 @@ export {
     ObjectTree,
     ObjectTreeNode,
     ResizableBox,
-    ContentGenerator
+    ContentGenerator,
+    TableModelDialog,
+    SwaggerAPITree,
+    SwaggerAPITreeNode
 };

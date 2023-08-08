@@ -19,9 +19,9 @@ import {
 } from '../../../utils'
 import React, { useState, useEffect} from 'react';
 // import data_objects from './jsobject'
-import data_objects from '../../../../data/jsobject3'
+import data_objects from '../../../../data/jsobject'
 
-  const Page1 = () => {
+  const Page_Designer = () => {
     // const MainJson = data_objects
     const [mouseMode, setMouseMode] = useState('HANDLE');   /* mouseMode: HANDLE RESIZE MOVENEWITEM DELETEITEM COPYITEM*/
     const [overTargetID,setOverTargetID] = useState(null);  /*компонент над котором перетаскивается новый объект*/
@@ -231,4 +231,4 @@ import data_objects from '../../../../data/jsobject3'
     )
   }
 
-  export default Page1;
+  export default Page_Designer;
