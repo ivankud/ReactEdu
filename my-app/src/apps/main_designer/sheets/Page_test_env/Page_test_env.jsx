@@ -44,6 +44,7 @@ import styles from './Page_test_env.module.css';
     };
     const [model,setModel] = useState({})
     const changeModel=(vModel)=>{
+      console.log('vModel>>',vModel)
       setModel(vModel)
     }
     const [modal, setModal] = useState(true)
@@ -61,6 +62,7 @@ import styles from './Page_test_env.module.css';
     // },[])    
     return (        
         <div>
+          {JSON.stringify(model)}
           <button onClick={changeModal}>Показать модальное окно модели</button>
           {modal&&<TableModelDialog modal={modal} toggle={changeModal} model={model} changeModel={changeModel}/>}
           {/* {isLaoded&&<SwaggerAPITree data_objects={swaggerData}/>} */}

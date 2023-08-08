@@ -5,10 +5,8 @@ import styles from './SwaggerAPITreeNode.module.css';
 import { Button } from 'reactstrap';
 
 const SwaggerAPITreeNode = (props)=> {
-  console.log(props.apiName)
     const [showField, setShowField] = useState(false)
     const [addStyle, setAddStyle] = useState('notSelectedItem')
-    console.log(props.data_objects)
     return (
       <div>
         <div  style={{display:'flex'}}>
