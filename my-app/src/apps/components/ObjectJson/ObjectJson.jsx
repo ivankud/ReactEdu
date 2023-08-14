@@ -10,15 +10,20 @@ import Console from '../Console';
 
 import { Button } from 'reactstrap';
 
+import { getJSONpropertyType } from '../../utils';
+
 const ObjectJson = (props)=> {
     // const[object, setObject] = useState(props.data_objects)
     const[modeView, setModeView] = useState('TREE')
     const[newProperty, setNewProperty] = useState({})
+    const[bAllowSetNewProperty,setBAllowSetNewProperty] = useState(false)
+    const[bAddNewProperty,setBAddNewProperty] = useState(false)
     const setProperty =(nameProperty, value)=>{
       let vObject = JSON.parse(JSON.stringify(props.data_objects))
       vObject[nameProperty] = JSON.parse(value);
       props.set_data_objects(JSON.stringify(vObject))
-      props.changeMessageConsole(`Изменено значение тега "${nameProperty}" на знчение >>${value.replace(/\\/gm,'')}`)
+      typeof value === 'string' && props.changeMessageConsole(`Изменено значение тега "${nameProperty}" на знчение >>${value?.replace(/\\/gm,'')}`)
+      typeof value !== 'string' && props.changeMessageConsole(`Изменено значение тега "${nameProperty}" на знчение >>${value}`)
     }
     useEffect(()=>{},[props.data_objects])
 
@@ -52,29 +57,74 @@ const ObjectJson = (props)=> {
                                                                             setProperty={setProperty}
                                                                         />
             })}
-            <div className='d-flex w-100'>
-              <input  onChange= {(value)=>{
-                                  let newName = value.target.value;
-                                  let oldValue = newProperty[Object.keys(newProperty)[0]]??"";
-                                  let vNewProperty = {}
-                                  vNewProperty[newName] = oldValue
-                                  setNewProperty(JSON.parse(JSON.stringify(vNewProperty)))}
-                                } 
-                      defaultValue={newProperty[Object.keys(newProperty)[0]]}
-              />
-              <input  onChange= {(value)=>{
-                                  let vNewProperty = newProperty
-                                  vNewProperty[[Object.keys(newProperty)[0]]] = value.target.value
-                                  setNewProperty(JSON.parse(JSON.stringify(vNewProperty)))}
-                                } 
-                      defaultValue={newProperty[Object.keys(newProperty)[0]]}
-              />
-              {JSON.stringify(newProperty)}
-              <button style={{background:'#c0fafa', border: 'none', borderRadius:'5px', }} className='m-auto'>➕</button>
-              <button style={{background:'#c0fafa', border: 'none', borderRadius:'5px', }} className='m-auto'>✔</button>
-              <button style={{background:'#c0fafa', border: 'none', borderRadius:'5px', }} className='m-auto'>❌</button>
-            </div>
-          
+            <div className='w-100'>
+              <div style={{display:'flex'}}className='w-100'>
+                {bAddNewProperty&& <div className='d-flex flex-column' style={{width:'30%'}}>
+                                    <input  
+                                      style={{width:'100%'}}
+                                      className={`${(!props.data_objects.hasOwnProperty(Object.keys(newProperty).join('')) && Object.keys(newProperty).join('').length>0)?'':'bg-danger'}`}
+                                      onChange= {
+                                        (value)=>{
+                                          let newName = value.target.value;
+                                          let oldValue = newProperty[Object.keys(newProperty)[0]]??"";
+                                          let vNewProperty = {}
+                                          vNewProperty[newName] = oldValue
+                                          setNewProperty(JSON.parse(JSON.stringify(vNewProperty)))}
+                                        } 
+                                      defaultValue={newProperty[Object.keys(newProperty)[0]]}
+                                    />
+                                    {'Тип: '+getJSONpropertyType(newProperty)}
+                                    </div>
+                }                
+                {bAddNewProperty&& <textarea
+                                      style={{width:'70%'}}
+                                      onChange= {
+                                        (value)=>{
+                                          let vNewProperty = newProperty
+                                          let vVal = value.target.value;
+                                          let val;
+                                          if(vVal.indexOf('\'')>0 || vVal.indexOf('"')>0) val = vVal
+                                          else val = Number(vVal)
+                                          if (isNaN(val)) {
+                                            if(vVal==='true') val = true
+                                            if(vVal==='false') val = false
+                                          }
+                                          vNewProperty[[Object.keys(newProperty)[0]]] = val
+                                          setNewProperty(JSON.parse(JSON.stringify(vNewProperty)))}
+                                        } 
+                                      defaultValue={newProperty[Object.keys(newProperty)[0]]}
+                                    />}            
+              </div>
+              <div  style={{display:'flex'}}>
+              {!bAddNewProperty&& <button 
+                                    style={{background:'#c0fafa', border: 'none', borderRadius:'5px', }} 
+                                    className='m-auto'
+                                    onClick={
+                                      ()=>{
+                                        setBAddNewProperty(true)
+                                      }}
+                                  >➕</button>}
+              { bAddNewProperty&& <button 
+                                    style={{background:'#c0fafa', border: 'none', borderRadius:'5px', }} 
+                                    className='m-auto'
+                                    disabled={!(!props.data_objects.hasOwnProperty(Object.keys(newProperty).join('')) && Object.keys(newProperty).join('').length>0)}
+                                    onClick={
+                                      ()=>{
+                                        setBAddNewProperty(false)
+                                        setProperty(Object.keys(newProperty)[0],newProperty[Object.keys(newProperty)[0]])
+                                        setNewProperty({})
+                                      }}
+                                  >✔</button>}
+              { bAddNewProperty&& <button
+                                    style={{background:'#c0fafa', border: 'none', borderRadius:'5px', }} 
+                                    className='m-auto'
+                                    onClick={()=>{
+                                      setBAddNewProperty(false)
+                                      setNewProperty({})
+                                    }}
+                                  >❌</button>}
+              </div>
+            </div>          
           </div>
         }
         { 

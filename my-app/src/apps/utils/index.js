@@ -4,7 +4,8 @@ import
     getElementById,
     updateObject,
     getPathById,
-    objectReverse
+    objectReverse,
+    getJSONpropertyType
 } from "./JsonUtils";
 
 import {
@@ -27,11 +28,13 @@ import {
 } from './Generator'
 
 export {
+    /*методы для работы с json*/
     isValidJson,
     getElementById,
     updateObject,
     getPathById,
     objectReverse,
+    getJSONpropertyType,
 
     dragElement,
     dragNewElementElement,
