@@ -1,6 +1,6 @@
 let data_objects = {
     "tag": "div",
-    "id": "main_object",
+    "id": "des-main_object",
     "block": "true",
     "style": {
         "position": "absolute",
@@ -14,11 +14,13 @@ let data_objects = {
     "children": [
         {
             "tag": "table",
-            "id": "Table_1",
+            "id": "des-Table_1",
             "style": {
                 "position": "absolute",
-                "left": "583px",
-                "top": "228px"
+                "left": "183px",
+                "top": "228px",
+                "width":"600px",
+                "height":"200px"
             },
             "content": "Таблица",
             "model": [
@@ -38,7 +40,7 @@ let data_objects = {
         },
         {
             "tag": "div",
-            "id": "Div_1",
+            "id": "des-Div_1",
             "style": {
                 "width": "370px",
                 "height": "277px",
@@ -53,7 +55,7 @@ let data_objects = {
             "children": [
                 {
                     "tag": "button",
-                    "id": "Button_2",
+                    "id": "des-Button_2",
                     "style": {
                         "position": "absolute",
                         "left": "77.1875px",
@@ -66,7 +68,7 @@ let data_objects = {
                 },
                 {
                     "tag": "button",
-                    "id": "Button_3",
+                    "id": "des-Button_3",
                     "style": {
                         "position": "absolute",
                         "left": "77.1875px",
@@ -81,7 +83,7 @@ let data_objects = {
         },
         {
             "tag": "button",
-            "id": "Button_1",
+            "id": "des-Button_1",
             "style": {
                 "position": "absolute",
                 "left": "1017.5208129882812px",
@@ -94,7 +96,7 @@ let data_objects = {
         },
         {
             "tag": "button",
-            "id": "ButtonType2_1",
+            "id": "des-ButtonType2_1",
             "style": {
                 "position": "absolute",
                 "left": "1037.5208129882812px",
@@ -107,7 +109,7 @@ let data_objects = {
         },
         {
             "tag": "table",
-            "id": "Table_2",
+            "id": "des-Table_2",
             "style": {
                 "position": "absolute",
                 "left": "1027.5208129882812px",

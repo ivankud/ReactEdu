@@ -9,7 +9,15 @@ const CompanentPanelElement = (props) => {
     const [mode, setMode] = useState('STAND') /*STAND MOVE*/
     // const [elemStyle, setElemStyle] = useState(props.content.style)
     
+    console.log("CompanentPanelElement->props>>",props)
+    console.log("CompanentPanelElement->props->id>>",props.id)
     const originalStyle = JSON.parse(JSON.stringify(props.content.style));
+    console.log("originalStyle>>",originalStyle)
+    if(props.id === 'TableTemplate') {
+        console.log('table label')
+        originalStyle.width="40px";
+        originalStyle.height="30px";
+    }
     delete originalStyle['position']
     delete originalStyle['left']
     delete originalStyle['top']
@@ -105,9 +113,8 @@ const CompanentPanelElement = (props) => {
                                 mode==='MOVE'&&
                                 <div className={`${styles["label"]} ${styles["phantom"]}`}>{props.label}</div>
                             }
-                        </div>                        
-                // break;
-                
+                        </div>                      
+                // break;                
             case 'div':
                 return  <div  className={`d-flex justify-content-center align-items-center flex-column ${styles['componentElement']}`} >
                             <div id={props.id} className={`${styles['elementButton']}` }>

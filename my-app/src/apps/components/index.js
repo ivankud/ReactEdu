@@ -20,7 +20,7 @@ import ResizableBox from './ResizableBox'
 import TableModelDialog from './TableModelDialog';
 import SwaggerAPITreeNode from './SwaggerAPITreeNode';
 import SwaggerAPITree from './SwaggerAPITree/SwaggerAPITree';
-
+import Table from './Table';
 
 
 export {
@@ -45,5 +45,6 @@ export {
     ContentGenerator,
     TableModelDialog,
     SwaggerAPITree,
-    SwaggerAPITreeNode
+    SwaggerAPITreeNode,
+    Table
 };

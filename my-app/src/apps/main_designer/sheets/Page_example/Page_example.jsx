@@ -58,7 +58,6 @@ class Page_example extends React.Component {
 {console.log('123123123123')}}
 >
 AgePlus
-
 </button>
 	</div>
 </div>
