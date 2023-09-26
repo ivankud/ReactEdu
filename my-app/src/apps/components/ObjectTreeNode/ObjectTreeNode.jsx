@@ -16,7 +16,7 @@ const ObjectTreeNode = (props)=> {
             style={{border:'none', background:'none', width:`${(props.counter+1)*20}px`}} 
             onClick={
                 ()=>{
-                  console.log('props.counter>>',props.counter)
+                  // console.log('props.counter>>',props.counter)
                   let vShowChildren = !showChildren;
                   setShowChildren(vShowChildren)
                 }}>

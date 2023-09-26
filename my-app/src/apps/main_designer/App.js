@@ -27,11 +27,12 @@ const App = (props) => {
   return (
     <div 
       className={`${styles["grid-container"]}`}
+      style={{display: "flex",flexDirection: "row"}}
     >      
       <div>
           <MenuBar router={router}/>
       </div>      
-      <div>
+      <div style={{flex: 1}}>
           <RouterProvider router={router}/>
       </div>
     </div>

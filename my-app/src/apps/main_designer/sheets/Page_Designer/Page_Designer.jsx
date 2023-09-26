@@ -93,7 +93,7 @@ const Page_Designer = () => {
     let x = event.clientX - rect.x;
     let y = event.clientY - rect.y;
     let vNewItem = JSON.parse(JSON.stringify(newItem));
-    console.log();
+    // console.log();
     vNewItem.style.left = x + "px";
     vNewItem.style.top = y + "px";
     /*вычисление id для нового объекта↓↓↓↓↓↓*/
@@ -180,7 +180,7 @@ const Page_Designer = () => {
         changeСoordinatesSelectedElem
       );
     }
-  }, [MainJson, selectedElems, targetId, selectionFrameSize]);
+  }, [MainJson, selectedElems, targetId, selectionFrameSize, changeСoordinatesSelectedElem]);
 
   useEffect(() => {
     /*вычисляет размеры рамки объекта*/

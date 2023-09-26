@@ -1,6 +1,6 @@
 export function justDragElement(id, callbackChangeStyle) {
     let elem = document.getElementById(id);
-    console.log('elem>>',elem)
+    // console.log('elem>>',elem)
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(id)) {
       /* if present, the header is where you move the DIV from:*/
@@ -22,7 +22,7 @@ export function justDragElement(id, callbackChangeStyle) {
     }
   
     function elementDrag(e) {
-      console.log('elementDrag Elem>>')
+      // console.log('elementDrag Elem>>')
       e = e || window.event;
       e.preventDefault();
       // calculate the new cursor position:
@@ -37,7 +37,7 @@ export function justDragElement(id, callbackChangeStyle) {
     }
   
     function closeDragElement() {
-      console.log('closeDragElement Elem>>')
+      // console.log('closeDragElement Elem>>')
       /* stop moving when mouse button is released:*/
       document.onmouseup = null;
       document.onmousemove = null;

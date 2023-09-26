@@ -21,6 +21,7 @@ import TableModelDialog from './TableModelDialog';
 import SwaggerAPITreeNode from './SwaggerAPITreeNode';
 import SwaggerAPITree from './SwaggerAPITree/SwaggerAPITree';
 import Table from './Table';
+import SelectionFrame from './SelectionFrame';
 
 
 export {
@@ -46,5 +47,6 @@ export {
     TableModelDialog,
     SwaggerAPITree,
     SwaggerAPITreeNode,
-    Table
+    Table,
+    SelectionFrame
 };

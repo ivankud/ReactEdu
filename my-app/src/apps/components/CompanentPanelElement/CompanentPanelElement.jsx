@@ -9,12 +9,12 @@ const CompanentPanelElement = (props) => {
     const [mode, setMode] = useState('STAND') /*STAND MOVE*/
     // const [elemStyle, setElemStyle] = useState(props.content.style)
     
-    console.log("CompanentPanelElement->props>>",props)
-    console.log("CompanentPanelElement->props->id>>",props.id)
+    // console.log("CompanentPanelElement->props>>",props)
+    // console.log("CompanentPanelElement->props->id>>",props.id)
     const originalStyle = JSON.parse(JSON.stringify(props.content.style));
-    console.log("originalStyle>>",originalStyle)
+    // console.log("originalStyle>>",originalStyle)
     if(props.id === 'TableTemplate') {
-        console.log('table label')
+        // console.log('table label')
         originalStyle.width="40px";
         originalStyle.height="30px";
     }

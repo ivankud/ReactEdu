@@ -1,9 +1,9 @@
 
 import React, {useState, useEffect} from 'react';
 
-import styles from './ResizableBox.module.css';
-import { Button } from 'reactstrap';
-import {justDragElement} from '../../utils'
+// import styles from './ResizableBox.module.css';
+// import { Button } from 'reactstrap';
+// import {justDragElement} from '../../utils'
 
 const ResizableBox = (props)=> {
     let originalStyleKey = Object.keys(props.data_objects.style)
