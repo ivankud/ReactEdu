@@ -139,11 +139,11 @@ const Page_test_env = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            opacity: 0.5,
-            zIndex: 1,
+            opacity: 1,
+            zIndex: 2,
           }}
         >
-          {(mode === "SELECTIONFRAME_SELECTION" && 
+          {mode === "SELECTIONFRAME_SELECTION" && 
             <div
               id='selectionBox'
               style={{
@@ -153,10 +153,11 @@ const Page_test_env = () => {
                 left:   `${dot1.x<=dot2.x?dot1.x:dot2.x??0}px`,
                 width:  `${Math.abs(dot1.x-dot2.x)??0     }px`,
                 height: `${Math.abs(dot1.y-dot2.y)??0     }px`,
-                opacity: 0.5,
-                zIndex: 1,
+                opacity: 1,
+                zIndex: 3,
+                pointerEvents:"none",
               }}
-            >{dot1.y<=dot2.y?dot1.y:dot2.y??0}</div>)}
+            />}
         </div>
       )}
       
