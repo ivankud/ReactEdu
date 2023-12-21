@@ -34,6 +34,7 @@ function iCalc(i){
     i++;
     counter+=jCalc(i)
     setTimeout(()=>iCalc(i),0)
+    set
   }
   return counter; 
 }
