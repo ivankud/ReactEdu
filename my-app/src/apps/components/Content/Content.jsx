@@ -91,7 +91,8 @@ const Content = (props) => {
               id={render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
-              onClick={(event) => {
+              onDoubleClick={(event) => {
+                console.log('123123123')
                 event.stopPropagation();
                 changeSelectedID(event.target.id, event.currentTarget);
               }}

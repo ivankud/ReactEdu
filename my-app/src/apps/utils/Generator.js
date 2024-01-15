@@ -8,6 +8,7 @@ import getStyle from "./Generator_getStyle";
 import getInput from "./Generator_getInput";
 import getLabel from "./Generator_getLabel"
 import getTable from "./Generator_getTable";
+import alignObjectsVertical from "./Generator_alignObjectsVertical";
 
 export {
     prettyRenderText,
@@ -19,5 +20,6 @@ export {
     getButton,
     getInput,
     getLabel,
-    getTable
+    getTable,
+    alignObjectsVertical
 }

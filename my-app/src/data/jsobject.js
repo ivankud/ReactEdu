@@ -58,13 +58,13 @@ let data_objects = {
                     "id": "des-Button_2",
                     "style": {
                         "position": "absolute",
-                        "left": "77.1875px",
-                        "top": "74.66665649414062px",
+                        "left": "100px",
+                        "top": "100px",
                         "backgroundColor": "green",
                         "width": "75px",
                         "height": "30px"
                     },
-                    "content": "Кнопка1"
+                    "content": "Кнопка2"
                 },
                 {
                     "tag": "button",
@@ -78,6 +78,20 @@ let data_objects = {
                         "height": "30px"
                     },
                     "content": "Кнопка1"
+                },
+                
+                {
+                    "tag": "button",
+                    "id": "des-Button_4",
+                    "style": {
+                        "position": "absolute",
+                        "left": "200px",
+                        "top": "200px",
+                        "backgroundColor": "green",
+                        "width": "75px",
+                        "height": "30px"
+                    },
+                    "content": "Кнопка3"
                 }
             ]
         },

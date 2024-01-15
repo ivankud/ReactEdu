@@ -20,7 +20,7 @@ const Board = (props) => {
                 className={styles.main_board}
                 style={{position: "relative",}}
             >
-                {arr.map((item, indexI) => item.map((item1, indexJ)=> BoardGrid(indexJ*20,indexI*20)))}
+                {/* {arr.map((item, indexI) => item.map((item1, indexJ)=> BoardGrid(indexJ*20,indexI*20)))} */} {/*временно отключена*/}
                 <Content 
                     data_objects={props.data_objects} 
                     changeTargetId={changeTargetId} 

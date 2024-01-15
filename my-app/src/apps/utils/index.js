@@ -24,7 +24,8 @@ import {
     getButton,
     getInput,
     getLabel,
-    getTable
+    getTable,
+    alignObjectsVertical
 } from './Generator'
 
 export {
@@ -35,7 +36,7 @@ export {
     getPathById,
     objectReverse,
     getJSONpropertyType,
-
+    alignObjectsVertical,
     dragElement,
     dragNewElementElement,
     justDragElement,
