@@ -92,8 +92,8 @@ const Content = (props) => {
               key={Math.floor(Math.random() * 2000)}
               style={style}
               onDoubleClick={(event) => {
-                console.log('123123123')
                 event.stopPropagation();
+                console.log(event.target.id, props.targetId)
                 changeSelectedID(event.target.id, event.currentTarget);
               }}
               onMouseOver={(event) => {

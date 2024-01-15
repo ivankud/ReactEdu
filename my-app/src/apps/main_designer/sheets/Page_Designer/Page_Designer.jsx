@@ -56,11 +56,12 @@ const Page_Designer = () => {
   }
 
   function changeTargetId(valueId, targetNode) {
+    console.log(54321)
     /*Функция меняет выбранный объект
      * valueId - id выбранного объекта
      * targetNode - элемент DOM-дерева, нужен чтобы выщитать все вложенные объекты
      */
-    if (valueId && valueId !== "SelObjectFrame") {
+    if (valueId && valueId !== "SelObjectFrame" && valueId !== targetId) {
       let selectedElem = [];
       if (targetNode) catchByObject(targetNode, "id", selectedElem);
       selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))];
@@ -73,7 +74,23 @@ const Page_Designer = () => {
         setTemplateJSON(templateJSON);
         setSelectionFrameSize({});
         changeMessageConsole(`Выбран объект ${valueId}`);
+    }
+    else if (valueId && valueId === targetId) {
+      // let selectedElem = [];
+      // if (targetNode) catchByObject(targetNode, "id", selectedElem);
+      // selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))];
+      // let path = getPathById(MainJson, valueId);
+      // let templateJSON = getElementById(MainJson, valueId);
       
+        changeMessageConsole(`Выбор с объекта ${valueId} снят `);
+        setTargetId(null);
+        // setSelectedElems(null);
+        // setTargetPath('');
+        // setTemplateJSON(null);
+        // setSelectionFrameSize({});
+    }
+    else {
+      changeMessageConsole(`Ошибка место changeTargetId_13212ASDF `);
     }
   }
   const changeTemplateJSON = (value) => {

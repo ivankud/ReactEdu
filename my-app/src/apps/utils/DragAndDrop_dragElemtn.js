@@ -1,4 +1,5 @@
 export function dragElement(elmnt,changeСoordinatesSelectedElem) {
+    let dragMore = false;
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     // if (document.getElementById(elmnt.id + "header")) {
       /* if present, the header is where you move the DIV from:*/
@@ -26,7 +27,8 @@ export function dragElement(elmnt,changeСoordinatesSelectedElem) {
       // calculate the new cursor position:
       pos1 = pos3 - e.clientX;
       pos2 = pos4 - e.clientY;
-      if(Math.abs(pos2) > 10 || Math.abs(pos1) > 10 ){
+      if(Math.abs(pos2) > 20 || Math.abs(pos1) > 20 ){    // лимит смещения при котором смещение срабатывает
+        dragMore = true;
         pos3 = e.clientX;
         pos4 = e.clientY;
         // set the element's new position:
@@ -41,6 +43,6 @@ export function dragElement(elmnt,changeСoordinatesSelectedElem) {
       /* stop moving when mouse button is released:*/
       document.onmouseup = null;
       document.onmousemove = null;
-      changeСoordinatesSelectedElem&&changeСoordinatesSelectedElem({'top':elmnt.style.top, 'left': elmnt.style.left})
+      dragMore&&changeСoordinatesSelectedElem&&changeСoordinatesSelectedElem({'top':elmnt.style.top, 'left': elmnt.style.left})
     }
   }
