@@ -71,10 +71,10 @@ let data_objects = {
                     "id": "des-Button_3",
                     "style": {
                         "position": "absolute",
-                        "left": "77.1875px",
+                        "left": "200px",
                         "top": "74.66665649414062px",
                         "backgroundColor": "green",
-                        "width": "75px",
+                        "width": "100px",
                         "height": "30px"
                     },
                     "content": "Кнопка1"
@@ -85,10 +85,10 @@ let data_objects = {
                     "id": "des-Button_4",
                     "style": {
                         "position": "absolute",
-                        "left": "200px",
+                        "left": "300px",
                         "top": "200px",
                         "backgroundColor": "green",
-                        "width": "75px",
+                        "width": "50%",
                         "height": "30px"
                     },
                     "content": "Кнопка3"

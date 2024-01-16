@@ -25,7 +25,10 @@ import {
     getInput,
     getLabel,
     getTable,
-    alignObjectsVertical
+    alignObjectsHorizontal,
+    alignObjectsVertical,
+    alignObjectsFullWidth,
+    alignObjectsFullHeight
 } from './Generator'
 
 export {
@@ -36,10 +39,14 @@ export {
     getPathById,
     objectReverse,
     getJSONpropertyType,
-    alignObjectsVertical,
     dragElement,
     dragNewElementElement,
     justDragElement,
+    /*методы выравнивания объектов↓↓↓↓*/    
+    alignObjectsHorizontal,
+    alignObjectsVertical,
+    alignObjectsFullWidth,
+    alignObjectsFullHeight,
     /*Для генератора↓↓↓↓*/
     prettyRenderText,
     convertJsonToRenderText,

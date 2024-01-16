@@ -9,6 +9,9 @@ import getInput from "./Generator_getInput";
 import getLabel from "./Generator_getLabel"
 import getTable from "./Generator_getTable";
 import alignObjectsVertical from "./Generator_alignObjectsVertical";
+import alignObjectsHorizontal from "./Generator_alignObjectsHorizontal";
+import alignObjectsFullWidth from "./Generator_alignObjectsFullWidth";
+import alignObjectsFullHeight from './Generator_alignObjectsFullHeight'
 
 export {
     prettyRenderText,
@@ -21,5 +24,8 @@ export {
     getInput,
     getLabel,
     getTable,
-    alignObjectsVertical
+    alignObjectsVertical,
+    alignObjectsHorizontal,
+    alignObjectsFullWidth,
+    alignObjectsFullHeight,
 }

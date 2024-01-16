@@ -1,14 +1,16 @@
 
   export function dragNewElementElement(elmntId , changeStyle, setMode) {
-      let elmnt = document.getElementById(elmntId)
-      var /*pos1 = 0, pos2 = 0,*/ pos3 = 0, pos4 = 0;
-      if (elmnt) {
-        /* if present, the header is where you move the DIV from:*/
-        elmnt.onmousedown = dragMouseDown;
-      } else {
-        /* otherwise, move the DIV from anywhere inside the DIV:*/
-        elmnt.onmousedown = dragMouseDown;
-        document.onmousedown = dragMouseDown;
+      if(elmntId){
+        let elmnt = document.getElementById(elmntId)
+        var /*pos1 = 0, pos2 = 0,*/ pos3 = 0, pos4 = 0;
+        if (elmnt) {
+          /* if present, the header is where you move the DIV from:*/
+          elmnt.onmousedown = dragMouseDown;
+        } else {
+          /* otherwise, move the DIV from anywhere inside the DIV:*/
+          elmnt.onmousedown = dragMouseDown;
+          document.onmousedown = dragMouseDown;
+        }
       }
     
       function dragMouseDown(e) {

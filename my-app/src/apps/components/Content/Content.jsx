@@ -127,7 +127,7 @@ const Content = (props) => {
               // key = {render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
-              onClick={(event) => {
+              onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.target.id, event.currentTarget);
               }}
@@ -154,7 +154,7 @@ const Content = (props) => {
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onClick={(event) => {
+                onDoubleClick={(event) => {
                   event.stopPropagation();
                   changeSelectedID(event.currentTarget.id, event.currentTarget);
                 }}
@@ -192,7 +192,7 @@ const Content = (props) => {
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onClick={(event) => {
+                onDoubleClick={(event) => {
                   event.stopPropagation();
                   changeSelectedID(event.currentTarget.id, event.currentTarget);
                 }}
@@ -232,7 +232,7 @@ const Content = (props) => {
               id={render_object.id}
               style={style}
               defaultValue={render_object.content ?? ""}
-              onClick={(event) => {
+              onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.currentTarget.id, event.currentTarget);
               }}
@@ -244,7 +244,7 @@ const Content = (props) => {
             <p
               id={render_object.id}
               style={style}
-              onClick={(event) => {
+              onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.currentTarget.id, event.currentTarget);
               }}

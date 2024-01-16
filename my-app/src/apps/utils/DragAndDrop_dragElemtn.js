@@ -1,6 +1,8 @@
 export function dragElement(elmnt,changeСoordinatesSelectedElem) {
     let dragMore = false;
+    // console.log('elmnt->>',elmnt)
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if(elmnt){
     // if (document.getElementById(elmnt.id + "header")) {
       /* if present, the header is where you move the DIV from:*/
       // document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
@@ -8,7 +10,8 @@ export function dragElement(elmnt,changeСoordinatesSelectedElem) {
       /* otherwise, move the DIV from anywhere inside the DIV:*/
       elmnt.onmousedown = dragMouseDown;
     // }
-  
+    }
+
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
@@ -32,8 +35,8 @@ export function dragElement(elmnt,changeСoordinatesSelectedElem) {
         pos3 = e.clientX;
         pos4 = e.clientY;
         // set the element's new position:
-        console.log('offsetTop->>',(elmnt.offsetTop - pos2) + "px")
-        console.log('offsetLeft->>',(elmnt.offsetLeft - pos1) + "px")
+        // console.log('offsetTop->>',(elmnt.offsetTop - pos2) + "px")
+        // console.log('offsetLeft->>',(elmnt.offsetLeft - pos1) + "px")
         elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
       }
