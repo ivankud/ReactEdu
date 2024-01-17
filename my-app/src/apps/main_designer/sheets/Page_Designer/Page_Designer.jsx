@@ -77,12 +77,18 @@ const Page_Designer = () => {
       vCommand = "delete";
     }
     // console.log('vHeap->>',vHeap);
-    setSelectedHeapElems(vHeap);
+    setSelectedHeapElems(vHeap.filter(onlyUnique));
     if(vCommand==='add'){
       let selectedElem = [];
-      if (targetNode) catchByObject(targetNode, "id", selectedElem);
+      vHeap.forEach(elem=>{
+        let innerElem = [];
+        catchByObject(document.getElementById(elem), "id", innerElem)
+        selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
+      })
+      // console.log(selectedElem)
+      // if (targetNode) catchByObject(targetNode, "id", selectedElem);
       selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
-      let path = getPathById(MainJson, valueId);
+      // let path = getPathById(MainJson, valueId);
       selectedElem.concat(selectedElem)
       let vSelectedElem = selectedElem.filter(onlyUnique);
       console.log('vSelectedElem->>',vSelectedElem)
@@ -538,6 +544,9 @@ const Page_Designer = () => {
             )}
           />
         )}
+        {JSON.stringify(selectedHeapElems)}
+        <br/>
+        {JSON.stringify(selectedElems)}
       </div>
     </div>
   );
