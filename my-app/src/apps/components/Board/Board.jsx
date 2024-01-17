@@ -26,11 +26,13 @@ const Board = (props) => {
                     changeTargetId={changeTargetId} 
                     targetId={props.targetId} 
                     selectedElems={props.selectedElems} 
+                    setSelectedElems={props.setSelectedElems}
                     selectionFrameSize={props.selectionFrameSize}
                     mouseMode={props.mouseMode}
                     addNewChildOnElement={props.addNewChildOnElement}
                     setOverTargetID={props.setOverTargetID}
                     changeTemplateJSON={props.changeTemplateJSON}
+                    changeTargetAddIdOnHeap={props.changeTargetAddIdOnHeap}
                 />
                 {/* <FrameObject/> */}
             </div>

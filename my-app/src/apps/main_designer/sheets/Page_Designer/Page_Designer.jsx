@@ -20,6 +20,7 @@ import {
   alignObjectsHorizontal,
   alignObjectsFullWidth,
   alignObjectsFullHeight,
+  onlyUnique,
 } from "../../../utils";
 import React, { useState, useEffect } from "react";
 // import data_objects from './jsobject'
@@ -49,6 +50,7 @@ const Page_Designer = () => {
   // catchByObject(targetNode, "id", selectedElem)
   // selectedElem=[...selectedElem.filter(id=>id!=='')]
   const [selectedElems, setSelectedElems] = useState([]);
+  const [selectedHeapElems, setSelectedHeapElems] = useState([]);
   let arrGrid = Array(100).fill(Array(100).fill(0));
 
   function changeMessageConsole(eventmessage) {
@@ -60,11 +62,53 @@ const Page_Designer = () => {
     setMessageConsole(vmessageConsole);
   }
 
+  function changeTargetAddIdOnHeap(valueId, targetNode, command) {        /*Добавляет объект к списку выделенных объектов для группировки*/
+    // console.log("valueId->",valueId);
+    let vHeap = JSON.parse(JSON.stringify(selectedHeapElems));
+    console.log('Original vHeap->>',vHeap);
+    let vCommand = "";
+    if(vHeap.indexOf(valueId) === -1) {
+      vHeap.push(valueId)
+      vCommand = "add";
+    }
+    else {
+      let vHeap_tmp = vHeap.filter(elem=>elem !== valueId);
+      vHeap = JSON.parse(JSON.stringify(vHeap_tmp));
+      vCommand = "delete";
+    }
+    // console.log('vHeap->>',vHeap);
+    setSelectedHeapElems(vHeap);
+    if(vCommand==='add'){
+      let selectedElem = [];
+      if (targetNode) catchByObject(targetNode, "id", selectedElem);
+      selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
+      let path = getPathById(MainJson, valueId);
+      selectedElem.concat(selectedElem)
+      let vSelectedElem = selectedElem.filter(onlyUnique);
+      console.log('vSelectedElem->>',vSelectedElem)
+      setTargetId(null);
+      setSelectedElems(vSelectedElem);
+      setTargetPath(null);
+      setTemplateJSON(null);
+      setSelectionFrameSize({});
+      // changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
+      changeMessageConsole(`Dыбранные объекты ${vSelectedElem}`);
+    }
+    else if(vCommand==='delete'){
+      changeMessageConsole(`Из выбранных объектов развыделен ${valueId}`);
+    }
+    else {      
+      changeMessageConsole(`Ошибка место changeTargetAddIdOnHeap_DEF_BREANCH_944`);
+    }
+    setTargetId(valueId);
+  }
+
   function changeTargetId(valueId, targetNode) {
     console.log(54321)
     /*Функция меняет выбранный объект
      * valueId - id выбранного объекта
      * targetNode - элемент DOM-дерева, нужен чтобы выщитать все вложенные объекты
+     * comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
      */
     if (valueId && valueId !== "SelObjectFrame" && valueId !== targetId) {
       let selectedElem = [];
@@ -72,7 +116,7 @@ const Page_Designer = () => {
       selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))];
       let path = getPathById(MainJson, valueId);
       let templateJSON = getElementById(MainJson, valueId);
-      
+        console.log('selectedElem->>',selectedElem)
         setTargetId(valueId);
         setSelectedElems(selectedElem);
         setTargetPath(path);
@@ -141,6 +185,7 @@ const Page_Designer = () => {
   };
 
   const catchByObject = (object, tag, value) => {
+    /*выбирвает объект и все вложенные в него рекурсивно*/
     // console.log('object',object)
     if (object[tag] !== undefined) {
       value.push(object[tag]);
@@ -250,8 +295,7 @@ const Page_Designer = () => {
               viewBox="0 0 16 16"
             >
               <path d="M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v5.34l-1.2.24a1.5 1.5 0 0 0-1.196 1.636l.345 3.106a2.5 2.5 0 0 0 .405 1.11l1.433 2.15A1.5 1.5 0 0 0 6.035 16h6.385a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002z" />              
-            </svg>
-            
+            </svg>            
           </Button>
            
           <Button          
@@ -338,7 +382,25 @@ const Page_Designer = () => {
               class="bi bi-hand-index-fill"
               viewBox="0 0 16 16"
             >
-              <path d="m 13 3 L 4 3 C 0 3 0 13 4 13 H 12 C 16 13 16 5 12 5 H 5.007 C 2 5 2 11 5 11 H 11 C 13 11 13 7 11 7 H 6 C 5 7 5 8 6 8 H 11 C 12 8 12 10 11 10 h -6 C 3 10 3 6 5 6 H 12 C 15 6 15 12 12 12 H 4 C 1 12 1 4 4 4 H 13 C 14 4 14 3 13 3" />              
+              <path d="m 13 3 L 6 3 C 0 3 0 13 6 13 H 11 C 16 13 16 5 11 5 H 6 C 2 5 2 11 6 11 H 11 C 14 11 14 7 11 7 H 6 C 5 7 5 8 6 8 H 11 C 13 8 13 10 11 10 h -5 C 3 10 3 6 6 6 H 11 C 15 6 15 12 11 12 H 6 C 1 12 1 4 6 4 H 12 C 13 4 13 3 12 3" />              
+            </svg>
+          </Button>
+           
+          <Button          
+            className={mouseMode === "RESIZE" ? `bg-info` : ""}
+            onClick={() => {
+              alignObjectsFullHeight(templateJSON)
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              fill="currentColor"
+              class="bi bi-hand-index-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="m 13 3 L 6 3 C 0 3 0 13 6 13 H 11 C 16 13 16 5 11 5 H 6 C 2 5 2 11 6 11 H 11 C 14 11 14 7 11 7 H 6 C 5 7 5 8 6 8 H 11 C 13 8 13 10 11 10 h -5 C 3 10 3 6 6 6 H 11 C 15 6 15 12 11 12 H 6 C 1 12 1 4 6 4 H 12 C 13 4 13 3 12 3" />              
             </svg>
           </Button>
         </div>
@@ -389,10 +451,12 @@ const Page_Designer = () => {
           changeTemplateJSON={changeTemplateJSON}
           targetId={targetId}
           selectedElems={selectedElems}
+          setSelectedElems={setSelectedElems}
           selectionFrameSize={selectionFrameSize}
           mouseMode={mouseMode}
           addNewChildOnElement={addNewChildOnElement}
           setOverTargetID={setOverTargetID}
+          changeTargetAddIdOnHeap={changeTargetAddIdOnHeap}
         />
       </div>
       <div

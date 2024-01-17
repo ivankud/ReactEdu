@@ -11,7 +11,8 @@ import getTable from "./Generator_getTable";
 import alignObjectsVertical from "./Generator_alignObjectsVertical";
 import alignObjectsHorizontal from "./Generator_alignObjectsHorizontal";
 import alignObjectsFullWidth from "./Generator_alignObjectsFullWidth";
-import alignObjectsFullHeight from './Generator_alignObjectsFullHeight'
+import alignObjectsFullHeight from './Generator_alignObjectsFullHeight';
+import joinGroupObjects from "./Generator_joinGroupObjects";
 
 export {
     prettyRenderText,
@@ -28,4 +29,5 @@ export {
     alignObjectsHorizontal,
     alignObjectsFullWidth,
     alignObjectsFullHeight,
+    joinGroupObjects,
 }

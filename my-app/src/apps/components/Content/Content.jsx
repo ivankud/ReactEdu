@@ -18,7 +18,8 @@ const getChildren = (
   mouseMode,
   addNewChildOnElement,
   setOverTargetID,
-  changeTemplateJSON
+  changeTemplateJSON,
+  changeTargetAddIdOnHeap
 ) => {
   if (Object.hasOwn(children, "children")) {
     return children.children.map((item) => (
@@ -32,6 +33,7 @@ const getChildren = (
         addNewChildOnElement={addNewChildOnElement}
         setOverTargetID={setOverTargetID}
         changeTemplateJSON={changeTemplateJSON}
+        changeTargetAddIdOnHeap={changeTargetAddIdOnHeap}
       />
     ));
   }
@@ -72,6 +74,9 @@ const checkObject = (obj) => {
 };
 
 const Content = (props) => {
+  const handleKeyDown = event => {
+    console.log('User pressed: ', event.key);
+  };
   const RenderContent = (
     render_object,
     changeSelectedID,
@@ -88,6 +93,7 @@ const Content = (props) => {
         case "div":
           elem = (
             <div
+              tabIndex={0}
               id={render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
@@ -95,6 +101,11 @@ const Content = (props) => {
                 event.stopPropagation();
                 console.log(event.target.id, props.targetId)
                 changeSelectedID(event.target.id, event.currentTarget);
+              }}
+              onKeyDown={(event)=>{
+                event.stopPropagation();
+                document.getElementById(render_object.id).blur();
+                props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
               }}
               onMouseOver={(event) => {
                 event.stopPropagation();
@@ -115,7 +126,8 @@ const Content = (props) => {
                 props.mouseMode,
                 props.addNewChildOnElement,
                 props.setOverTargetID,
-                props.changeTemplateJSON
+                props.changeTemplateJSON,
+                props.changeTargetAddIdOnHeap
               )}
             </div>
           );
@@ -130,6 +142,11 @@ const Content = (props) => {
               onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.target.id, event.currentTarget);
+              }}
+              onKeyDown={(event)=>{
+                event.stopPropagation();
+                document.getElementById(render_object.id).blur();
+                props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
               }}
             >
               {render_object.content ?? ``}

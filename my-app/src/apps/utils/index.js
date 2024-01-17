@@ -28,8 +28,13 @@ import {
     alignObjectsHorizontal,
     alignObjectsVertical,
     alignObjectsFullWidth,
-    alignObjectsFullHeight
+    alignObjectsFullHeight,
+    joinGroupObjects,
 } from './Generator'
+
+import {
+    onlyUnique
+} from './Array';
 
 export {
     /*методы для работы с json*/
@@ -47,6 +52,8 @@ export {
     alignObjectsVertical,
     alignObjectsFullWidth,
     alignObjectsFullHeight,
+    /*Методы объединения*/
+    joinGroupObjects,
     /*Для генератора↓↓↓↓*/
     prettyRenderText,
     convertJsonToRenderText,
@@ -58,4 +65,6 @@ export {
     getInput,
     getLabel,
     getTable,
+    /*Для работы с массивами↓↓↓↓*/
+    onlyUnique
 }
