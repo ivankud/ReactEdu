@@ -74,9 +74,6 @@ const checkObject = (obj) => {
 };
 
 const Content = (props) => {
-  const handleKeyDown = event => {
-    console.log('User pressed: ', event.key);
-  };
   const RenderContent = (
     render_object,
     changeSelectedID,
@@ -88,6 +85,12 @@ const Content = (props) => {
       render_object.id === props.targetId,
       props.selectedElems
     );
+    const onKeyDownElem = (event)=>{    
+      console.log("onKeyDown")
+      event.stopPropagation();
+      // document.getElementById(render_object.id).blur();
+      props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
+    }
     if (checkObject) {
       switch (String(render_object.tag).toLowerCase()) {
         case "div":
@@ -102,11 +105,7 @@ const Content = (props) => {
                 console.log(event.target.id, props.targetId)
                 changeSelectedID(event.target.id, event.currentTarget);
               }}
-              onKeyDown={(event)=>{
-                event.stopPropagation();
-                document.getElementById(render_object.id).blur();
-                props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
-              }}
+              onKeyDown={(event)=>{onKeyDownElem(event)}}
               onMouseOver={(event) => {
                 event.stopPropagation();
                 props.setOverTargetID(render_object.id);
@@ -142,12 +141,8 @@ const Content = (props) => {
               onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.target.id, event.currentTarget);
-              }}
-              onKeyDown={(event)=>{
-                event.stopPropagation();
-                document.getElementById(render_object.id).blur();
-                props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
-              }}
+              }}              
+              onKeyDown={(event)=>{onKeyDownElem(event)}}
             >
               {render_object.content ?? ``}
               {getChildren(
@@ -174,7 +169,8 @@ const Content = (props) => {
                 onDoubleClick={(event) => {
                   event.stopPropagation();
                   changeSelectedID(event.currentTarget.id, event.currentTarget);
-                }}
+                }}                
+                onKeyDown={(event)=>{onKeyDownElem(event)}}
               >
                 <div
                   style={{
@@ -212,7 +208,8 @@ const Content = (props) => {
                 onDoubleClick={(event) => {
                   event.stopPropagation();
                   changeSelectedID(event.currentTarget.id, event.currentTarget);
-                }}
+                }}                
+                onKeyDown={(event)=>{onKeyDownElem(event)}}
               >
                 <div
                   style={{
@@ -252,7 +249,8 @@ const Content = (props) => {
               onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.currentTarget.id, event.currentTarget);
-              }}
+              }}              
+              onKeyDown={(event)=>{onKeyDownElem(event)}}
             />
           );
           break;
@@ -264,7 +262,8 @@ const Content = (props) => {
               onDoubleClick={(event) => {
                 event.stopPropagation();
                 changeSelectedID(event.currentTarget.id, event.currentTarget);
-              }}
+              }}              
+              onKeyDown={(event)=>{onKeyDownElem(event)}}
             >
               {render_object.content ?? ""}
             </p>
@@ -302,6 +301,7 @@ const Content = (props) => {
             data_objects={props.data_objects}
             style={style}
             changeTemplateJSON={props.changeTemplateJSON}
+            
           />
         ) : 
             props.mouseMode === "HANDLE" ? 

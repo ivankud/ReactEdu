@@ -78,11 +78,12 @@ const Page_Designer = () => {
     }
     // console.log('vHeap->>',vHeap);
     setSelectedHeapElems(vHeap.filter(onlyUnique));
-    if(vCommand==='add'){
+    // if(vCommand==='add'){
       let selectedElem = [];
       vHeap.forEach(elem=>{
         let innerElem = [];
         catchByObject(document.getElementById(elem), "id", innerElem)
+        // console.log('innerElem->>',innerElem)
         selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
       })
       // console.log(selectedElem)
@@ -99,13 +100,33 @@ const Page_Designer = () => {
       setSelectionFrameSize({});
       // changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
       changeMessageConsole(`Dыбранные объекты ${vSelectedElem}`);
-    }
-    else if(vCommand==='delete'){
-      changeMessageConsole(`Из выбранных объектов развыделен ${valueId}`);
-    }
-    else {      
-      changeMessageConsole(`Ошибка место changeTargetAddIdOnHeap_DEF_BREANCH_944`);
-    }
+    // }
+    // else if(vCommand==='delete'){
+    //   let selectedElem = [];
+    //   vHeap.forEach(elem=>{
+    //     let innerElem = [];
+    //     catchByObject(document.getElementById(elem), "id", innerElem)
+    //     // console.log('innerElem->>',innerElem)
+    //     selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
+    //   })
+    //   // console.log(selectedElem)
+    //   // if (targetNode) catchByObject(targetNode, "id", selectedElem);
+    //   selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
+    //   // let path = getPathById(MainJson, valueId);
+    //   selectedElem.concat(selectedElem)
+    //   let vSelectedElem = selectedElem.filter(onlyUnique);
+    //   console.log('vSelectedElem->>',vSelectedElem)
+    //   setTargetId(null);
+    //   setSelectedElems(vSelectedElem);
+    //   setTargetPath(null);
+    //   setTemplateJSON(null);
+    //   setSelectionFrameSize({});
+    //   // changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
+    //   changeMessageConsole(`Из выбранных объектов развыделен ${valueId}`);
+    // }
+    // else {      
+    //   changeMessageConsole(`Ошибка место changeTargetAddIdOnHeap_DEF_BREANCH_944`);
+    // }
     setTargetId(valueId);
   }
 
@@ -169,7 +190,8 @@ const Page_Designer = () => {
     vNewItem.style.left = x + "px";
     vNewItem.style.top = y + "px";
     /*вычисление id для нового объекта↓↓↓↓↓↓*/
-    let vNextItemId = vNewItem.id.replace("Template", "");
+    console.log('vNewItem->>>',vNewItem)
+    let vNextItemId = 'des-'+vNewItem.id.replace("Template", "");
     let aID = [];
     catchByObject(MainJson, "id", aID);
     let varr = aID
@@ -548,6 +570,17 @@ const Page_Designer = () => {
         <br/>
         {JSON.stringify(selectedElems)}
       </div>
+      {/* <button      
+        id="des-12312321323"
+        onKeyDown={(event)=>{
+            console.log("onKeyDown")
+            event.stopPropagation();
+            document.getElementById('des-12312321323').blur();
+          }
+        }
+      >
+        123123123123
+      </button> */}
     </div>
   );
 };
