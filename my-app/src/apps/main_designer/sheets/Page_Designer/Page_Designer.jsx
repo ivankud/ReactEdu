@@ -33,7 +33,7 @@ const Page_Designer = () => {
   const [mouseMode, setMouseMode] =
     useState(
       "HANDLE"
-    ); /* mouseMode: HANDLE RESIZE MOVENEWITEM DELETEITEM COPYITEM*/
+    ); /* mouseMode: HANDLE RESIZE MOVENEWITEM DELETEITEM COPYITEM CANJOIN*/
   const [overTargetID, setOverTargetID] =
     useState(null); /*компонент над котором перетаскивается новый объект*/
   const [newItem, setNewItem] = useState(null); /*новый перетаскиваемый объект*/
@@ -62,7 +62,8 @@ const Page_Designer = () => {
     setMessageConsole(vmessageConsole);
   }
 
-  function changeTargetAddIdOnHeap(valueId, targetNode, command) {        /*Добавляет объект к списку выделенных объектов для группировки*/
+  function changeTargetAddIdOnHeap(valueId, targetNode, command) {        
+    /*Добавляет объект к списку выделенных объектов для группировки*/
     // console.log("valueId->",valueId);
     let vHeap = JSON.parse(JSON.stringify(selectedHeapElems));
     console.log('Original vHeap->>',vHeap);
@@ -78,56 +79,36 @@ const Page_Designer = () => {
     }
     // console.log('vHeap->>',vHeap);
     setSelectedHeapElems(vHeap.filter(onlyUnique));
-    // if(vCommand==='add'){
-      let selectedElem = [];
-      vHeap.forEach(elem=>{
-        let innerElem = [];
-        catchByObject(document.getElementById(elem), "id", innerElem)
-        // console.log('innerElem->>',innerElem)
-        selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
-      })
-      // console.log(selectedElem)
-      // if (targetNode) catchByObject(targetNode, "id", selectedElem);
-      selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
-      // let path = getPathById(MainJson, valueId);
-      selectedElem.concat(selectedElem)
-      let vSelectedElem = selectedElem.filter(onlyUnique);
-      console.log('vSelectedElem->>',vSelectedElem)
-      setTargetId(null);
-      setSelectedElems(vSelectedElem);
-      setTargetPath(null);
-      setTemplateJSON(null);
-      setSelectionFrameSize({});
-      // changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
-      changeMessageConsole(`Dыбранные объекты ${vSelectedElem}`);
-    // }
-    // else if(vCommand==='delete'){
-    //   let selectedElem = [];
-    //   vHeap.forEach(elem=>{
-    //     let innerElem = [];
-    //     catchByObject(document.getElementById(elem), "id", innerElem)
-    //     // console.log('innerElem->>',innerElem)
-    //     selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
-    //   })
-    //   // console.log(selectedElem)
-    //   // if (targetNode) catchByObject(targetNode, "id", selectedElem);
-    //   selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
-    //   // let path = getPathById(MainJson, valueId);
-    //   selectedElem.concat(selectedElem)
-    //   let vSelectedElem = selectedElem.filter(onlyUnique);
-    //   console.log('vSelectedElem->>',vSelectedElem)
-    //   setTargetId(null);
-    //   setSelectedElems(vSelectedElem);
-    //   setTargetPath(null);
-    //   setTemplateJSON(null);
-    //   setSelectionFrameSize({});
-    //   // changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
-    //   changeMessageConsole(`Из выбранных объектов развыделен ${valueId}`);
-    // }
-    // else {      
-    //   changeMessageConsole(`Ошибка место changeTargetAddIdOnHeap_DEF_BREANCH_944`);
-    // }
-    setTargetId(valueId);
+    let selectedElem = [];
+    let checkJoinHeap = true;
+    let vPath = getPathById(MainJson, valueId).split('>').slice(0,-1).join('>');
+    vHeap.forEach(elem=>{
+      console.log('vpath=>',getPathById(MainJson, elem).split('>').slice(0,-1).join('>'))
+      if (vPath !== getPathById(MainJson, elem).split('>').slice(0,-1).join('>')) {
+        console.log('123123123123 false')
+        checkJoinHeap = false
+      };
+      let innerElem = [];
+      catchByObject(document.getElementById(elem), "id", innerElem)
+      // console.log('innerElem->>',innerElem)
+      selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
+    })
+    if(checkJoinHeap){setMouseMode('CANJOIN')}
+    // console.log(selectedElem)
+    // if (targetNode) catchByObject(targetNode, "id", selectedElem);
+    selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
+    // let path = getPathById(MainJson, valueId);
+    selectedElem.concat(selectedElem)
+    let vSelectedElem = selectedElem.filter(onlyUnique);
+    console.log('vSelectedElem->>',vSelectedElem)
+    setTargetId(null);
+    setSelectedElems(vSelectedElem);
+    setTargetPath(null);
+    setTemplateJSON(null);
+    setSelectionFrameSize({});
+    changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
+    changeMessageConsole(`Dыбранные объекты ${vSelectedElem}`);
+
   }
 
   function changeTargetId(valueId, targetNode) {
@@ -570,7 +551,7 @@ const Page_Designer = () => {
         <br/>
         {JSON.stringify(selectedElems)}
       </div>
-      {/* <button      
+      {/* <input      
         id="des-12312321323"
         onKeyDown={(event)=>{
             console.log("onKeyDown")
@@ -578,9 +559,7 @@ const Page_Designer = () => {
             document.getElementById('des-12312321323').blur();
           }
         }
-      >
-        123123123123
-      </button> */}
+      /> */}
     </div>
   );
 };

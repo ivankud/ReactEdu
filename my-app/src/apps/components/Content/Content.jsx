@@ -87,10 +87,17 @@ const Content = (props) => {
     );
     const onKeyDownElem = (event)=>{    
       console.log("onKeyDown")
+      document.getElementById(render_object.id).blur();
       event.stopPropagation();
-      // document.getElementById(render_object.id).blur();
+      console.log('фокус снят')
       props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
     }
+    const onDoubleClick = (event)=>{
+      event.stopPropagation();
+      console.log(event.target.id, props.targetId)
+      changeSelectedID(event.target.id, event.currentTarget);
+    }
+
     if (checkObject) {
       switch (String(render_object.tag).toLowerCase()) {
         case "div":
@@ -100,11 +107,7 @@ const Content = (props) => {
               id={render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
-              onDoubleClick={(event) => {
-                event.stopPropagation();
-                console.log(event.target.id, props.targetId)
-                changeSelectedID(event.target.id, event.currentTarget);
-              }}
+              onDoubleClick={(event) => {onDoubleClick(event)}}
               onKeyDown={(event)=>{onKeyDownElem(event)}}
               onMouseOver={(event) => {
                 event.stopPropagation();
@@ -138,11 +141,9 @@ const Content = (props) => {
               // key = {render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
-              onDoubleClick={(event) => {
-                event.stopPropagation();
-                changeSelectedID(event.target.id, event.currentTarget);
-              }}              
+              onDoubleClick={(event) => {onDoubleClick(event)}}   
               onKeyDown={(event)=>{onKeyDownElem(event)}}
+              onKeyPress={(event)=>{onKeyDownElem(event)}}
             >
               {render_object.content ?? ``}
               {getChildren(
@@ -166,10 +167,7 @@ const Content = (props) => {
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onDoubleClick={(event) => {
-                  event.stopPropagation();
-                  changeSelectedID(event.currentTarget.id, event.currentTarget);
-                }}                
+                onDoubleClick={(event) => {onDoubleClick(event)}}
                 onKeyDown={(event)=>{onKeyDownElem(event)}}
               >
                 <div
@@ -205,10 +203,7 @@ const Content = (props) => {
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onDoubleClick={(event) => {
-                  event.stopPropagation();
-                  changeSelectedID(event.currentTarget.id, event.currentTarget);
-                }}                
+                onDoubleClick={(event) => {onDoubleClick(event)}}
                 onKeyDown={(event)=>{onKeyDownElem(event)}}
               >
                 <div
@@ -246,10 +241,7 @@ const Content = (props) => {
               id={render_object.id}
               style={style}
               defaultValue={render_object.content ?? ""}
-              onDoubleClick={(event) => {
-                event.stopPropagation();
-                changeSelectedID(event.currentTarget.id, event.currentTarget);
-              }}              
+              onDoubleClick={(event) => {onDoubleClick(event)}}
               onKeyDown={(event)=>{onKeyDownElem(event)}}
             />
           );
@@ -259,10 +251,7 @@ const Content = (props) => {
             <p
               id={render_object.id}
               style={style}
-              onDoubleClick={(event) => {
-                event.stopPropagation();
-                changeSelectedID(event.currentTarget.id, event.currentTarget);
-              }}              
+              onDoubleClick={(event) => {onDoubleClick(event)}}
               onKeyDown={(event)=>{onKeyDownElem(event)}}
             >
               {render_object.content ?? ""}
