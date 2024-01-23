@@ -86,15 +86,12 @@ const Content = (props) => {
       props.selectedElems
     );
     const onKeyDownElem = (event)=>{    
-      console.log("onKeyDown")
       document.getElementById(render_object.id).blur();
       event.stopPropagation();
-      console.log('фокус снят')
       props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
     }
     const onDoubleClick = (event)=>{
       event.stopPropagation();
-      console.log(event.target.id, props.targetId)
       changeSelectedID(event.target.id, event.currentTarget);
     }
 
@@ -107,8 +104,12 @@ const Content = (props) => {
               id={render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
-              onDoubleClick={(event) => {onDoubleClick(event)}}
-              onKeyDown={(event)=>{onKeyDownElem(event)}}
+              onDoubleClick={(event) => {
+                onDoubleClick(event)
+              }}
+              onKeyDown={(event)=>{
+                onKeyDownElem(event)
+              }}
               onMouseOver={(event) => {
                 event.stopPropagation();
                 props.setOverTargetID(render_object.id);
@@ -143,7 +144,6 @@ const Content = (props) => {
               style={style}
               onDoubleClick={(event) => {onDoubleClick(event)}}   
               onKeyDown={(event)=>{onKeyDownElem(event)}}
-              onKeyPress={(event)=>{onKeyDownElem(event)}}
             >
               {render_object.content ?? ``}
               {getChildren(

@@ -5,7 +5,9 @@ import
     updateObject,
     getPathById,
     objectReverse,
-    getJSONpropertyType
+    getJSONpropertyType,
+    joinChildrenObjectsInDiv,
+    getIdByPath,
 } from "./JsonUtils";
 
 import {
@@ -29,7 +31,7 @@ import {
     alignObjectsVertical,
     alignObjectsFullWidth,
     alignObjectsFullHeight,
-    joinGroupObjects,
+    joinGroupObjects
 } from './Generator'
 
 import {
@@ -38,6 +40,8 @@ import {
 
 export {
     /*методы для работы с json*/
+    getIdByPath,
+    joinChildrenObjectsInDiv,
     isValidJson,
     getElementById,
     updateObject,
@@ -53,7 +57,7 @@ export {
     alignObjectsFullWidth,
     alignObjectsFullHeight,
     /*Методы объединения*/
-    joinGroupObjects,
+    // joinGroupObjects,
     /*Для генератора↓↓↓↓*/
     prettyRenderText,
     convertJsonToRenderText,

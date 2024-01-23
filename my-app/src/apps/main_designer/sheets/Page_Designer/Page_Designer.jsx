@@ -21,6 +21,8 @@ import {
   alignObjectsFullWidth,
   alignObjectsFullHeight,
   onlyUnique,
+  joinChildrenObjectsInDiv,
+  getIdByPath,
 } from "../../../utils";
 import React, { useState, useEffect } from "react";
 // import data_objects from './jsobject'
@@ -66,7 +68,7 @@ const Page_Designer = () => {
     /*Добавляет объект к списку выделенных объектов для группировки*/
     // console.log("valueId->",valueId);
     let vHeap = JSON.parse(JSON.stringify(selectedHeapElems));
-    console.log('Original vHeap->>',vHeap);
+    // console.log('Original vHeap->>',vHeap);
     let vCommand = "";
     if(vHeap.indexOf(valueId) === -1) {
       vHeap.push(valueId)
@@ -83,7 +85,7 @@ const Page_Designer = () => {
     let checkJoinHeap = true;
     let vPath = getPathById(MainJson, valueId).split('>').slice(0,-1).join('>');
     vHeap.forEach(elem=>{
-      console.log('vpath=>',getPathById(MainJson, elem).split('>').slice(0,-1).join('>'))
+      // console.log('vpath=>',getPathById(MainJson, elem).split('>').slice(0,-1).join('>'))
       if (vPath !== getPathById(MainJson, elem).split('>').slice(0,-1).join('>')) {
         console.log('123123123123 false')
         checkJoinHeap = false
@@ -94,6 +96,7 @@ const Page_Designer = () => {
       selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
     })
     if(checkJoinHeap){setMouseMode('CANJOIN')}
+    else {setMouseMode('HANDLE')}
     // console.log(selectedElem)
     // if (targetNode) catchByObject(targetNode, "id", selectedElem);
     selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))]; // comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
@@ -125,6 +128,7 @@ const Page_Designer = () => {
       let path = getPathById(MainJson, valueId);
       let templateJSON = getElementById(MainJson, valueId);
         console.log('selectedElem->>',selectedElem)
+        setSelectedHeapElems([]);
         setTargetId(valueId);
         setSelectedElems(selectedElem);
         setTargetPath(path);
@@ -140,6 +144,7 @@ const Page_Designer = () => {
       // let templateJSON = getElementById(MainJson, valueId);
       
         changeMessageConsole(`Выбор с объекта ${valueId} снят `);
+        setSelectedHeapElems([]);
         setTargetId(null);
         setSelectedElems(null);
         setTargetPath('');
@@ -377,28 +382,23 @@ const Page_Designer = () => {
             </svg>
           </Button>
            
-          <Button          
-            className={mouseMode === "RESIZE" ? `bg-info` : ""}
+          <Button
+            className={mouseMode === "CANJOIN" ? `bg-info` : ""}
             onClick={() => {
-              alignObjectsFullHeight(templateJSON)
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              fill="currentColor"
-              class="bi bi-hand-index-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="m 13 3 L 6 3 C 0 3 0 13 6 13 H 11 C 16 13 16 5 11 5 H 6 C 2 5 2 11 6 11 H 11 C 14 11 14 7 11 7 H 6 C 5 7 5 8 6 8 H 11 C 13 8 13 10 11 10 h -5 C 3 10 3 6 6 6 H 11 C 15 6 15 12 11 12 H 6 C 1 12 1 4 6 4 H 12 C 13 4 13 3 12 3" />              
-            </svg>
-          </Button>
-           
-          <Button          
-            className={mouseMode === "RESIZE" ? `bg-info` : ""}
-            onClick={() => {
-              alignObjectsFullHeight(templateJSON)
+              let vNewContainer = joinChildrenObjectsInDiv(MainJson,selectedHeapElems)
+              console.log(vNewContainer)
+              if(selectedHeapElems.length){
+                console.log('selectedHeapElems[0]',selectedHeapElems[0])
+                let vPath= getPathById(MainJson, selectedHeapElems[0]);
+                let idparent = getIdByPath(MainJson,vPath)
+                console.log("idparent",idparent)
+                setTargetId(idparent);
+                let templateJSON = getElementById(MainJson, idparent);
+                let vChildren = templateJSON.children.filter(ch => selectedHeapElems.indexOf(ch.id) === -1)
+                templateJSON.children = vChildren;
+                templateJSON.children.push(vNewContainer)
+                setTemplateJSON(templateJSON);
+              }
             }}
           >
             <svg
