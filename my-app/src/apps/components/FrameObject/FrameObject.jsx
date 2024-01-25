@@ -20,7 +20,7 @@ const FrameObject = () => {
                 style={{
                     width:"200px",
                     height:"200px",
-                    borderColor:'green',
+                    borderColor:'pink',
                 }}
                 onMouseDown={(e)=>{console.log('DIV2')}}
             >

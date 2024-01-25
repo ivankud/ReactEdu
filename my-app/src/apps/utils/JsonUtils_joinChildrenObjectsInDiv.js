@@ -23,7 +23,7 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
             "width": null,
             "height": null,
             "border-color": "pink",
-            "borderStyle": "solid",
+            "borderStyle": "groove",
             "borderWidth": "5px",
             "position": "absolute",
             "left": "0px",
@@ -66,22 +66,23 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
             console.log("y_top",vY_top)
             console.log("y_bottom",vY_bottom)
         })
-        console.log("result")
-        console.log("x_right",x_right)
-        console.log("x_left",x_left)
-        console.log("y_top",y_top)
-        console.log("y_bottom",y_bottom)
+        // console.log("result")
+        // console.log("x_right",x_right)
+        // console.log("x_left",x_left)
+        // console.log("y_top",y_top)
+        // console.log("y_bottom",y_bottom)
         newGlobalobject.children.forEach(child=>{
             console.log('child->',child)
-            child.style["left"] = (Number(child.style["left"].replace('px','')) - vX_left)+"px";
-            child.style["top"]  = (Number(child.style["top"].replace('px','')) - vY_top)+"px";
+            child.style["left"] = (Number(child.style["left"].replace('px','')) - x_left)+"px";
+            child.style["top"]  = (Number(child.style["top"].replace('px','')) - y_top)+"px";
         })
         console.log(1)     
         newGlobalobject.style["left"]   = Math.floor(x_left)+'px';
         newGlobalobject.style["top"]    = Math.floor(y_top)+'px';
         newGlobalobject.style["width"]  = Math.floor(x_right - x_left)+'px';
-        newGlobalobject.style["height"] = Math.floor(y_top - y_bottom)+'px';     
-        console.log('newGlobalobject.style',newGlobalobject.style)
+        newGlobalobject.style["height"] = Math.floor(y_bottom - y_top)+'px';     
+        console.log('newGlobalobject->>',newGlobalobject)
+        // console.log('newGlobalobject.style',newGlobalobject.style)
         /*Корректировка координат*/
         return newGlobalobject;
     }

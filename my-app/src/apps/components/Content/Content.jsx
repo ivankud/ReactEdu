@@ -49,11 +49,11 @@ const getStyle = (object, selectedElem, selectedElems) => {
     });
   }
   if (selectedElem || selectedElems?.includes(object.id)) {
-    style["borderStyle"] = style["borderStyle"] ?? "solid";
-    style["borderColor"] = style["borderColor"] ?? "#ff7a7a";
+    style["borderStyle"] = style["borderStyle"] ?? "groove";
+    style["borderColor"] = style["borderColor"] ?? "#00ff2a";
     style["borderWidth"] = style["borderWidth"] ?? "1px";
   } else {
-    style["borderStyle"] = "solid";
+    style["borderStyle"] = "groove";
     style["borderColor"] = "#ffffff";
     style["borderWidth"] = "1px";
   }
@@ -167,7 +167,7 @@ const Content = (props) => {
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onDoubleClick={(event) => {onDoubleClick(event)}}
+                onDoubleClick={(event) => {onDoubleClick(event)}}   
                 onKeyDown={(event)=>{onKeyDownElem(event)}}
               >
                 <div
@@ -184,7 +184,7 @@ const Content = (props) => {
                 {props.data_objects.id === props.targetId && (
                   <div
                     style={{
-                      background: "red",
+                      background: "pink",
                       width: style.width,
                       height: style.height,
                       position: "absolute",
@@ -241,7 +241,7 @@ const Content = (props) => {
               id={render_object.id}
               style={style}
               defaultValue={render_object.content ?? ""}
-              onDoubleClick={(event) => {onDoubleClick(event)}}
+              onDoubleClick={(event) => {onDoubleClick(event)}}   
               onKeyDown={(event)=>{onKeyDownElem(event)}}
             />
           );
@@ -251,7 +251,7 @@ const Content = (props) => {
             <p
               id={render_object.id}
               style={style}
-              onDoubleClick={(event) => {onDoubleClick(event)}}
+              onDoubleClick={(event) => {onDoubleClick(event)}}   
               onKeyDown={(event)=>{onKeyDownElem(event)}}
             >
               {render_object.content ?? ""}
@@ -273,7 +273,7 @@ const Content = (props) => {
   if (props.data_objects.id === props.targetId)
     style = {
       position: "absolute",
-      borderStyle: "solid",
+      borderStyle: "groove",
       borderColor: "#ff0000 ",
       borderWidth: "1px ",
       top: props.data_objects.style.top,

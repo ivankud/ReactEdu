@@ -8,7 +8,7 @@ import React, {useState, useEffect} from 'react';
 const ResizableBox = (props)=> {
     let originalStyleKey = Object.keys(props.data_objects.style)
     let originalStyte = JSON.parse(JSON.stringify(props.data_objects.style));
-    const [divStyle, setDivStyle] = useState({...{left: props.style.left, top: props.style.top, width: props.style.width, height: props.style.height},...{position: "absolute",   borderStyle:'solid', borderColor:'pink', zIndex:1}})    
+    const [divStyle, setDivStyle] = useState({...{left: props.style.left, top: props.style.top, width: props.style.width, height: props.style.height},...{position: "absolute",   borderStyle:'groove', borderColor:'pink', zIndex:1}})    
     const stylebc = {resize: "both", overflow: "auto"}
     const callbackSetStyle=()=>{
       /*функция прокидывает стиль наверх в конце изменения размера, когда мышка отпущена*/

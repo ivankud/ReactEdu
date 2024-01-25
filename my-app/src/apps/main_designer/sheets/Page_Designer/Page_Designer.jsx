@@ -115,12 +115,12 @@ const Page_Designer = () => {
   }
 
   function changeTargetId(valueId, targetNode) {
-    console.log(54321)
     /*Функция меняет выбранный объект
      * valueId - id выбранного объекта
-     * targetNode - элемент DOM-дерева, нужен чтобы выщитать все вложенные объекты
+     * targetNode - элемент DOM-дерева, нужен чтобы выcчитать все вложенные объекты
      * comment "des-" нужна для отделения объектов от всех остальных сокражение от designer
      */
+    if(!targetNode) targetNode = document.getElementById(valueId)
     if (valueId && valueId !== "SelObjectFrame" && valueId !== targetId) {
       let selectedElem = [];
       if (targetNode) catchByObject(targetNode, "id", selectedElem);
@@ -136,13 +136,7 @@ const Page_Designer = () => {
         setSelectionFrameSize({});
         changeMessageConsole(`Выбран объект ${valueId}`);
     }
-    else if (valueId && valueId === targetId) {
-      // let selectedElem = [];
-      // if (targetNode) catchByObject(targetNode, "id", selectedElem);
-      // selectedElem = [...selectedElem.filter((id) => id !== "" && id.startsWith('des-'))];
-      // let path = getPathById(MainJson, valueId);
-      // let templateJSON = getElementById(MainJson, valueId);
-      
+    else if (valueId && valueId === targetId) {      
         changeMessageConsole(`Выбор с объекта ${valueId} снят `);
         setSelectedHeapElems([]);
         setTargetId(null);
@@ -392,12 +386,13 @@ const Page_Designer = () => {
                 let vPath= getPathById(MainJson, selectedHeapElems[0]);
                 let idparent = getIdByPath(MainJson,vPath)
                 console.log("idparent",idparent)
-                setTargetId(idparent);
                 let templateJSON = getElementById(MainJson, idparent);
                 let vChildren = templateJSON.children.filter(ch => selectedHeapElems.indexOf(ch.id) === -1)
                 templateJSON.children = vChildren;
                 templateJSON.children.push(vNewContainer)
                 setTemplateJSON(templateJSON);
+                let valueId = templateJSON.children[templateJSON.children.length-1].id;
+                changeTargetId(valueId);
               }
             }}
           >
