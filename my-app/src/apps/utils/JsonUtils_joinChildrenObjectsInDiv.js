@@ -20,8 +20,8 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
         "tag": "div",
         "id": "des-Div_213123123123123123",
         "style": {
-            "width": null,
-            "height": null,
+            "width": "0px",
+            "height": "0px",
             "border-color": "pink",
             "borderStyle": "groove",
             "borderWidth": "5px",
@@ -66,24 +66,26 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
             console.log("y_top",vY_top)
             console.log("y_bottom",vY_bottom)
         })
-        // console.log("result")
-        // console.log("x_right",x_right)
-        // console.log("x_left",x_left)
-        // console.log("y_top",y_top)
-        // console.log("y_bottom",y_bottom)
+        console.log("result")
+        console.log("x_right",x_right)
+        console.log("x_left",x_left)
+        console.log("y_top",y_top)
+        console.log("y_bottom",y_bottom)
+        console.log('newGlobalobject->>',newGlobalobject)
+        let newChildren = []
         newGlobalobject.children.forEach(child=>{
-            console.log('child->',child)
-            child.style["left"] = (Number(child.style["left"].replace('px','')) - x_left)+"px";
-            child.style["top"]  = (Number(child.style["top"].replace('px','')) - y_top)+"px";
+            let vChild = JSON.parse(JSON.stringify(child))
+            /*Корректировка координат*/
+            vChild.style["left"] = (Number(vChild.style["left"].replace('px','')) - x_left)+"px";
+            vChild.style["top"]  = (Number(vChild.style["top"].replace('px','')) - y_top)+"px";
+            newChildren.push(vChild)
         })
-        console.log(1)     
+        console.log(3) 
+        newGlobalobject.children = JSON.parse(JSON.stringify(newChildren))            
         newGlobalobject.style["left"]   = Math.floor(x_left)+'px';
         newGlobalobject.style["top"]    = Math.floor(y_top)+'px';
         newGlobalobject.style["width"]  = Math.floor(x_right - x_left)+'px';
         newGlobalobject.style["height"] = Math.floor(y_bottom - y_top)+'px';     
-        console.log('newGlobalobject->>',newGlobalobject)
-        // console.log('newGlobalobject.style',newGlobalobject.style)
-        /*Корректировка координат*/
         return newGlobalobject;
     }
     return null;
