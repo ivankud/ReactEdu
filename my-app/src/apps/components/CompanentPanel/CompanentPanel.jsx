@@ -17,7 +17,7 @@ const CompanentPanel = (props) => {
                         {"tag": "table","id": "TableTemplate","style": {"position": "absolute","left": "30px","top": "30px", "width":"750px", "height":"400px"},"model": [{"name": "field1","field": "id"},{"name": "field2","field": "scaption"},{"name": "field3","field": "smnemocode"}],"content": 'Таблица'},
                         {"tag": "input","id": "InputTemplate","style": {"position": "absolute","left": "30px","top": "30px", "width":"75px", "height":"30px"},"content": 'Поле ввода'},
                         {"tag": "label","id": "LabelTemplate","style": {"position": "absolute","left": "30px","top": "30px", "width":"75px", "height":"30px"},"content": 'Надпись'},
-                        {"tag": "div","id": "DivTemplate","style": {"width":"40px","height":"40px","border-color":"pink","borderStyle":"solid","borderWidth":"5px","position": "absolute","left": "30px","top": "30px"},"content":'Контейнер'},
+                        {"tag": "div","id": "DivTemplate","style": {"width":"40px","height":"40px","border-color":"pink","borderStyle":"solid","borderWidth":"1px","position": "absolute","left": "30px","top": "30px"},"content":'Контейнер'},
                     ]
     return (
         <div className={styles.MainComponentPanel + ' d-flex justify-content-center align-items-center'}>

@@ -46,4 +46,3 @@ export default function alignObjectsHorizontal(render_objects){
 } 
 
 
-

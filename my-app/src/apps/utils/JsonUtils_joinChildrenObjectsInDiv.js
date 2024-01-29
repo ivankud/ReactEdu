@@ -25,7 +25,7 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
             "height": "0px",
             "border-color": "pink",
             "borderStyle": "solid",
-            "borderWidth": "5px",
+            "borderWidth": "1px",
             "position": "absolute",
             "left": "0px",
             "top": "0px"

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Board.module.css'
 // import BoardGrid from  './../BoardGrid'
-import {Content,BoardGrid} from './../';
+import {Content, BoardGrid} from './../';
 
 const Board = (props) => {
     // let arr = Array(2).fill(Array(2).fill(0));
@@ -11,7 +11,7 @@ const Board = (props) => {
     const height = 1080;
     return (
         <div style={{
-            border: "dashed",
+            border: "solid",
             width: width||"px",
             height: height||"px",
         }}>

@@ -280,8 +280,9 @@ const Page_Designer = () => {
         style={{ width: "100vw", backgroundColor: "#d1cfcd", height: "70px" }}
         className="d-flex align-items-center"
       >
-        <div style={{ padding: "5px", widht: "100%" }}>
+        <div style={{ padding: "1px", widht: "100%" }}>
           <Button
+            id="toolbarHandleButton"
             className={mouseMode === "HANDLE" ? `bg-info` : ""}
             onClick={() => {
               setMouseMode("HANDLE");
@@ -295,11 +296,12 @@ const Page_Designer = () => {
               class="bi bi-textarea-resize"
               viewBox="0 0 16 16"
             >
-              <path d="M0 4.5A2.5 2.5 0 0 1 2.5 2h11A2.5 2.5 0 0 1 16 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 11.5v-7zM2.5 3A1.5 1.5 0 0 0 1 4.5v7A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 13.5 3h-11zm10.854 4.646a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708l3-3a.5.5 0 0 1 .708 0zm0 2.5a.5.5 0 0 1 0 .708l-.5.5a.5.5 0 0 1-.708-.708l.5-.5a.5.5 0 0 1 .708 0z" />
+              <path d="M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v5.34l-1.2.24a1.5 1.5 0 0 0-1.196 1.636l.345 3.106a2.5 2.5 0 0 0 .405 1.11l1.433 2.15A1.5 1.5 0 0 0 6.035 16h6.385a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002z" />                            
             </svg>
           </Button>
            
           <Button
+            id="toolbarResizeButton"
             className={mouseMode === "RESIZE" ? `bg-info` : ""}
             onClick={() => {
               setMouseMode("RESIZE");
@@ -313,12 +315,14 @@ const Page_Designer = () => {
               class="bi bi-hand-index-fill"
               viewBox="0 0 16 16"
             >
-              <path d="M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v5.34l-1.2.24a1.5 1.5 0 0 0-1.196 1.636l.345 3.106a2.5 2.5 0 0 0 .405 1.11l1.433 2.15A1.5 1.5 0 0 0 6.035 16h6.385a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002z" />              
+              <path d="M0 4.5A2.5 2.5 0 0 1 2.5 2h11A2.5 2.5 0 0 1 16 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 11.5v-7zM2.5 3A1.5 1.5 0 0 0 1 4.5v7A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 13.5 3h-11zm10.854 4.646a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708l3-3a.5.5 0 0 1 .708 0zm0 2.5a.5.5 0 0 1 0 .708l-.5.5a.5.5 0 0 1-.708-.708l.5-.5a.5.5 0 0 1 .708 0z" />
             </svg>            
           </Button>
            
           <Button          
-            className={mouseMode === "RESIZE" ? `bg-info` : ""}
+            id="toolbarAlignVertiacalButton"
+            className={mouseMode === "HANDLE" ? `bg-info` : ""}
+            disabled={mouseMode === "HANDLE" ? false : true}
             onClick={() => {
               alignObjectsVertical(templateJSON)
             }}
@@ -334,10 +338,16 @@ const Page_Designer = () => {
             <path d="M 8.02 0.419 L 8 16 L 8 2 h -1 A 1 1 0 0 0 7 5 L 9 5 A 1 1 0 0 0 9 2 L 8 2 L 8 7 L 5 7 A 1 1 0 0 0 5 10 L 11 10 A 1 1 0 0 0 11 7 L 8 7 L 8 12 L 3 12 A 1 1 0 0 0 3 15 L 13 15 A 1 1 0 0 0 13 12 L 8 12" />              
           </svg>
           </Button> 
-          <Button          
-            className={mouseMode === "RESIZE" ? `bg-info` : ""}
+          <Button     
+            id="toolbarAlignHorizontalButton"
+            className={mouseMode === "HANDLE" ? `bg-info` : ""}
+            disabled={mouseMode === "HANDLE" ? false : true}
             onClick={() => {
-              alignObjectsHorizontal(templateJSON)
+              alignObjectsHorizontal(templateJSON);
+              // let vTemplateJSON = alignObjectsHorizontal(JSON.parse(JSON.stringify(templateJSON)));
+              // console.log('vTemplateJSON->>>>',vTemplateJSON)
+              // setTargetId(vTemplateJSON.id)
+              // setTemplateJSON(vTemplateJSON);
             }}
           >
           <svg
@@ -351,8 +361,10 @@ const Page_Designer = () => {
             <path d="M 0 8 L 15 8 L 1 8 L 1 10 A 1 1 0 0 0 4 10 L 4 6 A 1 1 0 0 0 1 6 L 1 8 L 6 8 L 6 12 A 1 1 0 0 0 9 12 L 9 4 A 1 1 0 0 0 6 4 L 6 8 L 11 8 L 11 14 A 1 1 0 0 0 14 14 L 14 2 A 1 1 0 0 0 11 2 L 11 8" />              
           </svg>
           </Button> 
-          <Button          
-            className={mouseMode === "RESIZE" ? `bg-info` : ""}
+          <Button                    
+            id="toolbarStretchHorizontalButton"
+            className={mouseMode === "HANDLE" ? `bg-info` : ""}
+            disabled={mouseMode === "HANDLE" ? false : true}
             onClick={() => {
               alignObjectsFullWidth(templateJSON)
             }}
@@ -370,7 +382,9 @@ const Page_Designer = () => {
           </Button>
            
           <Button          
-            className={mouseMode === "RESIZE" ? `bg-info` : ""}
+            id="toolbarStretchVerticalButton"
+            className={mouseMode === "HANDLE" ? `bg-info` : ""}
+            disabled={mouseMode === "HANDLE" ? false : true}
             onClick={() => {
               alignObjectsFullHeight(templateJSON)
             }}
@@ -388,6 +402,7 @@ const Page_Designer = () => {
           </Button>
            
           <Button
+            id="toolbarJoinGroupElemButton"
             className={mouseMode === "CANJOIN" ? `bg-info` : ""}
             disabled={mouseMode === "CANJOIN" ? false : true}
             onClick={() => {
@@ -399,19 +414,19 @@ const Page_Designer = () => {
                 let idparent = getIdByPath(MainJson,vPath)
                 console.log("idparent",idparent)
                 
-    /*вычисление id для нового объекта↓↓↓↓↓↓*/
-    let vNextItemId = 'des-'+vNewContainer.id.replace("Template", "");
-    let aID = [];
-    catchByObject(MainJson, "id", aID);
-    let varr = aID
-      .map((item) => item.toLowerCase())
-      .filter((item) => !item.search(new RegExp(vNextItemId, "i")))
-      .filter((item) => !isNaN(Number(item.split("_")[1])))
-      .map((item) => Number(item.split("_")[1]));
-    let vLen = varr.length; /*Так надо*/
-    let nextID = vLen > 0 ? Math.max(...varr) + 1 : 1;
-    vNewContainer.id = vNextItemId + "_" + String(nextID);
-    /*вычисление id для нового объекта↑↑↑↑↑↑*/
+                /*вычисление id для нового объекта↓↓↓↓↓↓*/
+                let vNextItemId = 'des-'+vNewContainer.id.replace("Template", "");
+                let aID = [];
+                catchByObject(MainJson, "id", aID);
+                let varr = aID
+                  .map((item) => item.toLowerCase())
+                  .filter((item) => !item.search(new RegExp(vNextItemId, "i")))
+                  .filter((item) => !isNaN(Number(item.split("_")[1])))
+                  .map((item) => Number(item.split("_")[1]));
+                let vLen = varr.length; /*Так надо*/
+                let nextID = vLen > 0 ? Math.max(...varr) + 1 : 1;
+                vNewContainer.id = vNextItemId + "_" + String(nextID);
+                /*вычисление id для нового объекта↑↑↑↑↑↑*/
 
                 let templateJSON = getElementById(MainJson, idparent);
                 let vChildren = templateJSON.children.filter(ch => selectedHeapElems.indexOf(ch.id) === -1)
