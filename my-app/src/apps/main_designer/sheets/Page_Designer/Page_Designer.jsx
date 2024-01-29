@@ -46,7 +46,7 @@ const Page_Designer = () => {
   const [messageConsole, setMessageConsole] = useState({});
   const [modeConsole, setModeConsole] = useState("TARGET");
   const [MainJson, setMainJSON] = useState(data_objects);
-  const [targetId, setTargetId] = useState("main_object");
+  const [targetId, setTargetId] = useState("des-main_object");
   const [targetPath, setTargetPath] = useState(getPathById(MainJson, targetId));
   const [templateJSON, setTemplateJSON] = useState(getElementById(MainJson, targetId));   // !!!ВЫБРАННЫ ОБЪЕКТ
   // catchByObject(targetNode, "id", selectedElem)
@@ -62,6 +62,19 @@ const Page_Designer = () => {
       `${moment(new Date()).format("YYYY.MM.DD hh:mm:ss")}`
     ] = `${eventmessage}`;
     setMessageConsole(vmessageConsole);
+  }
+
+  function deleteObject(){
+    if (targetId && (targetId !== "main_object"||targetId !== "des-main_object")  && selectedElems) {
+      let vPath= getPathById(MainJson, targetId);
+      let idparent = getIdByPath(MainJson,vPath)
+      let templateJSON = getElementById(MainJson, idparent);
+      let vChildren = templateJSON.children.filter(ch => ch.id !== targetId)
+      templateJSON.children = vChildren;
+      let valueId = templateJSON.id;
+      changeTargetId(valueId);
+      setTemplateJSON(templateJSON);
+    }
   }
 
   function changeTargetAddIdOnHeap(valueId, targetNode, command) {        
@@ -84,18 +97,16 @@ const Page_Designer = () => {
     let selectedElem = [];
     let checkJoinHeap = true;
     let vPath = getPathById(MainJson, valueId).split('>').slice(0,-1).join('>');
+    
     vHeap.forEach(elem=>{
-      // console.log('vpath=>',getPathById(MainJson, elem).split('>').slice(0,-1).join('>'))
       if (vPath !== getPathById(MainJson, elem).split('>').slice(0,-1).join('>')) {
-        console.log('123123123123 false')
         checkJoinHeap = false
       };
       let innerElem = [];
       catchByObject(document.getElementById(elem), "id", innerElem)
-      // console.log('innerElem->>',innerElem)
       selectedElem = JSON.parse(JSON.stringify(selectedElem.concat(innerElem)))
     })
-    if(checkJoinHeap){setMouseMode('CANJOIN')}
+    if(checkJoinHeap && vHeap.length>1){setMouseMode('CANJOIN')}
     else {setMouseMode('HANDLE')}
     // console.log(selectedElem)
     // if (targetNode) catchByObject(targetNode, "id", selectedElem);
@@ -225,9 +236,8 @@ const Page_Designer = () => {
   const changeSelectionFrame = () => {
     /*Вычисляет рамку объеденяющую родительский компонент и всех входящих элементов - здесь не происходит вычисление потомков selectedElems, они вычисляются в другом месте*/
     let minX, minY, maxX, maxY;
-    let aX = [],
-      aY = [];
-    if (targetId && targetId !== "main_object" && selectedElems) {
+    let aX = [],  aY = [];
+    if (targetId && (targetId !== "main_object"||targetId !== "des-main_object") && selectedElems) {
       selectedElems.forEach((id) => {
         let vRect = document.getElementById(id).getBoundingClientRect();
         aX.push(vRect.x);
@@ -249,7 +259,7 @@ const Page_Designer = () => {
 
   useEffect(() => {
     /*вешает событие drag на компонент*/
-    if (targetId !== "main_object") {
+    if (targetId !== "main_object" && targetId !== "des-main_object")  {
       dragElement(
         document.getElementById(targetId),
         changeСoordinatesSelectedElem
@@ -262,6 +272,7 @@ const Page_Designer = () => {
     /*P.S. надо пропихнуть такое же событие на изменение положение элемента, но пока пусть будет так*/
     changeSelectionFrame();
   }, [MainJson, selectedElems, templateJSON]);
+  
   return (
     /* mouseMode: HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
     <div>
@@ -378,6 +389,7 @@ const Page_Designer = () => {
            
           <Button
             className={mouseMode === "CANJOIN" ? `bg-info` : ""}
+            disabled={mouseMode === "CANJOIN" ? false : true}
             onClick={() => {
               let vNewContainer = joinChildrenObjectsInDiv(MainJson,selectedHeapElems)
               console.log(vNewContainer)
@@ -386,6 +398,21 @@ const Page_Designer = () => {
                 let vPath= getPathById(MainJson, selectedHeapElems[0]);
                 let idparent = getIdByPath(MainJson,vPath)
                 console.log("idparent",idparent)
+                
+    /*вычисление id для нового объекта↓↓↓↓↓↓*/
+    let vNextItemId = 'des-'+vNewContainer.id.replace("Template", "");
+    let aID = [];
+    catchByObject(MainJson, "id", aID);
+    let varr = aID
+      .map((item) => item.toLowerCase())
+      .filter((item) => !item.search(new RegExp(vNextItemId, "i")))
+      .filter((item) => !isNaN(Number(item.split("_")[1])))
+      .map((item) => Number(item.split("_")[1]));
+    let vLen = varr.length; /*Так надо*/
+    let nextID = vLen > 0 ? Math.max(...varr) + 1 : 1;
+    vNewContainer.id = vNextItemId + "_" + String(nextID);
+    /*вычисление id для нового объекта↑↑↑↑↑↑*/
+
                 let templateJSON = getElementById(MainJson, idparent);
                 let vChildren = templateJSON.children.filter(ch => selectedHeapElems.indexOf(ch.id) === -1)
                 templateJSON.children = vChildren;
@@ -409,11 +436,10 @@ const Page_Designer = () => {
           </Button>
            
           <Button
-            id="deleteButton"
-            className={mouseMode === "CANJOIN" ? `bg-info` : ""}
-            onClick={() => {
-              console.log()
-            }}
+            id="toolbarDeleteElemButton"
+            className={(mouseMode === "HANDLE" && targetId && (targetId !== "main_object"||targetId !== "des-main_object") ) ? `bg-info` : ""}
+            disabled={(mouseMode === "HANDLE" && targetId && (targetId !== "main_object"||targetId !== "des-main_object") ) ? `bg-info` : ""}
+            onClick={()=>{deleteObject()}}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

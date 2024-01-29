@@ -16,14 +16,15 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
 2.2. объединяются с корректировкой позиции
 2.3. иначе ошибка
 */
+// "id": "des-Div_213123123123123123",
     let newGlobalobject = {
         "tag": "div",
-        "id": "des-Div_213123123123123123",
+        "id": "Div",
         "style": {
             "width": "0px",
             "height": "0px",
             "border-color": "pink",
-            "borderStyle": "groove",
+            "borderStyle": "solid",
             "borderWidth": "5px",
             "position": "absolute",
             "left": "0px",
@@ -60,18 +61,18 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
             if (x_right < vX_right)     x_right = vX_right ;
             if (y_bottom < vY_bottom)   y_bottom  = vY_bottom ;
             newGlobalobject.children.push(getElementById(globalObject, vID));
-            console.log("vElem",vElem)
-            console.log("x_right",vX_right)
-            console.log("x_left",vX_left)
-            console.log("y_top",vY_top)
-            console.log("y_bottom",vY_bottom)
+            // console.log("vElem",vElem)
+            // console.log("x_right",vX_right)
+            // console.log("x_left",vX_left)
+            // console.log("y_top",vY_top)
+            // console.log("y_bottom",vY_bottom)
         })
-        console.log("result")
-        console.log("x_right",x_right)
-        console.log("x_left",x_left)
-        console.log("y_top",y_top)
-        console.log("y_bottom",y_bottom)
-        console.log('newGlobalobject->>',newGlobalobject)
+        // console.log("result")
+        // console.log("x_right",x_right)
+        // console.log("x_left",x_left)
+        // console.log("y_top",y_top)
+        // console.log("y_bottom",y_bottom)
+        // console.log('newGlobalobject->>',newGlobalobject)
         let newChildren = []
         newGlobalobject.children.forEach(child=>{
             let vChild = JSON.parse(JSON.stringify(child))
@@ -80,7 +81,7 @@ export function joinChildrenObjectsInDiv(globalObject, heap){
             vChild.style["top"]  = (Number(vChild.style["top"].replace('px','')) - y_top)+"px";
             newChildren.push(vChild)
         })
-        console.log(3) 
+        // console.log(3) 
         newGlobalobject.children = JSON.parse(JSON.stringify(newChildren))            
         newGlobalobject.style["left"]   = Math.floor(x_left)+'px';
         newGlobalobject.style["top"]    = Math.floor(y_top)+'px';

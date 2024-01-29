@@ -49,11 +49,11 @@ const getStyle = (object, selectedElem, selectedElems) => {
     });
   }
   if (selectedElem || selectedElems?.includes(object.id)) {
-    style["borderStyle"] = style["borderStyle"] ?? "groove";
-    style["borderColor"] = style["borderColor"] ?? "#00ff2a";
+    style["borderStyle"] = style["borderStyle"] ?? "solid";
+    style["borderColor"] = style["borderColor"] ?? "#eeff00";
     style["borderWidth"] = style["borderWidth"] ?? "1px";
   } else {
-    style["borderStyle"] = "groove";
+    style["borderStyle"] = "solid";
     style["borderColor"] = "#ffffff";
     style["borderWidth"] = "1px";
   }
@@ -273,7 +273,7 @@ const Content = (props) => {
   if (props.data_objects.id === props.targetId)
     style = {
       position: "absolute",
-      borderStyle: "groove",
+      borderStyle: "solid",
       borderColor: "#ff0000 ",
       borderWidth: "1px ",
       top: props.data_objects.style.top,
@@ -284,7 +284,7 @@ const Content = (props) => {
   return (
     <div>
       {props.data_objects.id === props.targetId &&
-        props.data_objects.id !== "main_object" &&
+        props.data_objects.id !== "des-main_object" &&
         (props.mouseMode === "RESIZE" ? (
           <ResizableBox
             data_objects={props.data_objects}
