@@ -122,7 +122,40 @@ const Page_Designer = () => {
     setSelectionFrameSize({});
     changeMessageConsole(`В выбранные объекты добавлен ${valueId}`);
     changeMessageConsole(`Dыбранные объекты ${vSelectedElem}`);
+  }
 
+  function joinObjectsButton(){
+    let vNewContainer = joinChildrenObjectsInDiv(MainJson,selectedHeapElems)
+    // console.log(vNewContainer)
+    if(selectedHeapElems.length){
+      // console.log('selectedHeapElems[0]',selectedHeapElems[0])
+      let vPath= getPathById(MainJson, selectedHeapElems[0]);
+      let idparent = getIdByPath(MainJson,vPath)
+      // console.log("idparent",idparent)
+      
+      /*вычисление id для нового объекта↓↓↓↓↓↓*/
+      let vNextItemId = 'des-'+vNewContainer.id.replace("Template", "");
+      let aID = [];
+      catchByObject(MainJson, "id", aID);
+      let varr = aID
+        .map((item) => item.toLowerCase())
+        .filter((item) => !item.search(new RegExp(vNextItemId, "i")))
+        .filter((item) => !isNaN(Number(item.split("_")[1])))
+        .map((item) => Number(item.split("_")[1]));
+      let vLen = varr.length; /*Так надо*/
+      let nextID = vLen > 0 ? Math.max(...varr) + 1 : 1;
+      vNewContainer.id = vNextItemId + "_" + String(nextID);
+      /*вычисление id для нового объекта↑↑↑↑↑↑*/
+
+      let templateJSON = getElementById(MainJson, idparent);
+      let vChildren = templateJSON.children.filter(ch => selectedHeapElems.indexOf(ch.id) === -1)
+      templateJSON.children = vChildren;
+      templateJSON.children.push(vNewContainer)
+      setTemplateJSON(templateJSON);
+      let valueId = templateJSON.children[templateJSON.children.length-1].id;
+      changeTargetId(valueId);                
+      setMouseMode("HANDLE");
+    }  
   }
 
   function changeTargetId(valueId, targetNode) {
@@ -405,38 +438,7 @@ const Page_Designer = () => {
             id="toolbarJoinGroupElemButton"
             className={mouseMode === "CANJOIN" ? `bg-info` : ""}
             disabled={mouseMode === "CANJOIN" ? false : true}
-            onClick={() => {
-              let vNewContainer = joinChildrenObjectsInDiv(MainJson,selectedHeapElems)
-              console.log(vNewContainer)
-              if(selectedHeapElems.length){
-                console.log('selectedHeapElems[0]',selectedHeapElems[0])
-                let vPath= getPathById(MainJson, selectedHeapElems[0]);
-                let idparent = getIdByPath(MainJson,vPath)
-                console.log("idparent",idparent)
-                
-                /*вычисление id для нового объекта↓↓↓↓↓↓*/
-                let vNextItemId = 'des-'+vNewContainer.id.replace("Template", "");
-                let aID = [];
-                catchByObject(MainJson, "id", aID);
-                let varr = aID
-                  .map((item) => item.toLowerCase())
-                  .filter((item) => !item.search(new RegExp(vNextItemId, "i")))
-                  .filter((item) => !isNaN(Number(item.split("_")[1])))
-                  .map((item) => Number(item.split("_")[1]));
-                let vLen = varr.length; /*Так надо*/
-                let nextID = vLen > 0 ? Math.max(...varr) + 1 : 1;
-                vNewContainer.id = vNextItemId + "_" + String(nextID);
-                /*вычисление id для нового объекта↑↑↑↑↑↑*/
-
-                let templateJSON = getElementById(MainJson, idparent);
-                let vChildren = templateJSON.children.filter(ch => selectedHeapElems.indexOf(ch.id) === -1)
-                templateJSON.children = vChildren;
-                templateJSON.children.push(vNewContainer)
-                setTemplateJSON(templateJSON);
-                let valueId = templateJSON.children[templateJSON.children.length-1].id;
-                changeTargetId(valueId);
-              }
-            }}
+            onClick={() => {joinObjectsButton()}}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -251,8 +251,14 @@ const Content = (props) => {
             <p
               id={render_object.id}
               style={style}
-              onDoubleClick={(event) => {onDoubleClick(event)}}   
-              onKeyDown={(event)=>{onKeyDownElem(event)}}
+              onDoubleClick={(event) => {
+                console.log('p>>onclick')
+                onDoubleClick(event)}
+              }   
+              onKeyDown={(event)=>{                
+                console.log('p>>onKeyDown')
+                onKeyDownElem(event)
+              }}
             >
               {render_object.content ?? ""}
             </p>
