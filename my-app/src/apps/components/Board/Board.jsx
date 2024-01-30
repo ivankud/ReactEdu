@@ -9,6 +9,35 @@ const Board = (props) => {
     let arr = props.grid;
     const width = 1920;
     const height = 1080;
+
+
+    const onKeyDownElem = (event)=>{    
+        console.log('onKeyDownElem_123123')
+    }
+    const onDoubleClick = (event)=>{
+        console.log('onDoubleClick_123123')
+    }
+    
+    const vElem = <div
+        id="123_test"
+        style={{width: "40px", opacity: "0.9", height: "40px", borderColor: "rgb(221, 19, 19)", borderStyle: "solid", borderWidth: "1px", position: "absolute", left: "456.438px", top: "239px"}}
+        onKeyDown={(event)=>{
+            console.log('1111111111111111111111111');
+            // document.getElementById("123_test").blur();
+            // event.stopPropagation();
+        }}
+        onMouseOver={(event) => {
+            console.log('p>>onMouseOver')
+        // event.stopPropagation();
+        }}
+        onDoubleClick={(event) => {
+            document.getElementById("123_test").focus();
+            // event.stopPropagation();
+            console.log('p>>onDoubleClick')
+        }}   
+        >
+    </div>
+
     return (
         <div style={{
             border: "solid",
@@ -35,6 +64,8 @@ const Board = (props) => {
                     changeTargetAddIdOnHeap={props.changeTargetAddIdOnHeap}
                 />
                 {/* <FrameObject/> */}
+                
+                {vElem}
             </div>
         </div>
     )
