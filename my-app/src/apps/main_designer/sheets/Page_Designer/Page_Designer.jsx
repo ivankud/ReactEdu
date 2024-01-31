@@ -23,6 +23,7 @@ import {
   onlyUnique,
   joinChildrenObjectsInDiv,
   getIdByPath,
+  getIdParentByPath,
 } from "../../../utils";
 import React, { useState, useEffect } from "react";
 // import data_objects from './jsobject'
@@ -67,7 +68,9 @@ const Page_Designer = () => {
   function deleteObject(){
     if (targetId && (targetId !== "main_object"||targetId !== "des-main_object")  && selectedElems) {
       let vPath= getPathById(MainJson, targetId);
-      let idparent = getIdByPath(MainJson,vPath)
+      // let idparent = getIdByPath(MainJson,vPath)
+      let idparent = getIdParentByPath(MainJson,vPath)
+      
       let templateJSON = getElementById(MainJson, idparent);
       let vChildren = templateJSON.children.filter(ch => ch.id !== targetId)
       templateJSON.children = vChildren;
@@ -130,7 +133,9 @@ const Page_Designer = () => {
     if(selectedHeapElems.length){
       // console.log('selectedHeapElems[0]',selectedHeapElems[0])
       let vPath= getPathById(MainJson, selectedHeapElems[0]);
-      let idparent = getIdByPath(MainJson,vPath)
+      // let idparent = getIdByPath(MainJson,vPath)
+      let idparent = getIdParentByPath(MainJson,vPath)
+      
       // console.log("idparent",idparent)
       
       /*вычисление id для нового объекта↓↓↓↓↓↓*/
@@ -156,6 +161,72 @@ const Page_Designer = () => {
       changeTargetId(valueId);                
       setMouseMode("HANDLE");
     }  
+  }
+
+
+
+  function disJoinObjectsButton(){
+    let vPath= getPathById(MainJson, targetId);
+    console.log('path->>',vPath)
+    console.log('check path->>',getIdByPath(MainJson,vPath))
+    let vParentID = getIdParentByPath(MainJson,vPath);
+    changeTargetId(vParentID);  
+    let vParentTemplateJSON = getElementById(MainJson, vParentID);
+    console.log('vParentTemplateJSON',vParentTemplateJSON)
+    let vParentChildren = vParentTemplateJSON.children.filter(ch=>ch.id !== targetId);
+    let vStyle = templateJSON.style;
+    let vChildren = JSON.parse(JSON.stringify(templateJSON.children));
+    vChildren.forEach(ch=>vParentChildren.push(ch))
+
+    vChildren.forEach(ch=>{
+      
+      let reg = new RegExp("[0-9]*")
+      switch (ch.style.top.replace(reg,"")) {
+        case "px":
+            console.log("inner object top \"px\"");
+            ch.style.top = (Number(ch.style.top.replace("px","")) + Number(vStyle.top.replace('px',""))) + "px";
+            break;
+        case "%":
+            console.log("inner object top \"%\"");
+            console.log("#TODO_0042");                            
+            break;
+        default:   
+            console.log("inner object top \"default\"");
+            console.log("#TODO_0043");                            
+          break;
+      }
+
+      switch (ch.style.left.replace(reg,"")) {
+        case "px":
+            console.log("inner object left \"px\"");
+            ch.style.left = (Number(ch.style.left.replace("px","")) + Number(vStyle.left.replace('px',""))) + "px";
+            break;
+        case "%":
+            console.log("inner object left \"%\"");
+            console.log("#TODO_0044");                            
+            break;
+        default:   
+            console.log("inner object left \"default\"");
+            console.log("#TODO_0045");                            
+          break;
+      }
+      console.log('ch.style->>',ch.style)
+          // ch.style.left = ch.style.left + vStyle.left;
+          // ch.style.top = ch.style.left + vStyle.top;
+      vParentChildren.push(ch)
+    })
+    console.log('filtered children after disJoin')
+    console.log('vParentChildren',vParentChildren)
+    vParentTemplateJSON.children=JSON.parse(JSON.stringify(vChildren))
+    let selectedElem = [];
+    catchByObject(document.getElementById(vParentID), "id", selectedElem);
+    selectedElem = [...selectedElem.filter((id) => id !== "" && id !== targetId && id.startsWith('des-'))];
+    // console.log('selectedElem->',selectedElem)
+    setTemplateJSON(vParentTemplateJSON);
+    setSelectedElems(selectedElem);
+    setTargetPath(getPathById(MainJson, vParentID));
+    setSelectionFrameSize({});
+    changeMessageConsole(`Выбран объект ${vParentID}`);
   }
 
   function changeTargetId(valueId, targetNode) {
@@ -272,8 +343,12 @@ const Page_Designer = () => {
     /*Вычисляет рамку объеденяющую родительский компонент и всех входящих элементов - здесь не происходит вычисление потомков selectedElems, они вычисляются в другом месте*/
     let minX, minY, maxX, maxY;
     let aX = [],  aY = [];
+    // console.log('targetId->>',targetId)
     if (targetId && (targetId !== "main_object"||targetId !== "des-main_object") && selectedElems) {
+      // console.log('!!! selectedElems',selectedElems)
       selectedElems.forEach((id) => {
+        // console.log('id',id)
+        // console.log('getElementById',document.getElementById(id))
         let vRect = document.getElementById(id).getBoundingClientRect();
         aX.push(vRect.x);
         aX.push(vRect.x + vRect.width);
@@ -305,7 +380,7 @@ const Page_Designer = () => {
   useEffect(() => {
     /*вычисляет размеры рамки объекта*/
     /*P.S. надо пропихнуть такое же событие на изменение положение элемента, но пока пусть будет так*/
-    changeSelectionFrame();
+    // changeSelectionFrame();
   }, [MainJson, selectedElems, templateJSON]);
   
   return (
@@ -451,6 +526,25 @@ const Page_Designer = () => {
               viewBox="0 0 16 16"
             >
               <path d="m 13 3 L 6 3 C 0 3 0 13 6 13 H 11 C 16 13 16 5 11 5 H 6 C 2 5 2 11 6 11 H 11 C 14 11 14 7 11 7 H 6 C 5 7 5 8 6 8 H 11 C 13 8 13 10 11 10 h -5 C 3 10 3 6 6 6 H 11 C 15 6 15 12 11 12 H 6 C 1 12 1 4 6 4 H 12 C 13 4 13 3 12 3" />              
+            </svg>
+          </Button>          
+           
+          <Button
+            id="toolbarDisJoinGroupElemButton"
+            // className={mouseMode === "CANDISJOIN" ? `bg-info` : ""}
+            // disabled={mouseMode === "CANDISJOIN" ? false : true}
+            onClick={() => {disJoinObjectsButton()}}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              fill="currentColor"
+              class="bi bi-hand-index-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="m 13 3 L 6 3 C 0 3 0 13 6 13 H 11 C 16 13 16 5 11 5 H 6 C 2 5 2 11 6 11 H 11 C 14 11 14 7 11 7 H 6 C 5 7 5 8 6 8 H 11 C 13 8 13 10 11 10 h -5 C 3 10 3 6 6 6 H 11 C 15 6 15 12 11 12 H 6 C 1 12 1 4 6 4 H 12 C 13 4 13 3 12 3" />          
+              <path d="m 12 11 L 9 8 L 12 5 A 1 1 0 0 0 10 3 L 7 6 L 4 3 A 1 1 0 0 0 2 5 L 5 8 L 2 11 A 1 1 0 0 0 4 13 L 7 10 L 10 13 A 1 1 0 0 0 12 11" />                    
             </svg>
           </Button>
            

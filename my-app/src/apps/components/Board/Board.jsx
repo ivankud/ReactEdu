@@ -6,19 +6,9 @@ import {Content, BoardGrid} from './../';
 const Board = (props) => {
     // let arr = Array(2).fill(Array(2).fill(0));
     const changeTargetId= props.changeTargetId;
-    let arr = props.grid;
+    // let arr = props.grid;
     const width = 1920;
     const height = 1080;
-
-
-    const onKeyDownElem = (event)=>{    
-        console.log('onKeyDownElem_123123')
-    }
-    const onDoubleClick = (event)=>{
-        console.log('onDoubleClick_123123')
-    }
-    
-
 
     return (
         <div style={{

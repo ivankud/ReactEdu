@@ -8,6 +8,8 @@ import {objectReverse} from './JsonUtils_objectReverse'
 import { getJSONpropertyType } from './JsonUtils_getJSONpropertyType'
 import { joinChildrenObjectsInDiv } from './JsonUtils_joinChildrenObjectsInDiv'
 import { getIdByPath } from './JsonUtils_getIdByPath'
+import { getIdParentByPath } from './JsonUtils_getIdParentByPath'
+
 
 export { 
     getElementById,
@@ -17,5 +19,6 @@ export {
     objectReverse,
     getJSONpropertyType,
     joinChildrenObjectsInDiv,
-    getIdByPath
+    getIdByPath,
+    getIdParentByPath,
 }

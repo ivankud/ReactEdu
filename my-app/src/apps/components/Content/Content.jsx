@@ -85,15 +85,15 @@ const Content = (props) => {
       render_object.id === props.targetId,
       props.selectedElems
     );
-    const onKeyDownElem = (event)=>{    
+    const onKeyDownElem = (event) => {
       document.getElementById(render_object.id).blur();
       event.stopPropagation();
-      props.changeTargetAddIdOnHeap(render_object.id,event.currentTarget,"")
-    }
-    const onDoubleClick = (event)=>{
+      props.changeTargetAddIdOnHeap(render_object.id, event.currentTarget, "");
+    };
+    const onDoubleClick = (event) => {
       event.stopPropagation();
       changeSelectedID(event.target.id, event.currentTarget);
-    }
+    };
 
     if (checkObject) {
       switch (String(render_object.tag).toLowerCase()) {
@@ -105,10 +105,10 @@ const Content = (props) => {
               key={Math.floor(Math.random() * 2000)}
               style={style}
               onDoubleClick={(event) => {
-                onDoubleClick(event)
+                onDoubleClick(event);
               }}
-              onKeyDown={(event)=>{
-                onKeyDownElem(event)
+              onKeyDown={(event) => {
+                onKeyDownElem(event);
               }}
               onMouseOver={(event) => {
                 event.stopPropagation();
@@ -143,8 +143,12 @@ const Content = (props) => {
               // key = {render_object.id}
               key={Math.floor(Math.random() * 2000)}
               style={style}
-              onDoubleClick={(event) => {onDoubleClick(event)}}   
-              onKeyDown={(event)=>{onKeyDownElem(event)}}
+              onDoubleClick={(event) => {
+                onDoubleClick(event);
+              }}
+              onKeyDown={(event) => {
+                onKeyDownElem(event);
+              }}
             >
               {render_object.content ?? ``}
               {getChildren(
@@ -170,15 +174,28 @@ const Content = (props) => {
                 id={render_object.id}
                 style={style}
                 onDoubleClick={(event) => {
-                  console.log('div0')
-                  onDoubleClick(event)}
-                }   
-                onKeyDown={(event)=>{onKeyDownElem(event)}}
+                  console.log("div0");
+                  onDoubleClick(event);
+                }}
+                onKeyDown={(event) => {
+                  onKeyDownElem(event);
+                }}
               >
+                <div
+                  style={{
+                    pointerEvents: "none",
+                    width: style.width,
+                    height: style.height,
+                    position: "absolute",
+                    top: "0px",
+                    left: "0px",
+                    "z-index": 33,
+                  }}
+                >
+                  {Table(render_object)}
+                </div>
                 {props.data_objects.id === props.targetId && (
                   <div
-                  
-                    onDoubleClick={(event) => {console.log('div1')}}   
                     style={{
                       pointerEvents: "none",
                       background: "pink",
@@ -192,22 +209,6 @@ const Content = (props) => {
                     }}
                   />
                 )}
-                <div
-                  onDoubleClick={(event) => {console.log('div2')}}   
-                  style={{                    
-                    pointerEvents: "none",
-                    width: style.width,
-                    height: style.height,
-                    position: "absolute",
-                    top: "0px",
-                    left: "0px",
-                     "z-index": 33,
-                  }}
-                > 
-                  {Table(render_object)}
-                 </div>
-                 
-                
               </div>
             );
           } else
@@ -217,8 +218,12 @@ const Content = (props) => {
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onDoubleClick={(event) => {onDoubleClick(event)}}
-                onKeyDown={(event)=>{onKeyDownElem(event)}}
+                onDoubleClick={(event) => {
+                  onDoubleClick(event);
+                }}
+                onKeyDown={(event) => {
+                  onKeyDownElem(event);
+                }}
               >
                 <div
                   style={{
@@ -251,29 +256,31 @@ const Content = (props) => {
 
         case "input":
           elem = (
-            <input            
+            <input
               tabIndex={0}
               id={render_object.id}
               style={style}
               defaultValue={render_object.content ?? ""}
-              onDoubleClick={(event) => {onDoubleClick(event)}}   
-              onKeyDown={(event)=>{onKeyDownElem(event)}}
+              onDoubleClick={(event) => {
+                onDoubleClick(event);
+              }}
+              onKeyDown={(event) => {
+                onKeyDownElem(event);
+              }}
             />
           );
           break;
         case "label":
           elem = (
-            <p            
+            <p
               tabIndex={0}
               id={render_object.id}
               style={style}
               onDoubleClick={(event) => {
-                console.log('p>>onclick')
-                onDoubleClick(event)}
-              }   
-              onKeyDown={(event)=>{                
-                console.log('p>>onKeyDown')
-                onKeyDownElem(event)
+                onDoubleClick(event);
+              }}
+              onKeyDown={(event) => {
+                onKeyDownElem(event);
               }}
             >
               {render_object.content ?? ""}
@@ -291,7 +298,7 @@ const Content = (props) => {
     props.changeTargetId,
     props.selectionFrameSize
   );
-  let style={};
+  let style = {};
   if (props.data_objects.id === props.targetId)
     style = {
       position: "absolute",
@@ -303,8 +310,8 @@ const Content = (props) => {
       width: props.selectionFrameSize.width,
       height: props.selectionFrameSize.height,
     };
-    console.log('resize mode style',style)
-    console.log('props.selectionFrameSize',props.selectionFrameSize)
+  console.log("resize mode style", style);
+  console.log("props.selectionFrameSize", props.selectionFrameSize);
   return (
     <div>
       {props.data_objects.id === props.targetId &&
@@ -314,15 +321,12 @@ const Content = (props) => {
             data_objects={props.data_objects}
             style={style}
             changeTemplateJSON={props.changeTemplateJSON}
-            
           />
-        ) : 
-            props.mouseMode === "HANDLE" ? 
-                <div style={props.data_objects.style} />
-                : 
-                ``
-        )
-       }
+        ) : props.mouseMode === "HANDLE" ? (
+          <div style={props.data_objects.style} />
+        ) : (
+          ``
+        ))}
       {elem}
     </div>
   );

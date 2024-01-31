@@ -8,6 +8,7 @@ import
     getJSONpropertyType,
     joinChildrenObjectsInDiv,
     getIdByPath,
+    getIdParentByPath,
 } from "./JsonUtils";
 
 import {
@@ -41,6 +42,7 @@ import {
 export {
     /*методы для работы с json*/
     getIdByPath,
+    getIdParentByPath,
     joinChildrenObjectsInDiv,
     isValidJson,
     getElementById,
