@@ -267,6 +267,8 @@ const Page_Designer = () => {
   }
 
   const changeSelectionFrame = () => {
+    // console.log('LABEL changeSelectionFrame')
+    // console.log('LABEL selectedElems->>')
     /*Вычисляет рамку объеденяющую родительский компонент и всех входящих элементов - здесь не происходит вычисление потомков selectedElems, они вычисляются в другом месте*/
     let minX, minY, maxX, maxY;
     let aX = [],  aY = [];
@@ -611,15 +613,6 @@ const Page_Designer = () => {
       <br/>
       <br/>
       <br/>      
-      {/* <input      
-        id="des-12312321323"
-        onKeyDown={(event)=>{
-            console.log("onKeyDown")
-            event.stopPropagation();
-            document.getElementById('des-12312321323').blur();
-          }
-        }
-      /> */}
     </div>
   );
 };

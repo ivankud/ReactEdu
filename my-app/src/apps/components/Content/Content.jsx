@@ -138,6 +138,7 @@ const Content = (props) => {
         case "button":
           elem = (
             <button
+              tabIndex={0}
               id={render_object.id}
               // key = {render_object.id}
               key={Math.floor(Math.random() * 2000)}
@@ -164,42 +165,55 @@ const Content = (props) => {
           if (Object.hasOwn(render_object, "model")) {
             elem = (
               <div
+                tabIndex={33}
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
-                onDoubleClick={(event) => {onDoubleClick(event)}}   
+                onDoubleClick={(event) => {
+                  console.log('div0')
+                  onDoubleClick(event)}
+                }   
                 onKeyDown={(event)=>{onKeyDownElem(event)}}
               >
-                <div
-                  style={{
-                    width: style.width,
-                    height: style.height,
-                    position: "absolute",
-                    top: "0px",
-                    left: "0px",
-                  }}
-                >
-                  {Table(render_object)}
-                </div>
                 {props.data_objects.id === props.targetId && (
                   <div
+                  
+                    onDoubleClick={(event) => {console.log('div1')}}   
                     style={{
+                      pointerEvents: "none",
                       background: "pink",
                       width: style.width,
                       height: style.height,
                       position: "absolute",
                       top: "0px",
                       left: "0px",
-                      "z-index": 33,
+                      "z-index": 34,
                       opacity: 0.33,
                     }}
-                  ></div>
+                  />
                 )}
+                <div
+                  onDoubleClick={(event) => {console.log('div2')}}   
+                  style={{                    
+                    pointerEvents: "none",
+                    width: style.width,
+                    height: style.height,
+                    position: "absolute",
+                    top: "0px",
+                    left: "0px",
+                     "z-index": 33,
+                  }}
+                > 
+                  {Table(render_object)}
+                 </div>
+                 
+                
               </div>
             );
           } else
             elem = (
               <div
+                tabIndex={0}
                 className="ag-theme-alpine"
                 id={render_object.id}
                 style={style}
@@ -237,7 +251,8 @@ const Content = (props) => {
 
         case "input":
           elem = (
-            <input
+            <input            
+              tabIndex={0}
               id={render_object.id}
               style={style}
               defaultValue={render_object.content ?? ""}
@@ -248,7 +263,8 @@ const Content = (props) => {
           break;
         case "label":
           elem = (
-            <p
+            <p            
+              tabIndex={0}
               id={render_object.id}
               style={style}
               onDoubleClick={(event) => {
@@ -275,7 +291,7 @@ const Content = (props) => {
     props.changeTargetId,
     props.selectionFrameSize
   );
-  let style;
+  let style={};
   if (props.data_objects.id === props.targetId)
     style = {
       position: "absolute",
@@ -287,6 +303,8 @@ const Content = (props) => {
       width: props.selectionFrameSize.width,
       height: props.selectionFrameSize.height,
     };
+    console.log('resize mode style',style)
+    console.log('props.selectionFrameSize',props.selectionFrameSize)
   return (
     <div>
       {props.data_objects.id === props.targetId &&
