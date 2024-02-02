@@ -170,13 +170,14 @@ const Page_Designer = () => {
     console.log('path->>',vPath)
     console.log('check path->>',getIdByPath(MainJson,vPath))
     let vParentID = getIdParentByPath(MainJson,vPath);
+    console.log('vParentID',vParentID)
     changeTargetId(vParentID);  
     let vParentTemplateJSON = getElementById(MainJson, vParentID);
     console.log('vParentTemplateJSON',vParentTemplateJSON)
     let vParentChildren = vParentTemplateJSON.children.filter(ch=>ch.id !== targetId);
     let vStyle = templateJSON.style;
     let vChildren = JSON.parse(JSON.stringify(templateJSON.children));
-    vChildren.forEach(ch=>vParentChildren.push(ch))
+    // vChildren.forEach(ch=>vParentChildren.push(ch))
 
     vChildren.forEach(ch=>{
       
@@ -217,11 +218,13 @@ const Page_Designer = () => {
     })
     console.log('filtered children after disJoin')
     console.log('vParentChildren',vParentChildren)
-    vParentTemplateJSON.children=JSON.parse(JSON.stringify(vChildren))
+    vParentTemplateJSON.children=JSON.parse(JSON.stringify(vParentChildren))
     let selectedElem = [];
     catchByObject(document.getElementById(vParentID), "id", selectedElem);
+    console.log('targetId->',targetId)
     selectedElem = [...selectedElem.filter((id) => id !== "" && id !== targetId && id.startsWith('des-'))];
-    // console.log('selectedElem->',selectedElem)
+    console.log('selectedElem->',selectedElem)
+    console.log('vParentTemplateJSON->',vParentTemplateJSON)
     setTemplateJSON(vParentTemplateJSON);
     setSelectedElems(selectedElem);
     setTargetPath(getPathById(MainJson, vParentID));

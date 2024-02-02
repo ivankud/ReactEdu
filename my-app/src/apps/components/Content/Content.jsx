@@ -310,8 +310,8 @@ const Content = (props) => {
       width: props.selectionFrameSize.width,
       height: props.selectionFrameSize.height,
     };
-  console.log("resize mode style", style);
-  console.log("props.selectionFrameSize", props.selectionFrameSize);
+  // console.log("resize mode style", style);
+  // console.log("props.selectionFrameSize", props.selectionFrameSize);
   return (
     <div>
       {props.data_objects.id === props.targetId &&
