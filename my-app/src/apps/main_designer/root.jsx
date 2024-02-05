@@ -7,6 +7,7 @@ import {
 import {
   Page_Designer,
   Page_test_env,
+  Page_test_env2,
   Page_example,
   Page_generator
 } from "./sheets";
@@ -36,6 +37,11 @@ const router_list = [
     path: "/page_test",
     element: <Page_test_env/>,
     caption: 'Тестовая страница',
+  },
+  {
+    path: "/page_test_json",
+    element: <Page_test_env2/>,
+    caption: 'Отображение страницы из JSON',
   },
 ];
 
