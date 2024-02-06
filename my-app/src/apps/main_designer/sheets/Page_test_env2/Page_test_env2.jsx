@@ -36,6 +36,7 @@ import styles from "./Page_test_env2.module.css";
 
 const Page_test_env2 = () => {
   const [state, setState] = useState({count:1});
+  console.log(this)
   // const vstate = state;
   
   // let funk = //`${funkBody}`
@@ -45,26 +46,27 @@ const Page_test_env2 = () => {
     // "return function (name) { return `Hello, ${state.count}` }",
   // )();
 
-  useEffect(()=>{
-    if(typeof state !== 'undefined'){
+  // useEffect(()=>{
+    // if(typeof state !== 'undefined'){
       // let funkBody = "return function (name) { console.log(123123123123); return `Hello, 1` }";
       // let funk = new Function(funkBody)();
       // console.log('funk->>',funk)   
       // console.log('state->>',state)   
-      // this.funk = this.funk.bind(this);
+      // funk = funk.bind(this);
       // let s = funk();
       // console.log(s)
-    }
-  },[state])
-  // useEffect(()=>{
-  //   console.log('bbb',state)
+    // }
+  // },[state])
+  useEffect(()=>{
+    console.log('bbb',state)
   //   if(typeof state !== 'undefined'){
   //     console.log('..',state)
-  //     let funkBody = "return function (name) { return `Hello, ${state.count}` }";
-  //     let funk = new Function(funkBody)();
-  //     console.log(1)      
-  //   }
-  // },[])
+      let funkBody = "return function (name) { return `Hello, ${state.count}` }";
+      let funk = new Function(funkBody)();
+      const funk1 = funk.bind(this)
+      
+    // }
+  },[])
   return (
     <div id='main_frame' style={{ position: "relative" }}>
       <div>
