@@ -39,6 +39,10 @@ import {
     onlyUnique
 } from './Array';
 
+import {
+    selectAndReadFileFromWindow
+} from './File'
+
 export {
     /*методы для работы с json*/
     getIdByPath,
@@ -72,5 +76,7 @@ export {
     getLabel,
     getTable,
     /*Для работы с массивами↓↓↓↓*/
-    onlyUnique
+    onlyUnique,
+    /*Для работы с файлами*/
+    selectAndReadFileFromWindow,
 }

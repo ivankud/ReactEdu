@@ -109,10 +109,6 @@ let data_objects = {
     ],
 }
 
-// const changeDataObject =(data)=> {
-    // data_objects=data;
-// }
-
 
 
 export default data_objects;
