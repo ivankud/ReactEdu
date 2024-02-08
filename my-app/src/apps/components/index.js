@@ -20,7 +20,7 @@ import ResizableBox from './ResizableBox'
 import TableModelDialog from './TableModelDialog';
 import SwaggerAPITreeNode from './SwaggerAPITreeNode';
 import SwaggerAPITree from './SwaggerAPITree/SwaggerAPITree';
-import Table from './Table';
+import {Table} from './Table';
 import SelectionFrame from './SelectionFrame';
 
 

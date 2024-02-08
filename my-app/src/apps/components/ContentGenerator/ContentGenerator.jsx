@@ -19,25 +19,26 @@ const RenderContent=(render_object)=>{
     if(checkObject && render_object){
         switch(String(render_object.tag).toLowerCase()) {
             case 'div': 
-                elem = getDiv(render_object)
-                break;
+                return getDiv(render_object)
+                // break;
             case 'button':
-                elem = getButton(render_object)
-                break;
+                return getButton(render_object)
+                // break;
             case 'table':
-                elem = getTable(render_object)
-                break;                
+                // console.log('123123123123123123123')
+                return getTable(render_object)
+                // elem = '<div>123123</div>'
+                // break;                
             case 'input':
-                elem = getInput(render_object)
-                break;
+                return getInput(render_object)
+                // break;
             case 'label':
-                elem = getLabel(render_object)
-                break;
+                return getLabel(render_object)
+                // break;
             default:
                 break;
         }
-    }        
-    return elem;
+    }            
 }
 
 

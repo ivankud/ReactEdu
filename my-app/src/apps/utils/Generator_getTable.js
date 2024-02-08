@@ -1,6 +1,67 @@
 import getStyle from "./Generator_getStyle"
 
-export default function getTable(render_object){
+import {TableText} from "../components/Table";
+
+// "../Table";
+
+function getTableFromTableText(render_object){
+    let elem ;
+    let style = getStyle(render_object);
+    // if (Object.hasOwn(render_object, "model")) {
+        elem = //'<div>ssssssssssssssssssss</div>'
+        // (
+        //   <div
+        //     tabIndex={33}
+        //     className="ag-theme-alpine"
+        //     id={render_object.id}
+        //     style={style}
+        //     onDoubleClick={(event) => {
+        //       console.log("div0");
+        //     }}
+        //   >
+            //  <div
+            //   style={{
+            //     pointerEvents: "none",
+            //     width: style.width,
+            //     height: style.height,
+            //     position: "absolute",
+            //     top: "0px",
+            //     left: "0px",
+            //     "z-index": 33,
+            //   }}
+            // >
+            //   {
+                 TableText(render_object)
+            // }
+        //     </div>
+        //   </div>
+        // )
+        ;
+    //   } else
+        // elem = (
+        //   <div
+        //     tabIndex={0}
+        //     className="ag-theme-alpine"
+        //     id={render_object.id}
+        //     style={style}
+        //   >
+        //     <div
+        //       style={{
+        //         width: style.width,
+        //         height: style.height,
+        //         position: "absolute",
+        //         top: "0px",
+        //         left: "0px",
+        //       }}
+        //     >
+            //   {Table(render_object)}
+        //     </div>
+        //   </div>
+        // );
+        return elem;
+}
+   
+ function getTableJustTable/*TRTH*/(render_object){
  if(Object.hasOwn(render_object,'model')){
     return `<table   
                 id="${render_object.id??''}"
@@ -40,3 +101,7 @@ else
             </table>`
 }
 
+const getTable = getTableFromTableText;
+// let getTable = getTableJustTable;
+
+export default getTable;

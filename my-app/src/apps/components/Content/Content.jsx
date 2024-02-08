@@ -7,7 +7,7 @@ import { React } from "react";
 // const RenderContent=(render_object,changeSelectedID)=>{
 
 import ResizableBox from "../ResizableBox";
-import Table from "../Table";
+import {Table} from "../Table";
 
 const getChildren = (
   children,

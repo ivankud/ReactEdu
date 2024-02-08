@@ -1,3 +1,3 @@
-import Table from "./Table";
+import {Table, TableText} from "./Table";
 
-export default Table;
+export {Table, TableText};
