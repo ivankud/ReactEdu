@@ -28,12 +28,14 @@ import data_objects  from '../../../../data/jsobject3';
       // console.log('vValue->>')
       // console.log(vValue)
       setJSONContent(JSON.parse(vValue));      
-      // setRenderClass(convertJsonToRenderClass(JSON.parse(vValue)))
+      setRenderClass(convertJsonToRenderClass(JSON.parse(vValue)))
     }
 
     useEffect(()=>{
       // setRenderClass(convertJsonToRenderClass(JSONContent))
-      // setRenderClass(convertJsonToRenderClass(JSONContent))
+      // setRenderClass(''
+        // convertJsonToRenderClass(JSONContent)
+      // )
     },[JSONContent])
     const vContent = JSONContent;
     return (        

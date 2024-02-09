@@ -1,6 +1,7 @@
 let data_objects = {
     "tag": "div",
     "id": "des-main_object",
+    "namePage":"namePage",
     "block": "true",
     "style": {
         "position": "absolute",
@@ -11,6 +12,7 @@ let data_objects = {
         "height": "100%"
     },
     "content": "",
+	"context": [],
     "children": []
 }
 

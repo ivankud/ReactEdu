@@ -25,9 +25,7 @@ const RenderContent=(render_object)=>{
                 return getButton(render_object)
                 // break;
             case 'table':
-                // console.log('123123123123123123123')
                 return getTable(render_object)
-                // elem = '<div>123123</div>'
                 // break;                
             case 'input':
                 return getInput(render_object)

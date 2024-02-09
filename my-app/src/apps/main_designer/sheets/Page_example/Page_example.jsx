@@ -1,23 +1,20 @@
-import React from "react";
+import { AgGridReact } from "ag-grid-react";
 
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+
+import React from "react";
 class Page_example extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selRow: {
-        name: "Абу",
-        sdescription: "Человек прямоходящий",
-        age: 42,
-      },
-      vNumber: 33,
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <div style={{ position: "relative" }}>
         <div
-          id="main_object"
+          id="des-main_object"
           style={{
             position: "absolute",
             left: "0px",
@@ -27,70 +24,97 @@ class Page_example extends React.Component {
             height: "100%",
           }}
         >
-          <input
-            id="InputName"
+          <div
             style={{
               position: "absolute",
-              left: "26px",
-              top: "67px",
-              width: "75px",
-              height: "30px",
-              borderColor: "#ffffff",
+              left: "85.5px",
+              top: "529.25px",
+              width: "750px",
+              height: "400px",
             }}
-            placeholder={"Твое Имя"}
-            defaultValue={"Твое Имя"}
-            value={this.state.selRow["name"]}
-          />
-          <input
-            id="InputDescription"
+            className={"ag-theme-quartz"}
+          >
+            <AgGridReact
+              rowData={[
+                {
+                  field1: "Строка1.id",
+                  field2: "Строка1.scaption",
+                  field3: "Строка1.smnemocode",
+                },
+                {
+                  field1: "Строка2.id",
+                  field2: "Строка2.scaption",
+                  field3: "Строка2.smnemocode",
+                },
+                {
+                  field1: "Строка3.id",
+                  field2: "Строка3.scaption",
+                  field3: "Строка3.smnemocode",
+                },
+              ]}
+              columnDefs={[
+                { field: "field1" },
+                { field: "field2" },
+                { field: "field3" },
+              ]}
+            ></AgGridReact>
+          </div>
+          <div
+            id="des-Div_1"
             style={{
+              width: "377px",
+              height: "217px",
+              borderColor: "pink",
+              borderStyle: "solid",
+              borderWidth: "1px",
               position: "absolute",
-              left: "152px",
-              top: "65px",
-              width: "181px",
-              height: "32px",
-              borderColor: "#ffffff",
-            }}
-            placeholder={"Описание"}
-            defaultValue={"Описание"}
-            value={this.state.selRow["sdescription"]}
-          />
-          <input
-            id="InputAge"
-            style={{
-              position: "absolute",
-              left: "387px",
-              top: "68px",
-              width: "75px",
-              height: "30px",
-              borderColor: "#ffffff",
-            }}
-            placeholder={"Возраст"}
-            defaultValue={"Возраст"}
-            onChange={(event) => {
-              let selRow = this.state.selRow;
-              selRow["age"] = event.target.value;
-              this.setState({ selRow: selRow });
-            }}
-            value={this.state.selRow["age"]}
-          />
-          <button
-            id="childAgePlus"
-            key="childAgePlus"
-            style={{
-              position: "absolute",
-              background: "red",
-              left: "523px",
-              top: "68px",
-              width: "100px",
-              height: "30px",
-            }}
-            onClick={() => {
-              console.log("123123123123");
+              left: "88px",
+              top: "31px",
             }}
           >
-            AgePlus1
-          </button>
+            Контейнер
+            <button
+              id="des-ButtonType2_1"
+              key="des-ButtonType2_1"
+              style={{
+                position: "absolute",
+                left: "127px",
+                top: "187px",
+                backgroundColor: "red",
+                width: "75px",
+                height: "30px",
+              }}
+            >
+              Кнопка2
+            </button>
+            <input
+              id="des-Input_1"
+              style={{
+                position: "absolute",
+                left: "0px",
+                top: "0px",
+                width: "75px",
+                height: "30px",
+              }}
+              placeholder={"Поле ввода"}
+              defaultValue={"Поле ввода"}
+              value={this.state.undefined}
+            />
+            <button
+              id="des-Button_1"
+              key="des-Button_1"
+              style={{
+                position: "absolute",
+                left: "302px",
+                top: "55px",
+                backgroundColor: "green",
+                width: "75px",
+                height: "30px",
+              }}
+            >
+              Кнопка1
+            </button>
+          </div>
         </div>
       </div>
     );

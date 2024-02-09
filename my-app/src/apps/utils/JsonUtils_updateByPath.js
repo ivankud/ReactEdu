@@ -7,8 +7,11 @@
  */
 
 export function updateObject(data, OriginalPath, value) {
-    // console.log('data',data,'path', OriginalPath, 'value',value)
+    console.log('data',data)
+    console.log('path', OriginalPath)
+    console.log('value',value)
     var pathArray = OriginalPath.split(">");
+    console.log(pathArray);
     var pointer = data; // points to the current nested object
     for (var i = 0, len = pathArray.length; i < len; i++) {
         var path = pathArray[i];
@@ -19,7 +22,12 @@ export function updateObject(data, OriginalPath, value) {
                 pointer = pointer[path];
             }
         } else {
-            console.log('error path:',OriginalPath)
+            if(path==='') {
+                data = value;
+            }
+            else {
+                console.log('error path:',OriginalPath)
+            }
         }
     }
     // console.log('updateObject_result',JSON.stringify(data,null,4))
