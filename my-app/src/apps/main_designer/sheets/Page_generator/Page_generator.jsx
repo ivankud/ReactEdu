@@ -4,6 +4,11 @@ import { Button } from "../../../components";
 
 import { saveAs } from "file-saver";
 
+// import beautify_js from 'js-beautify';
+
+import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
+// import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
+
 import {
   convertJsonToRenderClass,
   selectAndReadFileFromWindow, // открытие окна для выбора файла и считывания содердимого JSON
@@ -14,10 +19,13 @@ import styles from "./Page_generator.module.css";
 import data_objects from "../../../../data/jsobject3";
 
 const Page_generator = () => {
-  const [JSONContent, setJSONContent] = useState(data_objects); // контент полученный из файла в нем хранится JSON для генерации страницы
+  const textRef = React.useRef();
+  const [JSONContent, setJSONContent] = useState(/*data_objects*/ undefined); // контент полученный из файла в нем хранится JSON для генерации страницы
   const [renderClass, setRenderClass] = useState(
-    convertJsonToRenderClass(data_objects)
+    // convertJsonToRenderClass(data_objects)
+    null
   );
+  const [file, setterFile] = useState(null);
 
   const setJSONContentFromFile = (value) => {
     /*прочтение контента из файла и установка в шаблон*/
@@ -27,7 +35,11 @@ const Page_generator = () => {
     // console.log('vValue->>')
     // console.log(vValue)
     setJSONContent(JSON.parse(vValue));
-    setRenderClass(convertJsonToRenderClass(JSON.parse(vValue)));
+    let vRenderClass = convertJsonToRenderClass(JSON.parse(vValue))
+    // var beautify = require('js-beautify/js').js;
+    // vRenderClass = beautify(vRenderClass, { indent_size: 4, space_in_empty_paren: false })
+    // vRenderClass = beautify_js.beautify(vRenderClass)
+    setRenderClass(vRenderClass);
   };
 
   useEffect(() => {
@@ -36,6 +48,13 @@ const Page_generator = () => {
     // convertJsonToRenderClass(JSONContent)
     // )
   }, [JSONContent]);
+
+  useEffect(() => {
+    if (textRef.current) {
+      const obj = new SelectionText(textRef.current);
+      console.log("obj:", obj);
+    }
+  }, []);
 
   function dragElement(element, direction) {
     var md; // remember mouse down info
@@ -79,7 +98,7 @@ const Page_generator = () => {
 
   useEffect(() => {
     dragElement(document.getElementById("separator"), "H");
-  });
+  }, []);
 
   return (
     <div>
@@ -91,7 +110,7 @@ const Page_generator = () => {
           <Button
             className="w-100"
             onClick={() => {
-              selectAndReadFileFromWindow(setJSONContentFromFile);
+              selectAndReadFileFromWindow(setJSONContentFromFile,setterFile);
             }}
           >
             Открыть файл
@@ -109,19 +128,36 @@ const Page_generator = () => {
           <Button // кнопка сохранения сгенерированного кода в файл
             id="saveButtonForGenCode"
             className="w-100"
+            disabled={file?false:true}
             onClick={() => {
-              var blob = new Blob([renderClass], {
-                type: "text/plain;charset=utf-8",
-              });
-              saveAs(blob, `${data_objects.namePage}.jsx`);
+              if(file){
+                var blob = new Blob([renderClass], {
+                  type: "text/plain;charset=utf-8",
+                });
+                saveAs(blob, `${file["name"]}.jsx`);
+              }
             }}
           >
             Сохранить
           </Button>
-          <textarea
+          {/* <textarea
             id="genCodeTextarea"
             value={renderClass}
             style={{ height: "90vh", width: "100%" }}
+          /> */}        
+
+          <CodeEditor
+            value={renderClass}
+            ref={textRef}
+            language="js"
+            placeholder="Please enter JS code."
+            onChange={(evn) => setRenderClass(evn.target.value)}
+            padding={40}
+            style={{
+              fontFamily:
+                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+              fontSize: 12,
+            }}
           />
         </div>
       </div>

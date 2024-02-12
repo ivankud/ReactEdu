@@ -4,7 +4,7 @@ export default function getLabel(render_object){
 return `<p id="${render_object.id??''}"
     style={${getStyle(render_object)}}
 >
-{${render_object.content??''}}
+${render_object.content??''}
 </p>`
 }
 
