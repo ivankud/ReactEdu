@@ -9,9 +9,11 @@ import { getJSONpropertyType } from './JsonUtils_getJSONpropertyType'
 import { joinChildrenObjectsInDiv } from './JsonUtils_joinChildrenObjectsInDiv'
 import { getIdByPath } from './JsonUtils_getIdByPath'
 import { getIdParentByPath } from './JsonUtils_getIdParentByPath'
-
+import { objectGetFlatList } from './JsonUtils_objectGetFlatList'
+import { objectGetTagsByList } from './JsonUtils_objectGetTagsByList';
 
 export { 
+    
     getElementById,
     isValidJson,
     updateObject,
@@ -21,4 +23,6 @@ export {
     joinChildrenObjectsInDiv,
     getIdByPath,
     getIdParentByPath,
+    objectGetFlatList,
+    objectGetTagsByList,
 }

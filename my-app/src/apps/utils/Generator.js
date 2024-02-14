@@ -13,6 +13,7 @@ import alignObjectsHorizontal from "./Generator_alignObjectsHorizontal";
 import alignObjectsFullWidth from "./Generator_alignObjectsFullWidth";
 import alignObjectsFullHeight from './Generator_alignObjectsFullHeight';
 import joinGroupObjects from "./Generator_joinGroupObjects";
+import getImportByJSON from "./Generator_getImportByJSON";
 
 export {
     prettyRenderText,
@@ -30,4 +31,5 @@ export {
     alignObjectsFullWidth,
     alignObjectsFullHeight,
     joinGroupObjects,
+    getImportByJSON,
 }

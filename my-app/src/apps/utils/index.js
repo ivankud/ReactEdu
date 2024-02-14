@@ -32,7 +32,8 @@ import {
     alignObjectsVertical,
     alignObjectsFullWidth,
     alignObjectsFullHeight,
-    joinGroupObjects
+    joinGroupObjects,
+    getImportByJSON,
 } from './Generator'
 
 import {
@@ -75,6 +76,7 @@ export {
     getInput,
     getLabel,
     getTable,
+    getImportByJSON,
     /*Для работы с массивами↓↓↓↓*/
     onlyUnique,
     /*Для работы с файлами*/
