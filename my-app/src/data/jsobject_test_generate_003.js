@@ -1,7 +1,7 @@
 {
     "tag": "div",
     "id": "des-main_object",
-    "namePage": "namePage",
+    "namePage": "namePage23123123123",
     "block": "true",
     "style": {
         "position": "absolute",
