@@ -6,7 +6,7 @@
         {
             "selRow": {
                 "name": "Абу111",
-                "sdescription": "Человек прямохо23123дящи1231231233123123123123й",
+                "sdescription": "Человек прямоходящий",
                 "age": 42
             }
         },
@@ -45,7 +45,7 @@
                 },
                 {
                     "name": "field3",
-                    "field": "smnemocode"
+                    "field": "smnemocodeуцйуйцу"
                 }
             ],
             "content": "Таблица"

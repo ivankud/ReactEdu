@@ -9,7 +9,8 @@ import {
   Page_test_env,
   Page_test_env2,
   Page_example,
-  Page_generator
+  Page_generator,
+  Page_test_File,
 } from "./sheets";
 
 const router_list = [
@@ -42,6 +43,12 @@ const router_list = [
     path: "/page_test_json",
     element: <Page_test_env2/>,
     caption: 'Отображение страницы из JSON',
+  },
+  
+  {
+    path: "/Page_test_File",
+    element: <Page_test_File/>,
+    caption: 'Работа с файловой системой',
   },
 ];
 

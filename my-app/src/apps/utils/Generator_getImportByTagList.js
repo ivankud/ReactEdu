@@ -1,6 +1,10 @@
 
-export function getImportByTagList(render_object){
+export function getImportByTagList(tagList){
+    let 
+    tagList.forEach(elem=>{
 
+    })
+    return ''
 }
 
 export default getImportByTagList;
