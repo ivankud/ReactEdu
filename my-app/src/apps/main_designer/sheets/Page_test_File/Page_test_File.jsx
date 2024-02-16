@@ -78,7 +78,7 @@ import { FolderListWrapper } from "../../../components";
               const directoryHandle = await window.showDirectoryPicker();
               // console.log(directoryHandle)
               setDirectory(directoryHandle)
-              console.log("Файлы в папке↓↓↓↓");
+              console.log("Файлы и папки в папке↓↓↓↓");
               for await (const entry of directoryHandle.values()) {
                 // const file = await entry.getFile();
                 // const contents = await file.text();
