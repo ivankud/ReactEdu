@@ -22,6 +22,7 @@ import SwaggerAPITreeNode from './SwaggerAPITreeNode';
 import SwaggerAPITree from './SwaggerAPITree/SwaggerAPITree';
 import {Table} from './Table';
 import SelectionFrame from './SelectionFrame';
+import FolderListWrapper from './FolderListWrapper';
 
 
 export {
@@ -48,5 +49,6 @@ export {
     SwaggerAPITree,
     SwaggerAPITreeNode,
     Table,
-    SelectionFrame
+    SelectionFrame,
+    FolderListWrapper,
 };

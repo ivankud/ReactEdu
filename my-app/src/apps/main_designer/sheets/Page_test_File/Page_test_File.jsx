@@ -1,5 +1,7 @@
 import React , { useEffect, useState } from "react";
 
+import { FolderListWrapper } from "../../../components";
+
   const Page_test_File = () => {
     // const MainJson = data_objects
     const [fileHandle, setFileHandle] = useState(null)
@@ -7,6 +9,7 @@ import React , { useEffect, useState } from "react";
     const [fileContent, setFileContent] = useState(null)
     const [Directory, setDirectory] = useState(null)
     const [files, setFiles] = useState([])
+    const [folders, setFolders] = useState([])
     const [targetFile, setTargetFile] = useState([]);
     const [targetFileContent, setTargetFileContent] = useState('')
 
@@ -73,28 +76,39 @@ import React , { useEffect, useState } from "react";
           <button
             onClick={async ()=>{              
               const directoryHandle = await window.showDirectoryPicker();
-              console.log(directoryHandle)
+              // console.log(directoryHandle)
               setDirectory(directoryHandle)
               console.log("Файлы в папке↓↓↓↓");
               for await (const entry of directoryHandle.values()) {
                 // const file = await entry.getFile();
                 // const contents = await file.text();
-                console.log(entry.kind, entry.name);
+                console.log('entry->>',entry.kind, entry.name);
               }
               console.log("Файлы в папке↑↑↑↑");
               const promises = [];
               let vFiles = [];
+              let vFolders = [];
               for await (const entry of directoryHandle.values()) {
-                if (entry.kind !== 'file') {
-                  continue;
-                }
+                // console.log('entry->>',entry)
+                // if (entry.kind !== 'file') {
+                //   continue;
+                // }
                 // promises.push(entry.getFile().then((file) => `${file.name} (${file.size})`));
-                vFiles.push(entry);
-                promises.push(entry.getFile().then((file) => file));
+                if (entry.kind === 'file') {
+                  vFiles.push(entry);
+                  // promises.push(entry.getFile().then((file) => file));
+                }
+                else if(entry.kind === 'directory') {
+                  vFolders.push(entry);
+                  // promises.push(entry.getDirectory .then((file) => file));
+                }
               }
+              console.log("vFiles->>",vFiles)
+              console.log("vFolders->>",vFolders)
               setFiles(vFiles)
-              console.log('vFiles->>',vFiles)
-              console.log(await Promise.all(promises));
+              setFolders(vFolders)
+              // console.log('vFiles->>',vFiles)
+              // console.log(await Promise.all(promises));
             }}
           >
             Выберите папку
@@ -123,6 +137,7 @@ import React , { useEffect, useState } from "react";
             })}
           />
         </div>
+        <FolderListWrapper size={{"vertiacalSize":3, "horizontalSize":3}} folderHandler={Directory} nestedFoldersHandlers={folders} nestedFilesHandlers={files}/>
       </div>
     )
   };
