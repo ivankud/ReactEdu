@@ -1,9 +1,15 @@
 import React , { useEffect, useState } from "react";
 
 
-const FolderIcon = (label, horizontalSize, kind) => {
+const FolderIcon = (elem, horizontalSize, kind) => {
+  let label = elem?.name??"Без названия";
   return (
-      <button style={{width:`${100/horizontalSize}%`}}>         
+      <button 
+        style={{width:`${100/horizontalSize}%`}}
+        onClick={()=>{
+          console.log(elem.kind)
+        }}
+      >         
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" 
               width="64"
@@ -34,9 +40,11 @@ function GetListFolderAndFiles(size, folders, files){
     let vListTMP = []
     let vSliceList = ListFolderAndLists.slice(counterLine*horizontalSize,counterLine*horizontalSize+horizontalSize)
     vSliceList.forEach(listElem=>{
-      vListTMP.push(FolderIcon(listElem['name'],horizontalSize, listElem.kind))
+      vListTMP.push(FolderIcon(listElem,horizontalSize, listElem.kind))
     })    
-    let vLine = <div style={{display:"inline-block",  width:'100%'}}>
+    let vLine = <div 
+                  style={{display:"inline-block",  width:'100%'}} 
+                >
                   {vListTMP.map((elem)=>elem)}
                 </div>
     List.push(vLine)  
@@ -59,7 +67,7 @@ const FolderListWrapper = (props) => {
     console.log('useEffect->>',props)
   }, [props])
   return (
-    <div className="flex-1 p-1" style ={{borderColor:"#f0ffff",backgroundColor:"#f0ffff", borderStyle:"groove", width:'100%'}}>
+    <div className="flex-1 p-1" style ={{borderColor:"#f0ffff",backgroundColor:"#f0ffff", borderStyle:"groove", width:'100%', height: "100%"}}>
       {GetListFolderAndFiles(size, foldersHandler, filesHandler)}
     </div>
   )
