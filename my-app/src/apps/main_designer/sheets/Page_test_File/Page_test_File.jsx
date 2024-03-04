@@ -4,7 +4,7 @@ import { FolderListWrapper } from "../../../components";
 
 const Page_test_File = () => {
   // const MainJson = data_objects
-  const [fileHandle, setFileHandle] = useState(null);
+  const [fileHandle, setFileHandle] = useState(null); 
   const [file, setFile] = useState(null);
   const [fileContent, setFileContent] = useState(null);
   const [Directory, setDirectory] = useState(null);
@@ -31,39 +31,49 @@ const Page_test_File = () => {
     argSetFolders,
     argSetDiretories
   ) => {
+    const vFiles = [];
+    const vFolders = [];
+    let vDirectories = Directories??[];
     // console.log("Файлы и папки в папке↓↓↓↓");
-    for await (const entry of argDirectoryHandler.values()) {
-      // const file = await entry.getFile();
-      // const contents = await file.text();
-      // console.log('entry->>',entry.kind, entry.name);
-    }
-    // console.log("Файлы в папке↑↑↑↑");
-    // const promises = [];
-    let vFiles = [];
-    let vFolders = [];
-    let vDirectories = Directories;
-    for await (const entry of argDirectoryHandler.values()) {
-      // console.log('entry->>',entry)
-      // if (entry.kind !== 'file') {
-      //   continue;
-      // }
-      // promises.push(entry.getFile().then((file) => `${file.name} (${file.size})`));
-      if (entry.kind === "file") {
-        vFiles.push(entry);
-        // promises.push(entry.getFile().then((file) => file));
-      } else if (entry.kind === "directory") {
-        vFolders.push(entry);
-        // promises.push(entry.getDirectory .then((file) => file));
-      }
-    }
-    // console.log("vFiles->>",vFiles)
-    // console.log("vFolders->>",vFolders)
-    vDirectories.push(argDirectoryHandler);
-    argSetDirectory(argDirectoryHandler);
-    argSetFiles(vFiles);
-    argSetFolders(vFolders);
-    argSetDiretories(vDirectories)
+    selectFolder(argDirectoryHandler,
+      argSetDirectory,
+      argSetFiles,
+      argSetFolders,
+      argSetDiretories,
+      vFiles,
+      vFolders,
+      vDirectories
+      )    
   };
+
+  const selectFolder = async (  argDirectoryHandler,
+    argSetDirectory,
+    argSetFiles,
+    argSetFolders,
+    argSetDiretories,
+    argFlies,
+    argFolders,
+    argDirectories
+    )=>{
+      const flies = argFlies ??[];
+      const folders = argFolders ?? [];
+      const directories = argDirectories ?? [];
+      for await (const entry of argDirectoryHandler.values()) {
+        if (entry.kind === "file") {
+          flies.push(entry);
+        } else if (entry.kind === "directory") {
+          folders.push(entry);
+        }
+      }
+      // console.log("vFiles->>",vFiles)
+      // console.log("vFolders->>",vFolders)
+      // console.log('argDirectoryHandler->>',argDirectoryHandler)
+      directories ? directories.push(argDirectoryHandler): Directories.push(argDirectoryHandler);
+      argSetDirectory ? argSetDirectory(argDirectoryHandler) : setDirectory(argDirectoryHandler);
+      argSetFiles ? argSetFiles(flies) : setFiles(flies)
+      argSetFolders ? argSetFolders(folders) : setFolders(folders);
+      argSetDiretories ? argSetDiretories(directories) : setDiretories(directories);
+  }
 
   return (
     <div style={{ display: "inline-block", width: "1000px", height: "700px" }}>
@@ -76,16 +86,19 @@ const Page_test_File = () => {
                 directoryHandle,
                 setDirectory,
                 setFiles,
-                setFolders
+                setFolders,
+                setDiretories
               );
             }}
           >
-            Выберите папку
+            Выберите папку1
           </button>
           <FolderListWrapper
             size={{ vertiacalSize: 3, horizontalSize: 3 }}
             folderHandler={Directory}
+            directories={Directories}
             nestedFoldersHandlers={folders}
+            selectFolder={selectFolder}
             nestedFilesHandlers={files}
             setTargetFile={setTargetFile}
             setTargetFileContent={setTargetFileContent}
@@ -153,20 +166,6 @@ const Page_test_File = () => {
         <br />
         {fileContent}
         <br />
-        <button
-          onClick={async () => {
-            const directoryHandle = await window.showDirectoryPicker();
-            await setNewFolder(
-              directoryHandle,
-              setDirectory,
-              setFiles,
-              setFolders,
-              setDiretories
-            );
-          }}
-        >
-          Выберите папку
-        </button>
         {/* {files.map(
             (fileElem)=>{
               return  <button onClick={async ()=>{

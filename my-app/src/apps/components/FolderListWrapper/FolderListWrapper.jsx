@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from "react";
 
 
-const FolderIcon = (elem, horizontalSize, kind) => {
+const FolderIcon = (elem, horizontalSize, kind, selectFolder) => {
   let label = elem?.name??"Без названия";
   return (
       <button 
@@ -10,7 +10,7 @@ const FolderIcon = (elem, horizontalSize, kind) => {
           console.log(elem.kind)
         }}
       >         
-        <div>
+        <div onClick={()=>{selectFolder(elem)}}>
           <svg xmlns="http://www.w3.org/2000/svg" 
               width="64"
               height="64"
@@ -26,7 +26,7 @@ const FolderIcon = (elem, horizontalSize, kind) => {
   )
 }
 
-function GetListFolderAndFiles(size, folders, files){
+function GetListFolderAndFiles(size, folders, files, selectFolder, directories){
   // console.log('folders->>',folders)
   // console.log('files->>',files)
   let List = []
@@ -36,12 +36,14 @@ function GetListFolderAndFiles(size, folders, files){
   let horizontalSize = size['horizontalSize'];
   // console.log('lenList->',lenList)
   if(lenList===0) return null;
+  
   while (lenList>(counterLine*horizontalSize)) {
     let vListTMP = []
     let vSliceList = ListFolderAndLists.slice(counterLine*horizontalSize,counterLine*horizontalSize+horizontalSize)
     vSliceList.forEach(listElem=>{
-      vListTMP.push(FolderIcon(listElem,horizontalSize, listElem.kind))
-    })    
+      vListTMP.push(FolderIcon(listElem,horizontalSize, listElem.kind, selectFolder))
+    })  
+    // <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 9L14.5 9C16.9853 9 19 11.0147 19 13.5C19 15.9853 16.9853 18 14.5 18H5" stroke="#121923" stroke-width="1.2"></path> <path d="M9 13L5 9L9 5" stroke="#121923" stroke-width="1.2"></path> </g></svg>
     let vLine = <div 
                   style={{display:"inline-block",  width:'100%'}} 
                 >
@@ -49,7 +51,9 @@ function GetListFolderAndFiles(size, folders, files){
                 </div>
     List.push(vLine)  
     counterLine++;
-  } 
+  }
+  
+
   return List.map(elem=>elem);
 }
 
@@ -68,7 +72,7 @@ const FolderListWrapper = (props) => {
   }, [props])
   return (
     <div className="flex-1 p-1" style ={{borderColor:"#f0ffff",backgroundColor:"#f0ffff", borderStyle:"groove", width:'100%', height: "100%"}}>
-      {GetListFolderAndFiles(size, foldersHandler, filesHandler)}
+      {GetListFolderAndFiles(size, foldersHandler, filesHandler, props.selectFolder, props.directories)}
     </div>
   )
 }
