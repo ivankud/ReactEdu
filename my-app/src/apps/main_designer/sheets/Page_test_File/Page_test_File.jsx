@@ -24,6 +24,14 @@ const Page_test_File = () => {
     await writable.close();
   }
 
+  const readFileContent = async(fileHandle)=>{
+    const file = await fileHandle.getFile();
+    const contents = await file.text();
+    console.log('contents->>',contents)
+    setTargetFile(file)
+    setTargetFileContent(contents)
+  }
+
   const setNewFolder = async (
     argDirectoryHandler,
     argSetDirectory,
@@ -53,26 +61,50 @@ const Page_test_File = () => {
     argSetDiretories,
     argFlies,
     argFolders,
-    argDirectories
+    argDirectories,
+    command
     )=>{
-      const flies = argFlies ??[];
-      const folders = argFolders ?? [];
-      const directories = argDirectories ?? [];
-      for await (const entry of argDirectoryHandler.values()) {
-        if (entry.kind === "file") {
-          flies.push(entry);
-        } else if (entry.kind === "directory") {
-          folders.push(entry);
+      console.log("vFiles->>",argFlies)
+      console.log("vFolders->>",argFolders)
+      console.log('argDirectoryHandler->>',argDirectoryHandler)
+      console.log('!!!!selectFolder argDirectories->>',argDirectories)      
+      if(command) {
+        if(command==='back'){
+          const directories = Directories.slice(0,-1)??Directories[0];
+          let targetDirectory = directories[directories.length-1]
+          console.log('targetDirectory->>',targetDirectory)          
+          const flies = [];
+          const folders = [];
+          for await (const entry of targetDirectory.values()) {
+            if (entry.kind === "file") {
+              flies.push(entry);
+            } else if (entry.kind === "directory") {
+              folders.push(entry);
+            }
+          }
+          setFiles(flies)
+          setFolders(folders);
+          setDirectory(targetDirectory);
+          setDiretories(directories);
         }
       }
-      // console.log("vFiles->>",vFiles)
-      // console.log("vFolders->>",vFolders)
-      // console.log('argDirectoryHandler->>',argDirectoryHandler)
-      directories ? directories.push(argDirectoryHandler): Directories.push(argDirectoryHandler);
-      argSetDirectory ? argSetDirectory(argDirectoryHandler) : setDirectory(argDirectoryHandler);
-      argSetFiles ? argSetFiles(flies) : setFiles(flies)
-      argSetFolders ? argSetFolders(folders) : setFolders(folders);
-      argSetDiretories ? argSetDiretories(directories) : setDiretories(directories);
+      else {
+        const flies = argFlies ??[];
+        const folders = argFolders ?? [];
+        const directories = argDirectories ?? Directories ?? [];
+        for await (const entry of argDirectoryHandler.values()) {
+          if (entry.kind === "file") {
+            flies.push(entry);
+          } else if (entry.kind === "directory") {
+            folders.push(entry);
+          }
+        }
+        directories.push(argDirectoryHandler);
+        argSetDirectory ? argSetDirectory(argDirectoryHandler) : setDirectory(argDirectoryHandler);
+        argSetFiles ? argSetFiles(flies) : setFiles(flies)
+        argSetFolders ? argSetFolders(folders) : setFolders(folders);
+        argSetDiretories ? argSetDiretories(directories) : setDiretories(directories);
+      }      
   }
 
   return (
@@ -91,8 +123,9 @@ const Page_test_File = () => {
               );
             }}
           >
-            Выберите папку1
+            Выберите папку
           </button>
+          Путь: {Directories?.map(elem=>elem.name).join('/')??'Папка не выбрана'}
           <FolderListWrapper
             size={{ vertiacalSize: 3, horizontalSize: 3 }}
             folderHandler={Directory}
@@ -102,6 +135,7 @@ const Page_test_File = () => {
             nestedFilesHandlers={files}
             setTargetFile={setTargetFile}
             setTargetFileContent={setTargetFileContent}
+            readFileContent={readFileContent}
           />
         </div>
         <div>
@@ -162,26 +196,9 @@ const Page_test_File = () => {
           Записать в файл
         </button>
         <br />
-        Выбранный файл: {targetFile?.name ?? "Не выбран"}
-        <br />
-        {fileContent}
-        <br />
-        {/* {files.map(
-            (fileElem)=>{
-              return  <button onClick={async ()=>{
-                          const file = await fileElem.getFile();
-                          const contents = await file.text();
-                          console.log('contents->>',contents)
-                          setTargetFile(file)
-                          setTargetFileContent(contents)
-                        }}
-                      >
-                          {fileElem.name}
-                      </button>
-            })
-          } */}
-        <br />
-        <br />
+        {/* Выбранный файл: {targetFile?.name ?? "Не выбран"} */}
+        {/* <br /> */}
+        {/* {fileContent} */}
       </div>
     </div>
   );
