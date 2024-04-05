@@ -23,7 +23,8 @@ import SwaggerAPITree from './SwaggerAPITree/SwaggerAPITree';
 import {Table} from './Table';
 import SelectionFrame from './SelectionFrame';
 import FolderListWrapper from './FolderListWrapper';
-
+// import FileReadWriteViewer from './FileReadWriteViewer';
+import FileReadWriteViewer from './FileReadWriteViewer';
 
 export {
     MenuBar,
@@ -51,4 +52,5 @@ export {
     Table,
     SelectionFrame,
     FolderListWrapper,
+    FileReadWriteViewer
 };

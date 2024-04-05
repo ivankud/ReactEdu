@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "../../../components";
 
+import { FileReadWriteViewer } from "../../../components";
+
 import { saveAs } from "file-saver";
 
 // import beautify_js from 'js-beautify';
@@ -117,15 +119,15 @@ const Page_generator = () => {
           </Button>
           <textarea
             value={`${JSON.stringify(JSONContent, null, 4)}`}
-            style={{ height: "100%", width: "100%" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div id="separator" className={styles["separator"]} />
         <div id="second" className={styles["second"]}>
-          <div className="d-flex justify-content-center w-100">
+          {/* <div className="d-flex justify-content-center w-100">
             <h1> </h1>
-          </div>
-          <Button // кнопка сохранения сгенерированного кода в файл
+          </div> */}
+          {/* <Button // кнопка сохранения сгенерированного кода в файл
             id="saveButtonForGenCode"
             className="w-100"
             disabled={file?false:true}
@@ -139,14 +141,14 @@ const Page_generator = () => {
             }}
           >
             Сохранить
-          </Button>
+          </Button> */}
           {/* <textarea
             id="genCodeTextarea"
             value={renderClass}
             style={{ height: "90vh", width: "100%" }}
           /> */}        
 
-          <CodeEditor
+          {/* <CodeEditor
             value={renderClass}
             ref={textRef}
             language="js"
@@ -158,7 +160,8 @@ const Page_generator = () => {
                 "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
               fontSize: 12,
             }}
-          />
+          /> */}
+          <FileReadWriteViewer content={renderClass}/>
         </div>
       </div>
     </div>
