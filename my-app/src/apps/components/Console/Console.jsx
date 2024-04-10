@@ -21,20 +21,27 @@ const Console = (props) =>{
     return (
         <div 
             className = {styles['main_console']}
-        >            
-            <textarea 
+        >   
+            <textarea
+                type="text"
+                // cols="40" 
+                // rows="5" 
+                style={{width:"100%", height:"100%"}} 
+                name="Text1" 
+                id="Text1"
                 onChange={(e)=>{
                     if(isValidJson(e.target.value)) {
                         ChangeJSON(e.target.value)
                     }                    
                     // setVJS(e.target.value)
                 }}
-                value={JSON.stringify(props.data_objects, null, 4)}/>
-            <button onClick={()=>{
+                value={JSON.stringify(props.data_objects, null, 4)}
+            />
+            {/* <button onClick={()=>{
                 ChangeJSON(props.data_objects)
             }}>
                 Save
-            </button>
+            </button> */}
         </div>
     )
 }

@@ -20,7 +20,7 @@ const CompanentPanel = (props) => {
                         {"tag": "div","id": "DivTemplate","style": {"width":"40px","height":"40px","border-color":"pink","borderStyle":"solid","borderWidth":"1px","position": "absolute","left": "30px","top": "30px"},"content":'Контейнер'},
                     ]
     return (
-        <div className={styles.MainComponentPanel + ' d-flex justify-content-center align-items-center'}>
+        <div className={styles.MainComponentPanel + ' d-flex justify-content-center align-items-center w-100'}>
             <div className={`${styles.SlideComponentPanel} d-flex align-content-start flex-wrap`}>
                 <div className="d-flex flex-row">
                     <div className="p-2">
@@ -45,15 +45,7 @@ const CompanentPanel = (props) => {
                     </div>
                 </div>                
                 <div className="d-flex flex-row">
-                    {/* <div className="p-2">
-                        <CompanentPanelElement id='Button_7' type='Button' content='Кнопка7'/>
-                    </div>
-                    <div className="p-2">
-                        <CompanentPanelElement id='Button_8' type='Button' content='Кнопка8'/>
-                    </div>
-                    <div className="p-2">
-                        <CompanentPanelElement id='Button_9' type='Button' content='Кнопка9'/>
-                    </div> */}
+             
                 </div>
                 
             </div>

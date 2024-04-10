@@ -426,8 +426,7 @@ const Page_Designer = () => {
   return (
     /* mouseMode: HANDLE MOVENEWITEM DELETEITEM COPYITEM*/
     <div style={{backgroundColor: "pink", width: "100%", height: "100%" }}>
-      <div id="top_container_toolbar_tabs_and_button"
-        style={{ width: "100%", backgroundColor: "#d1cfcd", /*height: "70px", */display:"block" }}
+      <div id="top_container_toolbar_tabs_and_button" style={{ width: "100%", backgroundColor: "#d1cfcd", height: "10%", display:"block" }}
         className="align-items-center"
       >        
         <div  id="top_container_toolbar_tabs" style={{ width: "100%" }}>
@@ -643,7 +642,7 @@ const Page_Designer = () => {
             backgroundColor: "#d1cfcd",
             height: "100%",
             verticalAlign: "top",
-            width: "20vw",
+            width: "30%",
           }}
         >
           <ObjectTree
@@ -669,7 +668,7 @@ const Page_Designer = () => {
             display: "inline-block",
             height: "100%",
             overflow: "scroll",
-            width: "50vw",
+            width: "50%",
           }}
         >
           <Board
@@ -687,22 +686,22 @@ const Page_Designer = () => {
             changeTargetAddIdOnHeap={changeTargetAddIdOnHeap}
           />
         </div>
-        <div
+        <div id="middle_object_dragable_element_containter"
           style={{
             display: "inline-block",
             padding: "0px",
             backgroundColor: "#FFFFE0",
-            height: "65vh",
+            height: "100%",
             verticalAlign: "top",
-            width: "300px",
+            width: "20%",
           }}
         >
           <CompanentPanel setMouseMode={setMouseMode} setNewItem={setNewItem} />
         </div>
       </div>
-      <div id="bottom_container">
-        <div style={{ height: "300px" }}>
-          <Button
+      <div id="bottom_container" style={{ height: "40%" }}>
+        <div style={{ height: "10%" }}>
+          <Button id="bottom_container_button_selected_object"
             className={
               modeConsole === "TARGET"
                 ? "btn-secondary disabled"
@@ -714,7 +713,7 @@ const Page_Designer = () => {
           >
             Выбранный объект
           </Button>
-          <Button
+          <Button id="bottom_container_button_common_object"
             className={
               modeConsole === "MAIN"
                 ? "btn-secondary disabled"
@@ -726,7 +725,7 @@ const Page_Designer = () => {
           >
             Общий объект
           </Button>
-          <Button
+          <Button id="bottom_container_button_console_show"
             className={
               modeConsole === "CONSOLE"
                 ? "btn-secondary disabled"
@@ -739,26 +738,29 @@ const Page_Designer = () => {
             Консоль
           </Button>
           {modeConsole === "CONSOLE" && (
-            <Button
-              style={{ backgroundColor: "#fa7a7a" }}
-              size="md"
-              onClick={() => {
-                setMessageConsole({});
-              }}
+          <Button
+            style={{ backgroundColor: "#fa7a7a" }}
+            size="md"
+            onClick={() => {
+              setMessageConsole({});
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-x-lg"
+              viewBox="0 0 16 16"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-x-lg"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-              </svg>
-              Очистить консоль
-            </Button>
-          )}
+              <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+            </svg>
+            Очистить консоль
+          </Button>
+        )}
+        </div>
+        <div style={{ height: "80%", backgroundColor:'green' }}>
+          
           {modeConsole === "TARGET" && <Console data_objects={templateJSON} />}
           {modeConsole === "MAIN" && <Console data_objects={MainJson} />}
           {modeConsole === "CONSOLE" && (
@@ -768,10 +770,11 @@ const Page_Designer = () => {
               )}
             />
           )}
-          {JSON.stringify(selectedHeapElems)}
-          <br />
-          {JSON.stringify(selectedElems)}
         </div>
+        
+        {/* {JSON.stringify(selectedHeapElems)} */}
+        {/* <br /> */}
+        {/* {JSON.stringify(selectedElems)} */}
       </div>
     </div>
   );
