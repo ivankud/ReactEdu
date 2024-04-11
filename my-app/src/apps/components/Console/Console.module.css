@@ -1,11 +1,11 @@
 .main_console {
-    width: 90%;
+    width: 100%;
     /* min-width: 300px; */
-    /* height: 80%;
+    height: 100%;
     vertical-align: top;
     border-style:dashed;
-    text-align: center; */
-    background-color: aqua;
+    text-align: center;
+    /* background-color: aqua; */
 }
 
 /* .main_console textarea { */

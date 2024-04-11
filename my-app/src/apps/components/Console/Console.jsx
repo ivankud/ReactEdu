@@ -24,8 +24,7 @@ const Console = (props) =>{
         >   
             <textarea
                 type="text"
-                // cols="40" 
-                // rows="5" 
+                cols={1} rows={1}
                 style={{width:"100%", height:"100%"}} 
                 name="Text1" 
                 id="Text1"
@@ -37,11 +36,7 @@ const Console = (props) =>{
                 }}
                 value={JSON.stringify(props.data_objects, null, 4)}
             />
-            {/* <button onClick={()=>{
-                ChangeJSON(props.data_objects)
-            }}>
-                Save
-            </button> */}
+            {/* <button style={{width:"100%", height:"10%"}} onClick={()=>{ChangeJSON(props.data_objects)}}>Save</button> */}
         </div>
     )
 }

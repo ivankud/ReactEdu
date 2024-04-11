@@ -16,6 +16,7 @@
     "js-beautify": "^1.14.11",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
+    "primereact": "^10.6.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-children-utilities": "^2.10.0",
