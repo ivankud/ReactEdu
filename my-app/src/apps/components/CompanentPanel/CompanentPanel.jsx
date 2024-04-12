@@ -20,7 +20,7 @@ const CompanentPanel = (props) => {
                         {"tag": "div","id": "DivTemplate","style": {"width":"40px","height":"40px","border-color":"pink","borderStyle":"solid","borderWidth":"1px","position": "absolute","left": "30px","top": "30px"},"content":'Контейнер'},
                     ]
     return (
-        <div className={styles.MainComponentPanel + ' d-flex justify-content-center align-items-center w-100'}>
+        <div className={styles.MainComponentPanel + ' d-flex justify-content-center align-items-center w-100'} style={{height:'100%'}}>
             <div className={`${styles.SlideComponentPanel} d-flex align-content-start flex-wrap`}>
                 <div className="d-flex flex-row">
                     <div className="p-2">
