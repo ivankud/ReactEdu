@@ -20,7 +20,10 @@ import styles from "./Page_generator.module.css";
 
 import data_objects from "../../../../data/jsobject3";
 
-const Page_generator = () => {
+
+import Split from "@uiw/react-split";
+
+const Page_generator = (props) => {
   const textRef = React.useRef();
   const [JSONContent, setJSONContent] = useState(/*data_objects*/ undefined); // контент полученный из файла в нем хранится JSON для генерации страницы
   const [renderClass, setRenderClass] = useState(
@@ -52,59 +55,25 @@ const Page_generator = () => {
   }, [JSONContent]);
 
   useEffect(() => {
+    setJSONContent(props.content)
+    console.log('props.content->>',props.content)
+    let vRenderClass = convertJsonToRenderClass(props.content)
+    setRenderClass(vRenderClass);
+    // setRenderClass(convertJsonToRenderClass(JSONContent))
+    // setRenderClass(''
+    // convertJsonToRenderClass(JSONContent)
+    // )
+  }, [props.content]);
+
+  useEffect(() => {
     if (textRef.current) {
       const obj = new SelectionText(textRef.current);
       console.log("obj:", obj);
     }
   }, []);
 
-  function dragElement(element, direction) {
-    var md; // remember mouse down info
-    const first = document.getElementById("first");
-    const second = document.getElementById("second");
-
-    element.onmousedown = onMouseDown;
-
-    function onMouseDown(e) {
-      //console.log("mouse down: " + e.clientX);
-      md = {
-        e,
-        offsetLeft: element.offsetLeft,
-        offsetTop: element.offsetTop,
-        firstWidth: first.offsetWidth,
-        secondWidth: second.offsetWidth,
-      };
-
-      document.onmousemove = onMouseMove;
-      document.onmouseup = () => {
-        //console.log("mouse up");
-        document.onmousemove = document.onmouseup = null;
-      };
-    }
-
-    function onMouseMove(e) {
-      //console.log("mouse move: " + e.clientX);
-      var delta = { x: e.clientX - md.e.clientX, y: e.clientY - md.e.clientY };
-
-      if (direction === "H") {
-        // Horizontal
-        // Prevent negative-sized elements
-        delta.x = Math.min(Math.max(delta.x, -md.firstWidth), md.secondWidth);
-
-        element.style.left = md.offsetLeft + delta.x + "px";
-        first.style.width = md.firstWidth + delta.x + "px";
-        second.style.width = md.secondWidth - delta.x + "px";
-      }
-    }
-  }
-
-  useEffect(() => {
-    dragElement(document.getElementById("separator"), "H");
-  }, []);
-
   return (
-    <div>
-      <div className={styles["splitter"]} style={{ height: "100vh" }}>
+      <Split className="w-100 h-100">
         <div id="first" className={styles["first"]}>
           <div className="d-flex justify-content-center w-100">
             <h1>Выберите JSON страницы</h1>
@@ -122,49 +91,8 @@ const Page_generator = () => {
             style={{ width: "100%" }}
           />
         </div>
-        <div id="separator" className={styles["separator"]} />
-        <div id="second" className={styles["second"]}>
-          {/* <div className="d-flex justify-content-center w-100">
-            <h1> </h1>
-          </div> */}
-          {/* <Button // кнопка сохранения сгенерированного кода в файл
-            id="saveButtonForGenCode"
-            className="w-100"
-            disabled={file?false:true}
-            onClick={() => {
-              if(file){
-                var blob = new Blob([renderClass], {
-                  type: "text/plain;charset=utf-8",
-                });
-                saveAs(blob, `${file["name"]}.jsx`);
-              }
-            }}
-          >
-            Сохранить
-          </Button> */}
-          {/* <textarea
-            id="genCodeTextarea"
-            value={renderClass}
-            style={{ height: "90vh", width: "100%" }}
-          /> */}        
-
-          {/* <CodeEditor
-            value={renderClass}
-            ref={textRef}
-            language="js"
-            placeholder="Please enter JS code."
-            onChange={(evn) => setRenderClass(evn.target.value)}
-            padding={40}
-            style={{
-              fontFamily:
-                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-              fontSize: 12,
-            }}
-          /> */}
           <FileReadWriteViewer content={renderClass}/>
-        </div>
-      </div>
-    </div>
+        </Split>
   );
 };
 

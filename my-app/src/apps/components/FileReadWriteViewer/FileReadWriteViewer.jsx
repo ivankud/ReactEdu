@@ -175,6 +175,9 @@ const FileReadWriteViewer = (props) => {
     setFileHandle(handle);
   };
 
+  useEffect(()=>{
+  },[])
+
   return (
     <div
       style={{ display: "flex", width: "100%", height: "100%" }}
@@ -198,6 +201,7 @@ const FileReadWriteViewer = (props) => {
         >
           Выберите папку
         </button>
+        <button style={{disabled:true}}>Создать шаблонные файлы</button>
         <div>
           Путь:{" "}
           {Directories?.map((elem) => elem.name).join("/") ??
