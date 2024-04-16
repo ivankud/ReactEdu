@@ -91,8 +91,8 @@ const Page_generator = (props) => {
             style={{ width: "100%" }}
           />
         </div>
-          <FileReadWriteViewer content={renderClass}/>
-        </Split>
+        <FileReadWriteViewer content={renderClass}/>
+      </Split>
   );
 };
 

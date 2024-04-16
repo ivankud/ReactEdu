@@ -69,8 +69,8 @@
 .first {
   background-color: #dde;
   width: 20%;
-  height: 95%;
-  min-width: 10px;
+  /* height: 95%; */
+  /* min-width: 10px; */
 }
 
 .second {

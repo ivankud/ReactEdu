@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FolderListWrapper } from "../../components";
 // import { FolderListWrapper} from "../../../components";
-import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
+// import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
+
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
+import Split from "@uiw/react-split";
 
 const FileReadWriteViewer = (props) => {
   // const MainJson = data_objects
@@ -148,6 +152,9 @@ const FileReadWriteViewer = (props) => {
   };
 
   const openSpecificFile = async (fileHandle) => {
+    setFileHandle(null);
+    setTargetFile(null);
+    setTargetFileContent(null);
     const file = await fileHandle.getFile();
     console.log("file->>", file);
     console.log("fileHandle->>", fileHandle);
@@ -178,15 +185,12 @@ const FileReadWriteViewer = (props) => {
   useEffect(()=>{
   },[])
 
-  return (
+   return (
     <div
-      style={{ display: "flex", width: "100%", height: "100%" }}
-      className="d-flex justify-content-center w-100"
+      style={{ display: "flex", width: "100%", height: "100%", }}
+      // className="d-flex justify-content-center"
     >
-      {/* <div className="flex-1"> */}
-      {/* <div style={{ height: "100vh" }}> */}
-      {/* <div > */}
-      <div style={{ height: "100%", display: "inline-block", width: "25%" }}>
+      <div style={{ height: "100%", display: "inline-block", width: "25%"}} className='d-flex flex-column align-items-stretch'>
         <button
           onClick={async () => {
             const directoryHandle = await window.showDirectoryPicker();
@@ -220,8 +224,6 @@ const FileReadWriteViewer = (props) => {
           readFileContent={readFileContent}
         />
       </div>
-      {/* </div> */}
-      {/* </div> */}
       <div style={{ display: "inline-block", width: "75%" }}>
         <button onClick={openFile}> Открытие файла </button>
         <button onClick={createFile}> Создать файл </button>
@@ -245,35 +247,45 @@ const FileReadWriteViewer = (props) => {
           Записать в файл{" "}
         </button>
         <br />
-        Выбранный файл: {targetFile?.name ?? "Не выбран"}
+        <input className='w-100' value={`Выбранный файл: ${targetFile?.name ?? "Не выбран"}`}></input>
         <br />
         {fileContent}
-        <div style={{ height: "100%" }}>
-          <CodeEditor
-            value={targetFileContent ?? fileContent ?? ""}
-            // ref={textRef}
-            language="js"
-            placeholder="Please enter JS code."
-            // onChange={(evn) => setRenderClass(evn.target.value)}
-            onChange={(event) => {
-              setTargetFileContent(event.target.value);
-            }}
-            padding={40}
-            style={{
-              height: "95%",
-              fontFamily:
-                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-              fontSize: 12,
-            }}
-          />
-          {/* <textarea
-            id="fileContent"
-            value={targetFileContent??fileContent??""}
-            onChange={(event) => {
-              setTargetFileContent(event.target.value);
-            }}
-          /> */}
-        </div>
+            <CodeMirror value={targetFileContent ?? fileContent ?? ""} height="calc(80vh)" extensions={[javascript({ jsx: true })]}/>
+            {/* <CodeEditor
+              value={targetFileContent ?? fileContent ?? ""}
+              // ref={textRef}
+              language="js"
+              placeholder="Please enter JS code."
+              // onChange={(evn) => setRenderClass(evn.target.value)}
+              onChange={(event) => {
+                setTargetFileContent(event.target.value);
+              }}
+              padding={40}
+              style={{        
+                width:'600px',
+                height:'600px',
+                overflowX: "scroll",
+                overflowY: "scroll",
+                fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                fontSize: 12,
+              }}
+            /> */}
+            {/* </div> */}
+            {/* <textarea
+              style={{        
+                width:'100%',
+                height:'100%',
+                overflowX: "scroll",
+                overflowY: "scroll",
+                fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                fontSize: 12,
+              }}
+              id="fileContent"
+              value={targetFileContent??fileContent??""}
+              // onChange={(event) => {
+              //   setTargetFileContent(event.target.value);
+              // }}
+            /> */}
       </div>
     </div>
   );

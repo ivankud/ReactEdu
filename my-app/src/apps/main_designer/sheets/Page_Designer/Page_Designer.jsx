@@ -652,7 +652,7 @@ const Page_Designer = () => {
                     whiteSpace: "nowrap",
                     display: "inline-block",
                     backgroundColor: "#d1cfcd",
-                    height: "100%",
+                    // height: "100%",
                     verticalAlign: "top",
                     width: "20%",
                   }}
@@ -787,8 +787,9 @@ const Page_Designer = () => {
             </div>
           </Split>
         </div>}
-        {viewMode==='GENERATOR'&&
-          <Page_generator content={MainJson}/>
+        {viewMode==='GENERATOR'&&<div id="generator_container" style={{width: "100%", height: '95%',}}>
+            <Page_generator content={MainJson}/>
+          </div>
         }
       
     </div>
