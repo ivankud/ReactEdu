@@ -52,6 +52,75 @@ textarea_2 {
     overflow-y: scroll;
     white-space: nowrap;
     padding: 15px;
-    height: calc(100% - 30px);
-    width: calc(100% - 30px);
+    height: calc(50% - 30px);
+    width: calc(50% - 30px);
 }
+
+.cm-editor {
+  /* our container wrapper for Codemirror instance */
+  flex: 1; /* expand to the maximum */
+  height: 50%;
+  position: relative; /* needed for child component .cm-scroller */
+}
+
+.cm-scroller {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.outercontainer {
+  position: absolute !important;
+  overflow-y: auto;
+  flex: 1;
+  height:100%;
+  widht:100%;
+}
+
+
+.cm-codeeditor1 {
+  /* our container wrapper for Codemirror instance */
+  /* flex: 1; */
+   /* expand to the maximum */
+  /* height: calc(100%); */
+  position: absolute;
+   /* needed for child component .cm-scroller */
+  /* right: 10; */
+  /* bottom: 0; */
+  /* left: 10; */
+  /* position: relatice !important; */
+  overflow-y: visible ;
+  overflow-x: scroll ;
+  /* overflow: auto; */
+  /* flex: 1; */
+  height:90%;
+  width:55%;
+  /* height:800px; */
+  /* width:600px; */
+}
+
+
+.cm-codeeditorcontainer{  
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-y: auto ;
+  overflow-x: visible ;
+}
+
+.cm-codeeditor {
+  position: absolute;
+  min-width: 100%;
+  /* width: 100%;
+  height: 100%; */
+  /* top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px; */
+  overflow-y: visible ;
+  overflow-x: hidden ;
+}
+

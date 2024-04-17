@@ -3,19 +3,24 @@ import { FolderListWrapper } from "../../components";
 // import { FolderListWrapper} from "../../../components";
 // import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
 
+import styles from './FileReadWriteViewer.module.css';
+
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import Split from "@uiw/react-split";
 
+import { EditorView } from "@codemirror/view";
+
 const FileReadWriteViewer = (props) => {
   // const MainJson = data_objects
-  const [fileHandle, setFileHandle] = useState(null);
-  const [file, setFile] = useState(null);
+
   const [fileContent, setFileContent] = useState(null);
   const [Directory, setDirectory] = useState(null);
   const [Directories, setDiretories] = useState(null);
   const [files, setFiles] = useState([]);
   const [folders, setFolders] = useState([]);
+  const [fileHandle, setFileHandle] = useState(null);
+  const [file, setFile] = useState(null);
   const [targetFile, setTargetFile] = useState([]);
   const [targetFileContent, setTargetFileContent] = useState("");
 
@@ -184,7 +189,24 @@ const FileReadWriteViewer = (props) => {
 
   useEffect(()=>{
   },[])
-
+  // const codemirrorRef = React.useRef();
+  useEffect(() => {
+    // const current = codemirrorRef.setSize("100%","100%");
+    // var editor = CodeMirror(document.getElementById("editor"));
+    // console.log(editor)
+    // editor.setSize("100%", "100%");
+  //   var editor = CodeMirror(document.getElementById("editor"), {
+  //     mode: "text/x-csharp",
+  //     lineNumbers: true,
+  //     indentUnit: 4,
+  //     tabSize: 4,
+  //     theme: "monokai",
+  //     lineWrapping: true,
+  //     value: `// Welcome to something!n// ...`
+  // });
+  // editor.setSize("50%", "100%");
+  },[]);
+  const codemirrorRef = React.useRef();
    return (
     <div
       style={{ display: "flex", width: "100%", height: "100%", }}
@@ -207,9 +229,7 @@ const FileReadWriteViewer = (props) => {
         </button>
         <button style={{disabled:true}}>Создать шаблонные файлы</button>
         <div>
-          Путь:{" "}
-          {Directories?.map((elem) => elem.name).join("/") ??
-            "Папка не выбрана"}
+          <input className='w-100' value={`Путь: ${Directories?.map((elem) => elem.name).join("/") ??"Папка не выбрана"}}`}></input>
         </div>
         <FolderListWrapper
           size={{ vertiacalSize: 3, horizontalSize: 2 }}
@@ -224,68 +244,47 @@ const FileReadWriteViewer = (props) => {
           readFileContent={readFileContent}
         />
       </div>
-      <div style={{ display: "inline-block", width: "75%" }}>
-        <button onClick={openFile}> Открытие файла </button>
-        <button onClick={createFile}> Создать файл </button>
-        <button
-          onClick={
-            /*writeFileHandler*/ () => {
-              console.log(props.content);
-              if(props.content) {
-                console.log('write content fileHandle',fileHandle)
-                writeFile(fileHandle, props.content);
-                // openSpecificFile(fileHandle);
-              }
-              else {
-                writeFile(fileHandle, targetFileContent);                
-                // openSpecificFile(fileHandle);
+      <div style={{ display: "inline-block", width: "75%" }} className="w-75 h-100 d-flex flex-column">
+        <div>
+          <button onClick={openFile}> Открытие файла </button>
+          <button onClick={createFile}> Создать файл </button>
+          <button
+            onClick={
+              /*writeFileHandler*/ () => {
+                console.log(props.content);
+                if(props.content) {
+                  console.log('write content fileHandle',fileHandle)
+                  writeFile(fileHandle, props.content);
+                  // openSpecificFile(fileHandle);
+                }
+                else {
+                  writeFile(fileHandle, targetFileContent);                
+                  // openSpecificFile(fileHandle);
+                }
               }
             }
-          }
-        >
-          {" "}
-          Записать в файл{" "}
-        </button>
-        <br />
+          >
+            {" "}
+            Записать в файл{" "}
+          </button>
+          <button onClick={()=>{
+            setTargetFileContent("")
+            setTargetFile([])
+            setFile(null)
+            setFileHandle(null)
+          }}>Закрыть файл</button>
+        </div>
+        <div>
+          <button>1</button>
+        </div>
         <input className='w-100' value={`Выбранный файл: ${targetFile?.name ?? "Не выбран"}`}></input>
-        <br />
-        {fileContent}
-            <CodeMirror value={targetFileContent ?? fileContent ?? ""} height="calc(80vh)" extensions={[javascript({ jsx: true })]}/>
-            {/* <CodeEditor
-              value={targetFileContent ?? fileContent ?? ""}
-              // ref={textRef}
-              language="js"
-              placeholder="Please enter JS code."
-              // onChange={(evn) => setRenderClass(evn.target.value)}
-              onChange={(event) => {
-                setTargetFileContent(event.target.value);
-              }}
-              padding={40}
-              style={{        
-                width:'600px',
-                height:'600px',
-                overflowX: "scroll",
-                overflowY: "scroll",
-                fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-                fontSize: 12,
-              }}
-            /> */}
-            {/* </div> */}
-            {/* <textarea
-              style={{        
-                width:'100%',
-                height:'100%',
-                overflowX: "scroll",
-                overflowY: "scroll",
-                fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-                fontSize: 12,
-              }}
-              id="fileContent"
-              value={targetFileContent??fileContent??""}
-              // onChange={(event) => {
-              //   setTargetFileContent(event.target.value);
-              // }}
-            /> */}
+        <div className={`${styles['cm-codeeditorcontainer']}`}>
+            <CodeMirror 
+              className={`${styles['cm-codeeditor']}`}
+              style={!(targetFileContent ?? fileContent ?? "")?{width:"100%"}:{}}
+              value={targetFileContent ?? fileContent ?? ""}               
+              extensions={[javascript({ jsx: true })]}/>
+        </div>
       </div>
     </div>
   );
