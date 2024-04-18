@@ -35,8 +35,8 @@ const Page_generator = (props) => {
   const setJSONContentFromFile = (value) => {
     /*прочтение контента из файла и установка в шаблон*/
     let vValue = value
-      .replace("export default data_objects;", "")
-      .replace("let data_objects = ", "");
+      ?.replace("export default data_objects;", "")
+      ?.replace("let data_objects = ", "");
     // console.log('vValue->>')
     // console.log(vValue)
     setJSONContent(JSON.parse(vValue));

@@ -16,7 +16,7 @@ import {
 const router_list = [
   {
     path: "/",
-    element: <Page_test_env/>,
+    element: <Page_Designer/>,
     caption: 'Страница DEF',
   },  
   {

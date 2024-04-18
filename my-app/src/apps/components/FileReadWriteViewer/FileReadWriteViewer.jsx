@@ -23,6 +23,8 @@ const FileReadWriteViewer = (props) => {
   const [file, setFile] = useState(null);
   const [targetFile, setTargetFile] = useState([]);
   const [targetFileContent, setTargetFileContent] = useState("");
+  const [smartTabs, setSmartTabs] = useState([]);
+  const [currentTab, setCurrentTab] = useState(null);
 
   // fileHandle is an instance of FileSystemFileHandle..
   async function writeFile(targetFileHandle, contents) {
@@ -71,9 +73,24 @@ const FileReadWriteViewer = (props) => {
     argSetFolders,
     argSetDiretories
   ) => {
+    // console.log("1-1")
     const vFiles = [];
     const vFolders = [];
+    let vSmartTabs = [].concat(smartTabs);
+    // console.log("CurrentTab->>>", currentTab)
+    let vCurrentTab = (currentTab||currentTab===0)?(currentTab+1):0;
+    // console.log("vCurrentTab->>>", vCurrentTab)
+    vSmartTabs = vSmartTabs.concat({
+                                      DirectoryHandler:argDirectoryHandler,
+                                      name:argDirectoryHandler.name
+                                    });       
+    // console.log("vSmartTabs");
+    console.log(vSmartTabs);
+    setSmartTabs(vSmartTabs);
+    setCurrentTab(vCurrentTab);
+    // vSmartTabs = vSmartTabs.push
     let vDirectories = Directories ?? [];
+    console.log(1)
     // console.log("Файлы и папки в папке↓↓↓↓");
     selectFolder(
       argDirectoryHandler,
@@ -84,7 +101,8 @@ const FileReadWriteViewer = (props) => {
       vFiles,
       vFolders,
       vDirectories
-    );
+    );            
+    console.log(2)
   };
 
   const selectFolder = async (
@@ -102,6 +120,9 @@ const FileReadWriteViewer = (props) => {
     // console.log("vFolders->>",argFolders)
     // console.log('argDirectoryHandler->>',argDirectoryHandler)
     // console.log('!!!!selectFolder argDirectories->>',argDirectories)
+    let vSmartTabs = [].concat(smartTabs);
+    let vTab = vSmartTabs[currentTab]
+    console.log(11111)
     if (command) {
       if (command === "back") {
         const directories = Directories.slice(0, -1) ?? Directories[0];
@@ -118,8 +139,25 @@ const FileReadWriteViewer = (props) => {
         }
         setFiles(flies);
         setFolders(folders);
-        setDirectory(targetDirectory);
+        setDirectory(targetDirectory);        
+        // vTab['DirectoryHandler'] = structuredClone(targetDirectory);        
+        // vTab['Directories'] = structuredClone(directories);
+        // vTab['files'] = structuredClone(files);
+        // vTab['folders'] = structuredClone(folders);
         setDiretories(directories);
+        let vCurrentTab = currentTab;
+        let vSmartTabs = smartTabs??[];
+        if(vCurrentTab || vCurrentTab===0) {
+          vSmartTabs[vCurrentTab]['name']=targetDirectory.name;
+        }
+        else {
+          vSmartTabs = vSmartTabs.concat({
+            DirectoryHandler:targetDirectory,
+            name:targetDirectory.name
+          });
+          setSmartTabs(vSmartTabs);
+          setCurrentTab(0);
+        }
       }
     } else {
       const flies = argFlies ?? [];
@@ -138,10 +176,38 @@ const FileReadWriteViewer = (props) => {
         : setDirectory(argDirectoryHandler);
       argSetFiles ? argSetFiles(flies) : setFiles(flies);
       argSetFolders ? argSetFolders(folders) : setFolders(folders);
+      console.log('argDirectoryHandler')
+      console.log(argDirectoryHandler)
       argSetDiretories
         ? argSetDiretories(directories)
         : setDiretories(directories);
-    }
+        let vCurrentTab = currentTab;
+        let vSmartTabs = smartTabs??[];
+        if(vCurrentTab || vCurrentTab===0) {
+          vSmartTabs[vCurrentTab]['name']=argDirectoryHandler.name;
+        }
+        else {
+          vSmartTabs = vSmartTabs.concat({
+            DirectoryHandler:argDirectoryHandler,
+            name:argDirectoryHandler.name
+          });
+          setSmartTabs(vSmartTabs);
+          setCurrentTab(0);
+        }
+        // [vCurrentTab]['name'] = argDirectoryHandler.name;
+        // console.log(argDirectoryHandler.name)
+        // console.log(vSmartTabs)
+        // setSmartTabs(vSmartTabs)
+        
+        // vTab['DirectoryHandler'] = structuredClone(argDirectoryHandler);        
+        // vTab['Directories'] = structuredClone(directories);
+        // vTab['files'] = structuredClone(flies);
+        // vTab['folders'] = structuredClone(folders);
+    }    
+    console.log(22222)
+    // vSmartTabs[currentTab] = structuredClone(vTab);
+    console.log(vSmartTabs);
+    // setSmartTabs(vSmartTabs);
   };
 
   const openFile = async () => {
@@ -187,49 +253,69 @@ const FileReadWriteViewer = (props) => {
     setFileHandle(handle);
   };
 
-  useEffect(()=>{
-  },[])
-  // const codemirrorRef = React.useRef();
-  useEffect(() => {
-    // const current = codemirrorRef.setSize("100%","100%");
-    // var editor = CodeMirror(document.getElementById("editor"));
-    // console.log(editor)
-    // editor.setSize("100%", "100%");
-  //   var editor = CodeMirror(document.getElementById("editor"), {
-  //     mode: "text/x-csharp",
-  //     lineNumbers: true,
-  //     indentUnit: 4,
-  //     tabSize: 4,
-  //     theme: "monokai",
-  //     lineWrapping: true,
-  //     value: `// Welcome to something!n// ...`
-  // });
-  // editor.setSize("50%", "100%");
-  },[]);
-  const codemirrorRef = React.useRef();
+  const doubleTab = async ()=>{    
+    /*Дублирование вкладки и работа уже в ней*/
+    // const vFiles = filse;
+    // const vFolders = [];
+    let vSmartTabs = [].concat(smartTabs);
+    let vTab = vSmartTabs[currentTab]
+    vTab['DirectoryHandler'] = structuredClone(Directory);
+    vTab['Directories'] = structuredClone(Directories);
+    vTab['files'] = structuredClone(files);
+    vTab['folders'] = structuredClone(folders);
+    vSmartTabs[currentTab] = structuredClone(vTab);
+    vSmartTabs[currentTab+1] = structuredClone(vTab);
+    console.log("vSmartTabs")
+    console.log(vSmartTabs);
+    setSmartTabs(vSmartTabs);
+    setCurrentTab(currentTab+1);
+  }
+
+  const openFolder = async () => {
+    const directoryHandle = await window.showDirectoryPicker();
+    await setNewFolder(
+      directoryHandle,
+      setDirectory,
+      setFiles,
+      setFolders,
+      setDiretories
+    );
+  }
+
    return (
     <div
       style={{ display: "flex", width: "100%", height: "100%", }}
-      // className="d-flex justify-content-center"
+      className="d-flex flex-row "
     >
-      <div style={{ height: "100%", display: "inline-block", width: "25%"}} className='d-flex flex-column align-items-stretch'>
-        <button
-          onClick={async () => {
-            const directoryHandle = await window.showDirectoryPicker();
-            await setNewFolder(
-              directoryHandle,
-              setDirectory,
-              setFiles,
-              setFolders,
-              setDiretories
-            );
-          }}
-        >
+      <div style={{ height: "100%", display: "inline-block", width: "400px"}} className='d-flex flex-column align-items-stretch'>
+        <button onClick={openFolder}>
           Выберите папку
         </button>
         <button style={{disabled:true}}>Создать шаблонные файлы</button>
         <div>
-          <input className='w-100' value={`Путь: ${Directories?.map((elem) => elem.name).join("/") ??"Папка не выбрана"}}`}></input>
+          <input className='w-100' value={`Путь: ${Directories?.map((elem) => elem.name).join("/") ??"Папка не выбрана"}`}></input>
+        </div>
+        <div>
+          {smartTabs.map((element,index) => {
+            return  <button
+                      onClick={()=>{
+                        console.log('index->>',index)
+                        console.log(smartTabs[index])
+                        setFiles(structuredClone(smartTabs[index]['files']));
+                        setFolders(structuredClone(smartTabs[index]['folders']));
+                        setDirectory(structuredClone(smartTabs[index]['DirectoryHandler']));
+                        setDiretories(structuredClone(smartTabs[index]['Directories']));
+                        setCurrentTab(index)
+                      }}
+                    >
+                      {element.name}
+                    </button>
+          })}
+          {/* <button style={(currentTab||currentTab===0){}}>+</button> */}
+          <button 
+            disabled={(currentTab||currentTab===0)?false:true}
+            onClick={doubleTab}
+          >+</button>
         </div>
         <FolderListWrapper
           size={{ vertiacalSize: 3, horizontalSize: 2 }}
@@ -244,7 +330,7 @@ const FileReadWriteViewer = (props) => {
           readFileContent={readFileContent}
         />
       </div>
-      <div style={{ display: "inline-block", width: "75%" }} className="w-75 h-100 d-flex flex-column">
+      <div style={{ display: "inline-block"}} className="w-75 h-100 d-flex flex-column flex-fill">
         <div>
           <button onClick={openFile}> Открытие файла </button>
           <button onClick={createFile}> Создать файл </button>

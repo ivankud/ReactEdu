@@ -25,7 +25,7 @@ import {
 
 
 const App = (props) => {
-  const [menuBarShow, setMenuBarShow] = useState(true);
+  const [menuBarShow, setMenuBarShow] = useState(false);
 
   const changeMenuBarShow = (value) =>{
     setMenuBarShow(value)
