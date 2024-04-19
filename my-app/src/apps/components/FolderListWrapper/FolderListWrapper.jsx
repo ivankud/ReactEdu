@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+import {
+  color_ColorMain,
+  color_ColorSecondaryA,
+  color_ColorSecondaryB,
+  color_ColorAdditional
+} from '../../../config'
+
 /*функция для создания папки или файла с привязкой к обрабочику объекта, что обеспечивает переход внуть папки или чтение файла*/
 const FolderIcon = (
   elem,
@@ -17,12 +24,14 @@ const FolderIcon = (
   // console.log('horizontalSize',horizontalSize)
   return (
     <button
-      className={`${horizontalSize===1?"d-flex justify-content-start":""}`}
+      className={`btn ${horizontalSize===1?" d-flex justify-content-start":""}`}
       style={{
-        width: `${100 / horizontalSize}%`,
-        height: "100%",
+        width: `${(100 / horizontalSize)-1}%`,
+        height: `99%`,
         borderStyle: "outset",
-        
+        marginLeft:'2px',
+        // padding:"1px",
+        backgroundColor:`${kind==='revertButton'?'':color_ColorSecondaryB['color1']}`        
       }}
       onClick={() => {
         if (kind === "directory") {
@@ -88,10 +97,10 @@ function GetListFolderAndFiles(
   // console.log('files->>',files)
   // console.log('directories->>',directories)
   // console.log('directories.length->>',directories?.length)
-  console.log(
-    "directories.flag ",
-    directories?.length !== 1 && !!directories?.length
-  );
+  // console.log(
+    // "directories.flag ",
+    // directories?.length !== 1 && !!directories?.length
+  // );
   let List = []; // итоговая список для отображения
   let counterLine = 0; // счетчик строк
   let ListFolderAndLists = [].concat(folders, files); // список обработчиков из которого составляется список для отображения
@@ -118,7 +127,7 @@ function GetListFolderAndFiles(
   if (lineInCounter === horizontalSize) {
     /*если требуется создаем линию*/
     vLine = (
-      <div style={{ display: "inline-block", width: "100%", height: "100%" }}>
+      <div style={{ display: "inline-block", width: "100%", height: "100%"}}>
         {vListTMP.map((elem) => elem)}
       </div>
     );
@@ -204,10 +213,10 @@ const FolderListWrapper = (props) => {
   }, [props]);
   return (
     <div
-      // className="flex-1 p-1"
+      className="flex-1 p-1"
       style={{
-        borderColor: "#f0ffff",
-        backgroundColor: "#f0ffff",
+        borderColor: color_ColorSecondaryA['color5'],//"#f0ffff",
+        backgroundColor: color_ColorSecondaryB['color5'],//"#f0ffff",
         borderStyle: "groove",
         width: "100%",
         height: "100%",

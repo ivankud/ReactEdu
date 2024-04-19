@@ -11,6 +11,13 @@ import Split from "@uiw/react-split";
 
 import { EditorView } from "@codemirror/view";
 
+import {
+  // color_ColorMain,
+  color_ColorSecondaryA,
+  color_ColorSecondaryB,
+  // color_ColorAdditional
+} from '../../../config'
+
 const FileReadWriteViewer = (props) => {
   // const MainJson = data_objects
 
@@ -76,21 +83,33 @@ const FileReadWriteViewer = (props) => {
     // console.log("1-1")
     const vFiles = [];
     const vFolders = [];
-    let vSmartTabs = [].concat(smartTabs);
+    let vSmartTabs = smartTabs??[].concat(smartTabs);
     // console.log("CurrentTab->>>", currentTab)
     let vCurrentTab = (currentTab||currentTab===0)?(currentTab+1):0;
     // console.log("vCurrentTab->>>", vCurrentTab)
-    vSmartTabs = vSmartTabs.concat({
-                                      DirectoryHandler:argDirectoryHandler,
-                                      name:argDirectoryHandler.name
-                                    });       
+    let vfiles2=[];
+    let vfolders2=[];
+    for await (const entry of argDirectoryHandler.values()) {
+      if (entry.kind === "file") {
+        vfiles2.push(entry);
+      } else if (entry.kind === "directory") {
+        vfolders2.push(entry);
+      }
+    }
+   
     // console.log("vSmartTabs");
+    // vSmartTabs = vSmartTabs.push
+    let vDirectories = Directories ?? [];
+    vSmartTabs = vSmartTabs.concat({
+      Directory:argDirectoryHandler,
+      Directories:[].concat(Directories),
+      files:vfiles2,
+      folders:vfolders2,
+      name:argDirectoryHandler.name
+    });    
     console.log(vSmartTabs);
     setSmartTabs(vSmartTabs);
     setCurrentTab(vCurrentTab);
-    // vSmartTabs = vSmartTabs.push
-    let vDirectories = Directories ?? [];
-    console.log(1)
     // console.log("Файлы и папки в папке↓↓↓↓");
     selectFolder(
       argDirectoryHandler,
@@ -102,7 +121,6 @@ const FileReadWriteViewer = (props) => {
       vFolders,
       vDirectories
     );            
-    console.log(2)
   };
 
   const selectFolder = async (
@@ -116,6 +134,7 @@ const FileReadWriteViewer = (props) => {
     argDirectories,
     command
   ) => {
+    console.log(selectFolder)
     // console.log("vFiles->>",argFlies)
     // console.log("vFolders->>",argFolders)
     // console.log('argDirectoryHandler->>',argDirectoryHandler)
@@ -152,11 +171,14 @@ const FileReadWriteViewer = (props) => {
         }
         else {
           vSmartTabs = vSmartTabs.concat({
-            DirectoryHandler:targetDirectory,
-            name:targetDirectory.name
+            Directory:targetDirectory,
+            name:targetDirectory.name,
+            Directories:[].concat(directories),
+            files:files,
+            folders:folders
           });
           setSmartTabs(vSmartTabs);
-          setCurrentTab(0);
+          // setCurrentTab(0);
         }
       }
     } else {
@@ -185,14 +207,21 @@ const FileReadWriteViewer = (props) => {
         let vSmartTabs = smartTabs??[];
         if(vCurrentTab || vCurrentTab===0) {
           vSmartTabs[vCurrentTab]['name']=argDirectoryHandler.name;
+          vSmartTabs[vCurrentTab]['Directory']=argDirectoryHandler;
+          vSmartTabs[vCurrentTab]['Directories']=directories;
+          vSmartTabs[vCurrentTab]['files']=flies;
+          vSmartTabs[vCurrentTab]['folders']=folders;
         }
         else {
           vSmartTabs = vSmartTabs.concat({
-            DirectoryHandler:argDirectoryHandler,
-            name:argDirectoryHandler.name
+            Directory:argDirectoryHandler,
+            name:argDirectoryHandler.name,
+            Directories:[].concat(directories),
+            files:files,
+            folders:folders
           });
           setSmartTabs(vSmartTabs);
-          setCurrentTab(0);
+          // setCurrentTab(0);
         }
         // [vCurrentTab]['name'] = argDirectoryHandler.name;
         // console.log(argDirectoryHandler.name)
@@ -259,16 +288,17 @@ const FileReadWriteViewer = (props) => {
     // const vFolders = [];
     let vSmartTabs = [].concat(smartTabs);
     let vTab = vSmartTabs[currentTab]
-    vTab['DirectoryHandler'] = structuredClone(Directory);
+    let vNextTab = vSmartTabs.length; 
+    vTab['Directory'] = structuredClone(Directory);
     vTab['Directories'] = structuredClone(Directories);
     vTab['files'] = structuredClone(files);
     vTab['folders'] = structuredClone(folders);
-    vSmartTabs[currentTab] = structuredClone(vTab);
-    vSmartTabs[currentTab+1] = structuredClone(vTab);
+    // vSmartTabs[currentTab] = structuredClone(vTab);
+    vSmartTabs[vNextTab] = structuredClone(vTab);
     console.log("vSmartTabs")
     console.log(vSmartTabs);
     setSmartTabs(vSmartTabs);
-    setCurrentTab(currentTab+1);
+    setCurrentTab(vNextTab);
   }
 
   const openFolder = async () => {
@@ -284,41 +314,66 @@ const FileReadWriteViewer = (props) => {
 
    return (
     <div
-      style={{ display: "flex", width: "100%", height: "100%", }}
+      style={{ display: "flex", width: "100%", height: "100%", overflow: "hidden"}}
       className="d-flex flex-row "
     >
       <div style={{ height: "100%", display: "inline-block", width: "400px"}} className='d-flex flex-column align-items-stretch'>
-        <button onClick={openFolder}>
+        <button
+          className="btn"
+          style={{
+            margin:'1px',
+            backgroundColor:color_ColorSecondaryA["color4"]
+          }}
+          onClick={openFolder}
+        >
           Выберите папку
         </button>
-        <button style={{disabled:true}}>Создать шаблонные файлы</button>
-        <div>
-          <input className='w-100' value={`Путь: ${Directories?.map((elem) => elem.name).join("/") ??"Папка не выбрана"}`}></input>
-        </div>
+        <button 
+          className="btn"
+          style={{
+            margin:'1px',
+            backgroundColor:color_ColorSecondaryA["color4"]
+          }}
+        >Создать шаблонные файлы</button>
         <div>
           {smartTabs.map((element,index) => {
             return  <button
+                      style={{
+                        margin: "2px",
+                        backgroundColor:(index===currentTab?color_ColorSecondaryB["color1"]:color_ColorSecondaryB["color5"])
+                      }}
+                      className='btn'
                       onClick={()=>{
                         console.log('index->>',index)
-                        console.log(smartTabs[index])
-                        setFiles(structuredClone(smartTabs[index]['files']));
-                        setFolders(structuredClone(smartTabs[index]['folders']));
-                        setDirectory(structuredClone(smartTabs[index]['DirectoryHandler']));
-                        setDiretories(structuredClone(smartTabs[index]['Directories']));
+                        let vTab = {...smartTabs[index]};
+                        console.log(vTab)
+                        setFiles(structuredClone(vTab['files']));
+                        setFolders(structuredClone(vTab['folders']));
+                        setDirectory(structuredClone(vTab['Directory']));
+                        setDiretories(structuredClone(vTab['Directories']));
                         setCurrentTab(index)
                       }}
                     >
                       {element.name}
                     </button>
           })}
-          {/* <button style={(currentTab||currentTab===0){}}>+</button> */}
           <button 
+            style={{
+              margin: "2px",
+              backgroundColor:color_ColorSecondaryA["color5"]
+            }}
+            className="btn"
             disabled={(currentTab||currentTab===0)?false:true}
             onClick={doubleTab}
           >+</button>
+        </div>        
+        <div>
+          <input 
+            className='w-100'
+            value={`Путь: ${Directories?.map((elem) => elem.name).join("/") ??"Папка не выбрана"}`}/>
         </div>
         <FolderListWrapper
-          size={{ vertiacalSize: 3, horizontalSize: 2 }}
+          size={{ vertiacalSize: 3, horizontalSize: 1 }}
           folderHandler={Directory}
           directories={Directories}
           nestedFoldersHandlers={folders}
